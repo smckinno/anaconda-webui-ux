@@ -87,6 +87,13 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .mini-mark { display: grid; width: 28px; height: 28px; place-items: center; color: #ee0000; font-size: 27px; }
 .mini-mark svg { width: 27px; height: 27px; }
 .setup-wizard { flex: 1; min-height: 0; }
+.setup-wizard {
+  --pf-v6-c-wizard__nav-item--MarginBlockStart: var(--pf-t--global--spacer--xs);
+  --pf-v6-c-wizard__nav-list--nested--MarginBlockStart: var(--pf-t--global--spacer--xs);
+  --pf-v6-c-wizard__nav-link-main--PaddingBlockStart: var(--pf-t--global--spacer--xs);
+  --pf-v6-c-wizard__nav-link-main--PaddingBlockEnd: var(--pf-t--global--spacer--xs);
+  --pf-v6-c-wizard__nav-link--before--InsetBlockStart: var(--pf-t--global--spacer--xs);
+}
 .setup-wizard .pf-v6-c-wizard__main-body { min-height: 0; overflow-y: auto; }
 .setup-wizard .pf-v6-c-wizard__footer { border-top: 1px solid var(--pf-t--global--border--color--default); }
 .step-content { max-width: 760px; padding: 24px 8px; }
