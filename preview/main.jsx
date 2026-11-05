@@ -451,7 +451,6 @@ function App() {
         key={name}
         id="setup-step-6"
         name={name}
-        isExpandable
         status={completedSteps.includes("setup-step-6") ? "success" : "default"}
         steps={[
             <WizardStep key="grouped" id="setup-step-6-grouped" name="Grouped menu"><SoftwareContent {...softwareProps} /></WizardStep>,
@@ -501,7 +500,6 @@ function App() {
             <Wizard
                 className="setup-wizard"
                 navAriaLabel="Setup steps"
-                isProgressive
                 onSave={() => {
                     setCompletedSteps(stepContent.map((_, index) => `setup-step-${index + 1}`));
                     setFinished(true);
