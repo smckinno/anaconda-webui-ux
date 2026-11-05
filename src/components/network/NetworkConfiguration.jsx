@@ -71,7 +71,7 @@ export const CockpitNetworkIframe = ({
     return (
         <iframe
           ref={iframeRef}
-          src={window.__ANACONDA_PREVIEW__ ? "/preview-network.html" : COCKPIT_NETWORK_IFRAME_SRC}
+          src={window.__ANACONDA_PREVIEW__ ? "./preview-network.html" : COCKPIT_NETWORK_IFRAME_SRC}
           name={iframeName}
           id={iframeId}
           className={className} />
