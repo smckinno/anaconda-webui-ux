@@ -19,9 +19,7 @@ import RhUiRegistryIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-regis
 import { Wizard, WizardStep } from "@patternfly/react-core/dist/esm/components/Wizard/index.js";
 import { Table, Thead, Tbody, Tr, Th, Td, TreeRowWrapper } from "@patternfly/react-table/dist/esm/components/Table/index.js";
 import { RedhatIcon } from "@patternfly/react-icons/dist/esm/icons/redhat-icon.js";
-import "../src/components/app.scss";
-import "../pkg/lib/patternfly/patternfly-6-cockpit.scss";
-import "../pkg/lib/patternfly/patternfly-6-overrides.scss";
+import "@patternfly/patternfly/patternfly.css";
 import "./preview.scss";
 
 const stepContent = [

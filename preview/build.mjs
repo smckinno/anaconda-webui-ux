@@ -11,6 +11,7 @@ fs.copyFileSync(path.join(root, "preview", "index.html"), path.join(outdir, "ind
 fs.copyFileSync(path.join(root, "preview", "preview-network.html"), path.join(outdir, "preview-network.html"));
 fs.copyFileSync(path.join(root, "preview", "linux-hero-background.png"), path.join(outdir, "linux-hero-background.png"));
 fs.copyFileSync(path.join(root, "preview", "linux-hero-background-dark.png"), path.join(outdir, "linux-hero-background-dark.png"));
+fs.cpSync(path.join(root, "node_modules", "@patternfly", "patternfly", "assets"), path.join(outdir, "assets"), { recursive: true });
 
 const context = await esbuild.context({
     entryPoints: [path.join(root, "preview", "main.jsx")],
