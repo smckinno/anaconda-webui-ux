@@ -26,6 +26,8 @@
 /runtime-npm-modules.txt
 /tmp/
 /tools
+/preview/bin/
+/preview/dist/
 
 # subdirs (/subdir/...)
 /po/*.pot

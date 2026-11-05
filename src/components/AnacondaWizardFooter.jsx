@@ -34,6 +34,14 @@ export const AnacondaWizardFooter = ({
     } = useContext(PageContext) || {};
 
     const onNextButtonClicked = () => {
+        if (window.__ANACONDA_PREVIEW__) {
+            if (activeStep.id === "anaconda-screen-review") {
+                window.dispatchEvent(new Event("anaconda-preview-install"));
+            } else {
+                goToNextStep();
+            }
+            return;
+        }
         if (onNext) {
             onNext({ goToNextStep });
         } else {
@@ -66,7 +74,7 @@ export const AnacondaWizardFooter = ({
                             <Button
                               id="installation-next-btn"
                               variant={nextButtonVariant || "primary"}
-                              isAriaDisabled={!isFormValid || isFormDisabled}
+                              isAriaDisabled={!window.__ANACONDA_PREVIEW__ && (!isFormValid || isFormDisabled)}
                               onClick={onNextButtonClicked}>
                                 {nextButtonText || _("Next")}
                             </Button>

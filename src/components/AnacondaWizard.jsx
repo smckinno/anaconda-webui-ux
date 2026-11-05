@@ -18,7 +18,7 @@ import { AnacondaPage } from "./AnacondaPage.jsx";
 import { AnacondaWizardFooter } from "./AnacondaWizardFooter.jsx";
 import { getSteps } from "./steps.js";
 
-export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFetching, onCritFail, pauseAtSummary, setCurrentStepId, setShowStorage, showStorage }) => {
+export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFetching, onCritFail, pauseAtSummary, previewMode = false, setCurrentStepId, setShowStorage, showStorage }) => {
     /**
      * Wizard step page state (reset in `AnacondaWizard` `goToStep` on step change).
      * - **isFormValid** / **setIsFormValid** — Required fields satisfied; reset when the step changes in the wizard.
@@ -122,7 +122,7 @@ export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFe
                           title={s.title}
                           isFirstScreen={s.isFirstScreen}
                           showStorage={showStorage}
-                          usePageInit={s.usePageInit}>
+                          usePageInit={previewMode ? undefined : s.usePageInit}>
                             <s.component {...componentProps} isFirstScreen={s.isFirstScreen} />
                         </AnacondaPage>
                     ),
@@ -148,7 +148,7 @@ export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFe
             setIsFormValid(false);
             // and disable the form so that the page can perform
             //  initialization before the user can interact with it
-            setIsFormDisabled(true);
+            setIsFormDisabled(!previewMode);
             setStepNotification(null);
         }
 
@@ -167,7 +167,12 @@ export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFe
         return null;
     }
 
-    let startIndex = stepsOrder.findIndex(step => step.isFirstScreen) + 1;
+    let startIndex = previewMode
+        ? Math.max(1, stepsOrder.findIndex(step => step.id === currentStepId || step.steps?.some(sub => sub.id === currentStepId)) + 1)
+        : stepsOrder.findIndex(step => step.isFirstScreen) + 1;
+    if (previewMode && stepsOrder.findIndex(step => step.id === currentStepId) > stepsOrder.findIndex(step => step.steps?.length)) {
+        startIndex += 1;
+    }
 
     // HACK: start index is calculated incorrectly for KS installations
     if (automatedInstall) {
@@ -189,7 +194,7 @@ export const AnacondaWizard = ({ automatedInstall, currentStepId, dispatch, isFe
                 <Wizard
                   className={"anaconda-wizard-step-" + currentStepId}
                   id="installation-wizard"
-                  isVisitRequired
+                  isVisitRequired={!previewMode}
                   startIndex={startIndex}
                   footer={<AnacondaWizardFooter {...footerProps} />}
                   onStepChange={((event, currentStep, prevStep) => goToStep(currentStep, prevStep))}
