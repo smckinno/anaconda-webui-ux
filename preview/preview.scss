@@ -63,8 +63,11 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .welcome-card h1 { margin: 0; color: var(--pf-t--global--text--color--regular); font-size: clamp(28px, 5vw, 36px); font-weight: 600; }
 .welcome-copy { max-width: 420px; margin: 16px auto 24px; color: var(--pf-t--global--text--color--subtle); font-size: 16px; line-height: 1.6; }
 .appearance-selector { display: flex; margin: 0 auto 28px; align-items: center; justify-content: center; gap: 12px; color: var(--pf-t--global--text--color--subtle); font-size: 14px; }
+.appearance-switch { display: inline-flex; align-items: center; gap: 8px; color: var(--pf-t--global--icon--color--regular); }
+.appearance-switch > svg { width: 15px; height: 15px; }
+.appearance-switch .pf-v6-c-switch { margin: 0; }
 .welcome-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 22px; }
-.welcome-actions .pf-v6-c-button { min-height: 44px; padding-inline: 24px; }
+.welcome-actions .pf-v6-c-button { display: inline-flex; min-width: 148px; min-height: 44px; align-items: center; justify-content: center; line-height: 1; padding-inline: 24px; }
 .completion-card .pf-v6-c-button { min-height: 44px; padding-inline: 24px; }
 
 .wizard-frame {
@@ -123,7 +126,7 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .source-column-labels { font-size: 13px; font-weight: 500; }
 .source-editor { width: 100%; }
 .source-column-labels, .source-row { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(260px, 1.25fr) 40px; gap: 16px; align-items: center; }
-.source-column-labels { margin-bottom: 8px; color: var(--pf-t--global--text--color--regular); font-size: 14px; font-weight: 600; }
+.source-column-labels { margin-bottom: 8px; color: var(--pf-t--global--text--color--regular); font-size: 14px; font-weight: 500; }
 .source-row { margin-bottom: 12px; }
 .source-type-toggle { display: flex; width: 100%; height: 42px; align-items: center; justify-content: space-between; padding: 0 14px; border: 1px solid var(--pf-t--global--border--color--default); border-radius: 6px; background: var(--pf-t--global--background--color--primary--default); color: var(--pf-t--global--text--color--regular); font: inherit; text-align: left; cursor: pointer; }
 .source-row > .pf-v6-c-select { width: 100%; }
@@ -142,14 +145,26 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .software-section { padding-bottom: 24px; border-bottom: 1px solid var(--pf-t--global--border--color--default); }
 .software-section + .software-section { padding-top: 20px; }
 .software-section h2 { margin: 0; }
+
+h2 {
+  font-size: 12pt !important;
+}
+
 .software-section > p { margin: 5px 0 14px; color: var(--pf-t--global--text--color--subtle); font-size: var(--pf-t--global--font--size--body--default); line-height: var(--pf-t--global--font--line-height--body); }
 .software-section .pf-v6-c-form__group-label { margin-bottom: 6px; }
-.software-section .pf-v6-c-form__label-text { font-size: var(--pf-t--global--font--size--body--default); font-weight: var(--pf-t--global--font--weight--body--bold); }
+.software-section .pf-v6-c-form__label-text { font-size: var(--pf-t--global--font--size--body--default); font-weight: 500; }
+.software-table-concept > .software-section:first-of-type { border-bottom: 0; }
 .software-recommendations { width: min(100%, 680px); margin: 0 0 var(--pf-t--global--spacer--md); }
+.software-recommendations,
+.environment-software-alert { --pf-v6-c-alert--BorderColor: var(--pf-t--global--border--color--brand--default); --pf-v6-c-alert__icon--Color: var(--pf-t--global--icon--color--regular); }
+.software-recommendations .pf-v6-c-alert__title,
+.environment-software-alert .pf-v6-c-alert__title { font-size: var(--pf-t--global--font--size--body--default); font-weight: 500; }
+.software-recommendations .pf-v6-c-alert__icon svg,
+.environment-software-alert .pf-v6-c-alert__icon svg { width: 14px; height: 14px; }
 .software-recommendations p { margin: 0; font-size: var(--pf-t--global--font--size--body--sm); line-height: var(--pf-t--global--font--line-height--body); }
 .software-recommendation-list { margin-block: var(--pf-t--global--spacer--sm); }
 .software-recommendation-item { display: flex; align-items: center; justify-content: space-between; gap: var(--pf-t--global--spacer--md); padding-block: var(--pf-t--global--spacer--sm); border-bottom: 1px solid var(--pf-t--global--border--color--default); }
-.software-recommendation-item strong { display: block; font-size: var(--pf-t--global--font--size--body--default); font-weight: var(--pf-t--global--font--weight--body--bold); }
+.software-recommendation-item strong { display: block; font-size: var(--pf-t--global--font--size--body--sm); font-weight: 500; }
 .software-recommendation-item .pf-v6-c-button { flex: none; }
 .content-select { width: min(100%, 680px); }
 .content-select-toggle { display: flex; width: min(100%, 680px); height: 42px; align-items: center; gap: 10px; padding: 0 10px 0 14px; border: 1px solid var(--pf-t--global--border--color--control--default); border-radius: 6px; background: var(--pf-t--global--background--color--primary--default); }
@@ -162,10 +177,16 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .content-select-toggle .pf-v6-c-button { min-width: 28px; min-height: 28px; margin-right: -4px; }
 .content-select .pf-v6-c-menu { width: min(680px, calc(100vw - 96px)); }
 .content-select .pf-v6-c-menu__item-description { max-width: 580px; white-space: normal; }
+.environment-select { width: min(100%, 680px); }
+.environment-select-toggle { display: flex; width: min(100%, 680px); height: 42px; align-items: center; justify-content: space-between; gap: 10px; padding: 0 14px; border: 1px solid var(--pf-t--global--border--color--control--default); border-radius: 6px; background: var(--pf-t--global--background--color--primary--default); color: var(--pf-t--global--text--color--regular); font: inherit; text-align: left; cursor: pointer; }
+.environment-select-toggle:focus-visible { outline: 2px solid var(--pf-t--global--border--color--clicked); outline-offset: -2px; }
+.environment-select-toggle svg { width: 14px; height: 14px; flex: none; }
+.environment-select .pf-v6-c-menu { width: min(680px, calc(100vw - 96px)); }
+.environment-select .pf-v6-c-menu__item-description { max-width: 580px; white-space: normal; }
 .selected-software-table { width: 100%; margin-top: 18px; }
 .selected-software-table .pf-v6-c-table__th { font-size: var(--pf-t--global--font--size--body--default); }
 .selected-software-table .pf-v6-c-table__td { padding-block: 14px; }
-.selected-software-table strong { display: block; font-family: var(--pf-t--global--font--family--body); font-size: var(--pf-t--global--font--size--body--default); font-weight: var(--pf-t--global--font--weight--body--bold); }
+.selected-software-table strong { display: block; font-family: var(--pf-t--global--font--family--body); font-size: var(--pf-t--global--font--size--body--sm); font-weight: 500; }
 .selected-software-table p { max-width: 760px; margin: 5px 0 0; color: var(--pf-t--global--text--color--subtle); font-size: var(--pf-t--global--font--size--body--sm); line-height: var(--pf-t--global--font--line-height--body); }
 .selected-software-table .software-tree-parent { background: var(--pf-t--global--background--color--secondary--default); }
 .selected-software-table .software-tree-parent .pf-v6-c-table__td { padding-block: var(--pf-t--global--spacer--sm); }
@@ -173,6 +194,11 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .selected-software-table .pf-v6-c-button { color: var(--pf-t--global--icon--color--subtle); }
 .selected-software-table .empty-software-state { padding-block: 20px; color: var(--pf-t--global--text--color--subtle); font-size: var(--pf-t--global--font--size--body--sm); }
 .environment-software-alert { width: min(100%, 760px); margin-top: var(--pf-t--global--spacer--lg); }
+.environment-table-title { display: flex; align-items: center; gap: 4px; margin: 0; font-size: var(--pf-t--global--font--size--body--default) !important; font-weight: 500; }
+.environment-table-title svg,
+.software-heading-icon { width: 14px; height: 14px; flex: none; }
+.environment-table-title svg { color: var(--pf-t--global--icon--color--regular); }
+.software-heading-icon { margin-inline-end: 4px; color: var(--pf-t--global--icon--color--regular); vertical-align: -2px; }
 .environment-software-alert > .pf-v6-c-alert__description > p { margin: 0 0 var(--pf-t--global--spacer--sm); font-size: var(--pf-t--global--font--size--body--sm); }
 .environment-software-alert .environment-table-scroll { margin-top: var(--pf-t--global--spacer--sm); }
 .environment-table-section { margin-top: var(--pf-t--global--spacer--lg); }
@@ -181,11 +207,11 @@ body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans
 .environment-software-table { min-width: 520px; width: 100%; }
 .environment-software-table .pf-v6-c-table__th:first-child { width: 40%; }
 .environment-software-table .pf-v6-c-table__td { padding-block: var(--pf-t--global--spacer--md); font-size: var(--pf-t--global--font--size--body--sm); }
-.environment-software-table .pf-v6-c-check__label { font-size: var(--pf-t--global--font--size--body--default); font-weight: var(--pf-t--global--font--weight--body--bold); }
+.environment-software-table .pf-v6-c-check__label { font-size: var(--pf-t--global--font--size--body--sm); font-weight: 500; }
 .software-tab-content .pf-v6-c-search-input { max-width: 100%; }
 .software-checklist { display: grid; gap: var(--pf-t--global--spacer--sm); margin-block: var(--pf-t--global--spacer--md); }
 .software-checklist .pf-v6-c-check { padding-bottom: var(--pf-t--global--spacer--sm); border-bottom: 1px solid var(--pf-t--global--border--color--default); }
-.software-checklist .pf-v6-c-check__label { font-size: var(--pf-t--global--font--size--body--default); font-weight: var(--pf-t--global--font--weight--body--bold); }
+.software-checklist .pf-v6-c-check__label { font-size: var(--pf-t--global--font--size--body--sm); font-weight: 500; }
 .software-checklist .pf-v6-c-check__description { font-size: var(--pf-t--global--font--size--body--sm); }
 .software-no-results { margin: 0; color: var(--pf-t--global--text--color--subtle); font-size: var(--pf-t--global--font--size--body--sm); }
 .software-selection-summary { margin-top: var(--pf-t--global--spacer--lg); }

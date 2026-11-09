@@ -7,15 +7,20 @@ import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchIn
 import { Tabs, Tab, TabTitleText } from "@patternfly/react-core/dist/esm/components/Tabs/index.js";
 import { Title } from "@patternfly/react-core/dist/esm/components/Title/index.js";
 import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/components/ToggleGroup/index.js";
+import { Switch } from "@patternfly/react-core/dist/esm/components/Switch/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
 import { CardHeader } from "@patternfly/react-core/dist/esm/components/Card/CardHeader.js";
 import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form/index.js";
 import { Select, SelectGroup, SelectOption } from "@patternfly/react-core/dist/esm/components/Select/index.js";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput/index.js";
 import { FileUpload } from "@patternfly/react-core/dist/esm/components/FileUpload/index.js";
-import { MinusCircleIcon, PlusCircleIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
+import { AngleDownIcon, ArrowRightIcon, MinusCircleIcon, PlusCircleIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
+import RhUiCheckClipboardIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-check-clipboard-icon.js";
+import RhUiCubesIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-cubes-icon.js";
 import RhUiTemplateIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-template-icon.js";
 import RhUiRegistryIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-registry-icon.js";
+import SunIcon from "@patternfly/react-icons/dist/esm/icons/sun-icon.js";
+import OutlinedMoonIcon from "@patternfly/react-icons/dist/esm/icons/outlined-moon-icon.js";
 import { Wizard, WizardStep } from "@patternfly/react-core/dist/esm/components/Wizard/index.js";
 import { Table, Thead, Tbody, Tr, Th, Td, TreeRowWrapper } from "@patternfly/react-table/dist/esm/components/Table/index.js";
 import { RedhatIcon } from "@patternfly/react-icons/dist/esm/icons/redhat-icon.js";
@@ -50,6 +55,17 @@ const ThemeToggle = ({ theme, setTheme, isCompact = false }) => <ToggleGroup
         onChange={() => setTheme("dark")}
     />
 </ToggleGroup>;
+
+const AppearanceSwitch = ({ theme, setTheme }) => <div className="appearance-switch">
+    <SunIcon aria-hidden="true" />
+    <Switch
+        id="opening-appearance-switch"
+        aria-label="Use dark appearance"
+        isChecked={theme === "dark"}
+        onChange={(_, isDark) => setTheme(isDark ? "dark" : "light")}
+    />
+    <OutlinedMoonIcon aria-hidden="true" />
+</div>;
 
 const ModeCard = ({ mode, selected, title, description, icon, onSelect }) => <Card
     isClickable
@@ -124,35 +140,55 @@ const InstallationContent = ({ mode, setMode }) => {
 };
 
 const environments = [
-    { id: "minimal", name: "Minimal Install", description: "A basic Red Hat Enterprise Linux environment for systems that need a small footprint." },
-    { id: "server", name: "Server", description: "An integrated, easier to manage server environment." },
-    { id: "workstation", name: "Workstation", description: "A graphical desktop environment for laptops, PCs, and engineering workstations." },
-    { id: "virtualization", name: "Virtualization Host", description: "Tools and services for hosting and managing virtual machines." },
+    { id: "fedora-cloud", name: "Fedora Cloud Server", description: "A server install with components needed to run in a cloud environment." },
+    { id: "fedora-custom", name: "Fedora Custom Operating System", description: "Basic building block for a custom Fedora system." },
+    { id: "fedora-server", name: "Fedora Server Edition", description: "An integrated, easier to manage server." },
+    { id: "fedora-workstation", name: "Fedora Workstation", description: "A user-friendly desktop system for laptops and PCs." },
+    { id: "kde-mobile", name: "KDE Plasma Mobile", description: "The KDE Plasma Mobile environment includes KDE Plasma Mobile and many Plasma Mobile applications." },
+    { id: "kde-workspaces", name: "KDE Plasma Workspaces", description: "A highly configurable graphical interface with a panel, desktop, system icons, widgets, and KDE applications." },
+    { id: "none", name: "None", description: "Continue without selecting a base environment." },
+    { id: "xfce-desktop", name: "Xfce Desktop", description: "A lightweight desktop environment that works well on low-end machines." },
 ];
 
+const getEnvironmentName = environment => environment && environment !== "none" ? environments.find(item => item.id === environment)?.name : undefined;
+const getEnvironmentAddOns = environment => environment && environment !== "none" ? environmentAddOns[environment] || [] : [];
+
 const environmentAddOns = {
-    minimal: [
+    "fedora-custom": [
         { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
         { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
         { id: "standard", name: "Standard", description: "Common set of utilities that extend the minimal installation." },
     ],
-    server: [
+    "fedora-server": [
         { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
         { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
         { id: "server-tools", name: "Server Tools", description: "Utilities for managing services, storage, and system administration." },
         { id: "web-server", name: "Web Server", description: "A ready to configure web server and related tools." },
     ],
-    workstation: [
+    "fedora-workstation": [
         { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
         { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." },
         { id: "container-management", name: "Container Management", description: "Tools for building, running, and managing containers." },
         { id: "office-suite", name: "Office Suite and Productivity", description: "Applications for documents, spreadsheets, and presentations." },
     ],
-    virtualization: [
+    "fedora-cloud": [
         { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
         { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
         { id: "virtualization-tools", name: "Virtualization Tools", description: "Tools to create, run, and administer virtual machines." },
         { id: "virtualization-platform", name: "Virtualization Platform", description: "Services for hosting virtual machines on this system." },
+    ],
+    "kde-mobile": [
+        { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+        { id: "mobile-applications", name: "Plasma Mobile Applications", description: "Applications and utilities designed for the Plasma Mobile environment." },
+    ],
+    "kde-workspaces": [
+        { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+        { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." },
+        { id: "office-suite", name: "Office Suite and Productivity", description: "Applications for documents, spreadsheets, and presentations." },
+    ],
+    "xfce-desktop": [
+        { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+        { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." },
     ],
 };
 
@@ -205,6 +241,25 @@ const SearchSelect = ({ ariaLabel, placeholder, items, groups, selected, onSelec
     </Select>;
 };
 
+const EnvironmentSelect = ({ selected, onSelect }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const selectedName = environments.find(item => item.id === selected)?.name;
+    return <Select
+        className="environment-select"
+        isOpen={isOpen}
+        selected={selected}
+        onOpenChange={setIsOpen}
+        onSelect={(_, value) => { onSelect(value); setIsOpen(false); }}
+        toggle={toggleRef => <button ref={toggleRef} type="button" className="environment-select-toggle" aria-label="Select environment" aria-expanded={isOpen} onClick={() => setIsOpen(current => !current)}>
+            <span>{selectedName || "Select environment"}</span><AngleDownIcon aria-hidden="true" />
+        </button>}
+        isScrollable
+        maxMenuHeight="320px"
+    >
+        {environments.map(item => <SelectOption key={item.id} value={item.id} description={item.description} isSelected={selected === item.id}>{item.name}</SelectOption>)}
+    </Select>;
+};
+
 const SoftwareHeader = ({ concept }) => <>
     <Title headingLevel="h1" size="2xl" id="software-content-title">Software selection</Title>
     <p className="software-description">{concept}</p>
@@ -212,18 +267,18 @@ const SoftwareHeader = ({ concept }) => <>
 
 const BaseEnvironmentSection = ({ environment, onEnvironmentChange, children }) => <section className="software-section" aria-labelledby="base-environment-title">
     <Title headingLevel="h2" size="xl" id="base-environment-title">Base environment</Title>
-    <p>{environment ? "Change the environment to explore the add-ons available for it." : "Select an environment to see its available add-ons."}</p>
+    <p>{environment && environment !== "none" ? "Change the environment to explore the add-ons available for it." : "Select an environment to see its available add-ons."}</p>
     <FormGroup label="Select environment" fieldId="base-environment-select">
-        <SearchSelect ariaLabel="Search and select environment" placeholder="Search and select environment" items={environments} selected={environment} onSelect={onEnvironmentChange} />
+        <EnvironmentSelect selected={environment} onSelect={onEnvironmentChange} />
     </FormGroup>
     {children}
 </section>;
 
 const SoftwareContent = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn, onAddRecommended }) => {
     const [expandedGroups, setExpandedGroups] = useState({ specific: true, general: true });
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
+    const specificAddOns = getEnvironmentAddOns(environment);
     const addOns = [...specificAddOns, ...generalAddOns];
-    const environmentName = environments.find(item => item.id === environment)?.name;
+    const environmentName = getEnvironmentName(environment);
     const recommendations = specificAddOns.map(item => item.id);
     const allRecommendedSelected = recommendations.every(id => selectedAddOns.includes(id));
     const toggleAddOn = onToggleAddOn;
@@ -255,7 +310,7 @@ const SoftwareContent = ({ environment, selectedAddOns, onEnvironmentChange, onT
         <section className="software-section additional-software" aria-labelledby="additional-software-title">
             <Title headingLevel="h2" size="xl" id="additional-software-title">Additional software</Title>
             <p>{environmentName ? `Choose add-ons for ${environmentName}. Recommended options appear first.` : "Choose optional add-ons available for any environment."}</p>
-            {environmentName && <Alert variant="info" isInline isExpandable component="h3" className="software-recommendations" title={`Recommended add-ons for ${environmentName}`} toggleAriaLabel={`Recommended add-ons for ${environmentName} details`}>
+            {environmentName && <Alert variant="custom" customIcon={<RhUiCubesIcon />} isInline isExpandable component="h3" className="software-recommendations" title={`Recommended add-ons for ${environmentName}`} toggleAriaLabel={`Recommended add-ons for ${environmentName} details`}>
                 <p>Choose the add-ons that fit this environment.</p>
                 <div className="software-recommendation-list">
                     {specificAddOns.map(item => <div className="software-recommendation-item" key={item.id}>
@@ -266,12 +321,12 @@ const SoftwareContent = ({ environment, selectedAddOns, onEnvironmentChange, onT
                 <Button variant="link" isDisabled={allRecommendedSelected} onClick={addRecommended}>{allRecommendedSelected ? "All recommended add-ons added" : "Add all recommended"}</Button>
             </Alert>}
             <FormGroup label="Add-ons" fieldId="software-addon-select">
-                <SearchSelect ariaLabel="Search and add software" placeholder="Search and add software" items={addOns} groups={[{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }]} selected={selectedAddOns} onSelect={toggleAddOn} isMulti />
+                <SearchSelect ariaLabel="Search and add software" placeholder="Search and add software" items={addOns} groups={environmentName ? [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }] : [{ label: "Available add-ons", items: generalAddOns }]} selected={selectedAddOns} onSelect={toggleAddOn} isMulti />
             </FormGroup>
             <Table aria-label="Selected software add-ons" variant="compact" isTreeTable className="selected-software-table">
                 <Thead><Tr><Th>Name</Th><Th screenReaderText="Actions" /></Tr></Thead>
                 <Tbody>
-                    {renderTreeGroup("specific", `For ${environmentName}`, selectedSpecific, 1)}
+                    {renderTreeGroup("specific", environmentName ? `For ${environmentName}` : "Environment add-ons", selectedSpecific, 1)}
                     {renderTreeGroup("general", "Other add-ons", selectedGeneral, 2)}
                     {!selectedSpecific.length && !selectedGeneral.length && <Tr><Td colSpan={2} className="empty-software-state">No additional software selected.</Td></Tr>}
                 </Tbody>
@@ -295,12 +350,12 @@ const AddOnChecklist = ({ items, selectedAddOns, onToggleAddOn, filter = "", idP
     </div>;
 };
 
-const SelectedAddOnsSummary = ({ environment, selectedAddOns, onToggleAddOn, showCategory = false }) => {
-    const currentEnvironmentAddOns = environment ? environmentAddOns[environment] : [];
+const SelectedAddOnsSummary = ({ environment, selectedAddOns, onToggleAddOn, showCategory = false, showSelectedIcon = false }) => {
+    const currentEnvironmentAddOns = getEnvironmentAddOns(environment);
     const items = [...currentEnvironmentAddOns, ...generalAddOns].filter(item => selectedAddOns.includes(item.id));
     const specificIds = new Set(currentEnvironmentAddOns.map(item => item.id));
     return <section className="software-selection-summary" aria-labelledby="selected-addons-title">
-        <Title headingLevel={showCategory ? "h2" : "h3"} size={showCategory ? "xl" : "lg"} id="selected-addons-title">Selected software ({items.length})</Title>
+        <Title headingLevel={showCategory ? "h2" : "h3"} size={showCategory ? "xl" : "lg"} id="selected-addons-title">{showSelectedIcon && <RhUiCheckClipboardIcon className="software-heading-icon" aria-hidden="true" />}<span>Selected software ({items.length})</span></Title>
         <Table aria-label="Selected software add-ons" variant="compact" className="selected-software-table">
             <Thead><Tr><Th>Name</Th>{showCategory && <Th>Category</Th>}<Th screenReaderText="Actions" /></Tr></Thead>
             <Tbody>
@@ -335,13 +390,14 @@ const EnvironmentAddOnsTable = ({ environmentName, items, selectedAddOns, onTogg
 </div>;
 
 const SoftwareCatalogColumns = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn }) => {
-    const environmentName = environments.find(item => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
     return <section className="software-content" aria-labelledby="software-content-title">
         <SoftwareHeader concept="Concept 2 · Preview software as you explore base environments, then choose any additional software." />
         <BaseEnvironmentSection environment={environment} onEnvironmentChange={onEnvironmentChange}>
-            {environment && <Alert
-                variant="info"
+            {environmentName && <Alert
+                variant="custom"
+                customIcon={<RhUiCubesIcon />}
                 isInline
                 isExpandable
                 component="h3"
@@ -361,7 +417,7 @@ const SoftwareCatalogColumns = ({ environment, selectedAddOns, onEnvironmentChan
                     ariaLabel="Search and add software"
                     placeholder="Search and add software"
                     items={[...specificAddOns, ...generalAddOns]}
-                    groups={[{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }]}
+                    groups={environmentName ? [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }] : [{ label: "Available add-ons", items: generalAddOns }]}
                     selected={selectedAddOns}
                     onSelect={onToggleAddOn}
                     isMulti
@@ -373,13 +429,13 @@ const SoftwareCatalogColumns = ({ environment, selectedAddOns, onEnvironmentChan
 };
 
 const SoftwareCatalogTable = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn }) => {
-    const environmentName = environments.find(item => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
-    return <section className="software-content" aria-labelledby="software-content-title">
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
+    return <section className="software-content software-table-concept" aria-labelledby="software-content-title">
         <SoftwareHeader concept="Concept 4 · Compare environment-specific add-ons in a table before choosing." />
         <BaseEnvironmentSection environment={environment} onEnvironmentChange={onEnvironmentChange}>
-            {environment && <div className="environment-table-section" aria-live="polite">
-                <Title headingLevel="h3" size="lg">Add-ons for {environmentName}</Title>
+            {environmentName && <div className="environment-table-section" aria-live="polite">
+                <Title headingLevel="h3" size="lg" className="environment-table-title"><RhUiCubesIcon aria-hidden="true" /><span>Add-ons for {environmentName}</span></Title>
                 <p>Each row is one selectable add-on for this environment.</p>
                 <EnvironmentAddOnsTable environmentName={environmentName} items={specificAddOns} selectedAddOns={selectedAddOns} onToggleAddOn={onToggleAddOn} idPrefix="table-specific" />
             </div>}
@@ -391,19 +447,19 @@ const SoftwareCatalogTable = ({ environment, selectedAddOns, onEnvironmentChange
                 <SearchSelect ariaLabel="Search and add software" placeholder="Search and add software" items={generalAddOns} selected={selectedAddOns} onSelect={onToggleAddOn} isMulti />
             </FormGroup>
         </section>
-        <SelectedAddOnsSummary environment={environment} selectedAddOns={selectedAddOns} onToggleAddOn={onToggleAddOn} showCategory />
+        <SelectedAddOnsSummary environment={environment} selectedAddOns={selectedAddOns} onToggleAddOn={onToggleAddOn} showCategory showSelectedIcon />
     </section>;
 };
 
 const SoftwareCatalogTabs = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn, onAddRecommended }) => {
     const [activeCategory, setActiveCategory] = useState("environment");
     const [filter, setFilter] = useState("");
-    const environmentName = environments.find(item => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
     const allRecommendedSelected = specificAddOns.every(item => selectedAddOns.includes(item.id));
     const showCategory = (key, items, idPrefix) => <div className="software-tab-content">
         <SearchInput aria-label={`Search ${key === "environment" ? environmentName : "other"} add-ons`} placeholder="Search add-ons" value={filter} onChange={(_, value) => setFilter(value)} onClear={() => setFilter("")} />
-        {key === "environment" && !environment ? <p>Select a base environment to see its add-ons.</p> : <AddOnChecklist items={items} selectedAddOns={selectedAddOns} onToggleAddOn={onToggleAddOn} filter={filter} idPrefix={idPrefix} />}
+        {key === "environment" && !environmentName ? <p>Select a base environment to see its add-ons.</p> : <AddOnChecklist items={items} selectedAddOns={selectedAddOns} onToggleAddOn={onToggleAddOn} filter={filter} idPrefix={idPrefix} />}
         {key === "environment" && <Button variant="link" isDisabled={allRecommendedSelected} onClick={() => onAddRecommended(specificAddOns.map(item => item.id))}>{allRecommendedSelected ? "All selected" : "Select all for this environment"}</Button>}
     </div>;
     return <section className="software-content" aria-labelledby="software-content-title">
@@ -413,7 +469,7 @@ const SoftwareCatalogTabs = ({ environment, selectedAddOns, onEnvironmentChange,
             <Title headingLevel="h2" size="xl" id="additional-software-title">Additional software</Title>
             <p>Switch categories to browse and select add-ons. Selections stay marked in each list.</p>
             <Tabs activeKey={activeCategory} onSelect={(_, key) => { setActiveCategory(key); setFilter(""); }} tabListAriaLabel="Add-on categories" className="software-category-tabs">
-                <Tab eventKey="environment" title={<TabTitleText>{environmentName ? `For ${environmentName}` : "Choose an environment"}</TabTitleText>}>{environmentName ? showCategory("environment", specificAddOns, "tab-specific") : <p>Select a base environment to see its add-ons.</p>}</Tab>
+        <Tab eventKey="environment" title={<TabTitleText>{environmentName ? `For ${environmentName}` : "Choose an environment"}</TabTitleText>}>{environmentName ? showCategory("environment", specificAddOns, "tab-specific") : <p>Select a base environment to see its add-ons.</p>}</Tab>
                 <Tab eventKey="other" title={<TabTitleText>Other add-ons</TabTitleText>}>{showCategory("other", generalAddOns, "tab-general")}</Tab>
             </Tabs>
         </section>
@@ -433,7 +489,7 @@ function App() {
     const addRecommendedSoftware = ids => setSelectedSoftwareAddOns(current => [...new Set([...current, ...ids])]);
     const softwareProps = {
         environment: softwareEnvironment,
-        selectedAddOns: selectedSoftwareAddOns.filter(id => generalAddOns.some(item => item.id === id) || (softwareEnvironment && environmentAddOns[softwareEnvironment].some(item => item.id === id))),
+        selectedAddOns: selectedSoftwareAddOns.filter(id => generalAddOns.some(item => item.id === id) || getEnvironmentAddOns(softwareEnvironment).some(item => item.id === id)),
         onEnvironmentChange: changeSoftwareEnvironment,
         onToggleAddOn: toggleSoftwareAddOn,
         onAddRecommended: addRecommendedSoftware,
@@ -453,10 +509,10 @@ function App() {
         name={name}
         status={completedSteps.includes("setup-step-6") ? "success" : "default"}
         steps={[
-            <WizardStep key="grouped" id="setup-step-6-grouped" name="Grouped menu"><SoftwareContent {...softwareProps} /></WizardStep>,
-            <WizardStep key="columns" id="setup-step-6-columns" name="Environment preview"><SoftwareCatalogColumns {...softwareProps} /></WizardStep>,
-            <WizardStep key="tabs" id="setup-step-6-tabs" name="Category tabs"><SoftwareCatalogTabs {...softwareProps} /></WizardStep>,
-            <WizardStep key="table" id="setup-step-6-table" name="Software table"><SoftwareCatalogTable {...softwareProps} /></WizardStep>,
+            <WizardStep key="grouped" id="setup-step-6-grouped" name="A. Grouped menu"><SoftwareContent {...softwareProps} /></WizardStep>,
+            <WizardStep key="columns" id="setup-step-6-columns" name="B. Environment preview"><SoftwareCatalogColumns {...softwareProps} /></WizardStep>,
+            <WizardStep key="tabs" id="setup-step-6-tabs" name="C. Category tabs"><SoftwareCatalogTabs {...softwareProps} /></WizardStep>,
+            <WizardStep key="table" id="setup-step-6-table" name="D. Software table"><SoftwareCatalogTable {...softwareProps} /></WizardStep>,
         ]}
     /> : <WizardStep
         key={name}
@@ -479,11 +535,11 @@ function App() {
             <p className="welcome-copy">Let’s get your system ready. This guided setup will help you configure the essentials before installation.</p>
             <div className="appearance-selector">
                 <span>Appearance</span>
-                <ThemeToggle theme={theme} setTheme={setTheme} />
+                <AppearanceSwitch theme={theme} setTheme={setTheme} />
             </div>
             <div className="welcome-actions">
-                <Button variant="primary" onClick={() => setStarted(true)}>Begin setup</Button>
-                <Button variant="link" onClick={() => setStarted(true)}>Continue to setup</Button>
+                <Button variant="primary" icon={<ArrowRightIcon />} iconPosition="end" onClick={() => setStarted(true)}>Install RHEL</Button>
+                <Button variant="secondary" onClick={() => setStarted(false)}>Cancel</Button>
             </div>
         </section> : finished ? <section className="welcome-card completion-card">
             <div className="brand-mark completion-mark" aria-hidden="true">✓</div>

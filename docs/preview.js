@@ -242,20 +242,20 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component10(props, context, updater) {
+          function Component11(props, context, updater) {
             this.props = props;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
           }
-          Component10.prototype.isReactComponent = {};
-          Component10.prototype.setState = function(partialState, callback) {
+          Component11.prototype.isReactComponent = {};
+          Component11.prototype.setState = function(partialState, callback) {
             if (typeof partialState !== "object" && typeof partialState !== "function" && partialState != null) {
               throw new Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
             }
             this.updater.enqueueSetState(this, partialState, callback, "setState");
           };
-          Component10.prototype.forceUpdate = function(callback) {
+          Component11.prototype.forceUpdate = function(callback) {
             this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
           };
           {
@@ -264,7 +264,7 @@
               replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
             };
             var defineDeprecationWarning = function(methodName, info2) {
-              Object.defineProperty(Component10.prototype, methodName, {
+              Object.defineProperty(Component11.prototype, methodName, {
                 get: function() {
                   warn("%s(...) is deprecated in plain JavaScript React classes. %s", info2[0], info2[1]);
                   return void 0;
@@ -279,7 +279,7 @@
           }
           function ComponentDummy() {
           }
-          ComponentDummy.prototype = Component10.prototype;
+          ComponentDummy.prototype = Component11.prototype;
           function PureComponent(props, context, updater) {
             this.props = props;
             this.context = context;
@@ -288,7 +288,7 @@
           }
           var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
           pureComponentPrototype.constructor = PureComponent;
-          assign(pureComponentPrototype, Component10.prototype);
+          assign(pureComponentPrototype, Component11.prototype);
           pureComponentPrototype.isPureReactComponent = true;
           function createRef11() {
             var refObject = {
@@ -1353,8 +1353,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component11) {
-            var prototype = Component11.prototype;
+          function shouldConstruct(Component12) {
+            var prototype = Component12.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1860,7 +1860,7 @@
             only: onlyChild
           };
           exports.Children = Children5;
-          exports.Component = Component10;
+          exports.Component = Component11;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
           exports.PureComponent = PureComponent;
@@ -2438,7 +2438,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment10 = 7;
+          var Fragment11 = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -3425,8 +3425,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component10) {
-            var prototype = Component10.prototype;
+          function shouldConstruct(Component11) {
+            var prototype = Component11.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3595,7 +3595,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment10:
+              case Fragment11:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -10889,9 +10889,9 @@
           var contextStackCursor = createCursor(emptyContextObject);
           var didPerformWorkStackCursor = createCursor(false);
           var previousContext = emptyContextObject;
-          function getUnmaskedContext(workInProgress2, Component10, didPushOwnContextIfProvider) {
+          function getUnmaskedContext(workInProgress2, Component11, didPushOwnContextIfProvider) {
             {
-              if (didPushOwnContextIfProvider && isContextProvider(Component10)) {
+              if (didPushOwnContextIfProvider && isContextProvider(Component11)) {
                 return previousContext;
               }
               return contextStackCursor.current;
@@ -11028,8 +11028,8 @@
                   case HostRoot:
                     return node.stateNode.context;
                   case ClassComponent: {
-                    var Component10 = node.type;
-                    if (isContextProvider(Component10)) {
+                    var Component11 = node.type;
+                    if (isContextProvider(Component11)) {
                       return node.stateNode.__reactInternalMemoizedMergedChildContext;
                     }
                     break;
@@ -12024,7 +12024,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment10) {
+              if (current2 === null || current2.tag !== Fragment11) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -12427,7 +12427,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment10) {
+                    if (child.tag === Fragment11) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -13483,7 +13483,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component10, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component11, props, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -13503,7 +13503,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component10(props, secondArg);
+            var children = Component11(props, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -13523,7 +13523,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component10(props, secondArg);
+                children = Component11(props, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -15322,10 +15322,10 @@
               child = child.sibling;
             }
           }
-          function resolveDefaultProps(Component10, baseProps) {
-            if (Component10 && Component10.defaultProps) {
+          function resolveDefaultProps(Component11, baseProps) {
+            if (Component11 && Component11.defaultProps) {
               var props = assign({}, baseProps);
-              var defaultProps2 = Component10.defaultProps;
+              var defaultProps2 = Component11.defaultProps;
               for (var propName in defaultProps2) {
                 if (props[propName] === void 0) {
                   props[propName] = defaultProps2[propName];
@@ -16254,22 +16254,22 @@
             workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
             workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
           }
-          function updateForwardRef(current2, workInProgress2, Component10, nextProps, renderLanes2) {
+          function updateForwardRef(current2, workInProgress2, Component11, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component10.propTypes;
+                var innerPropTypes = Component11.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component10)
+                    getComponentNameFromType(Component11)
                   );
                 }
               }
             }
-            var render2 = Component10.render;
+            var render2 = Component11.render;
             var ref = workInProgress2.ref;
             var nextChildren;
             var hasId;
@@ -16307,11 +16307,11 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateMemoComponent(current2, workInProgress2, Component10, nextProps, renderLanes2) {
+          function updateMemoComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component10.type;
-              if (isSimpleFunctionComponent(type) && Component10.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
-              Component10.defaultProps === void 0) {
+              var type = Component11.type;
+              if (isSimpleFunctionComponent(type) && Component11.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
+              Component11.defaultProps === void 0) {
                 var resolvedType = type;
                 {
                   resolvedType = resolveFunctionForHotReloading(type);
@@ -16334,7 +16334,7 @@
                     getComponentNameFromType(type)
                   );
                 }
-                if (Component10.defaultProps !== void 0) {
+                if (Component11.defaultProps !== void 0) {
                   var componentName = getComponentNameFromType(type) || "Unknown";
                   if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                     error("%s: Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.", componentName);
@@ -16342,14 +16342,14 @@
                   }
                 }
               }
-              var child = createFiberFromTypeAndProps(Component10.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+              var child = createFiberFromTypeAndProps(Component11.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
               child.ref = workInProgress2.ref;
               child.return = workInProgress2;
               workInProgress2.child = child;
               return child;
             }
             {
-              var _type = Component10.type;
+              var _type = Component11.type;
               var _innerPropTypes = _type.propTypes;
               if (_innerPropTypes) {
                 checkPropTypes(
@@ -16365,7 +16365,7 @@
             var hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current2, renderLanes2);
             if (!hasScheduledUpdateOrContext) {
               var prevProps = currentChild.memoizedProps;
-              var compare = Component10.compare;
+              var compare = Component11.compare;
               compare = compare !== null ? compare : shallowEqual;
               if (compare(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
                 return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -16378,7 +16378,7 @@
             workInProgress2.child = newChild;
             return newChild;
           }
-          function updateSimpleMemoComponent(current2, workInProgress2, Component10, nextProps, renderLanes2) {
+          function updateSimpleMemoComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
                 var outerMemoType = workInProgress2.elementType;
@@ -16418,7 +16418,7 @@
                 }
               }
             }
-            return updateFunctionComponent(current2, workInProgress2, Component10, nextProps, renderLanes2);
+            return updateFunctionComponent(current2, workInProgress2, Component11, nextProps, renderLanes2);
           }
           function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
             var nextProps = workInProgress2.pendingProps;
@@ -16508,24 +16508,24 @@
               }
             }
           }
-          function updateFunctionComponent(current2, workInProgress2, Component10, nextProps, renderLanes2) {
+          function updateFunctionComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
             {
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component10.propTypes;
+                var innerPropTypes = Component11.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component10)
+                    getComponentNameFromType(Component11)
                   );
                 }
               }
             }
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component10, true);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component11, true);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             var nextChildren;
@@ -16537,12 +16537,12 @@
             {
               ReactCurrentOwner$1.current = workInProgress2;
               setIsRendering(true);
-              nextChildren = renderWithHooks(current2, workInProgress2, Component10, nextProps, context, renderLanes2);
+              nextChildren = renderWithHooks(current2, workInProgress2, Component11, nextProps, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  nextChildren = renderWithHooks(current2, workInProgress2, Component10, nextProps, context, renderLanes2);
+                  nextChildren = renderWithHooks(current2, workInProgress2, Component11, nextProps, context, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16564,7 +16564,7 @@
             reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
             return workInProgress2.child;
           }
-          function updateClassComponent(current2, workInProgress2, Component10, nextProps, renderLanes2) {
+          function updateClassComponent(current2, workInProgress2, Component11, nextProps, renderLanes2) {
             {
               switch (shouldError(workInProgress2)) {
                 case false: {
@@ -16587,20 +16587,20 @@
                 }
               }
               if (workInProgress2.type !== workInProgress2.elementType) {
-                var innerPropTypes = Component10.propTypes;
+                var innerPropTypes = Component11.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     // Resolved props
                     "prop",
-                    getComponentNameFromType(Component10)
+                    getComponentNameFromType(Component11)
                   );
                 }
               }
             }
             var hasContext;
-            if (isContextProvider(Component10)) {
+            if (isContextProvider(Component11)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -16611,15 +16611,15 @@
             var shouldUpdate;
             if (instance === null) {
               resetSuspendedCurrentOnMountInLegacyMode(current2, workInProgress2);
-              constructClassInstance(workInProgress2, Component10, nextProps);
-              mountClassInstance(workInProgress2, Component10, nextProps, renderLanes2);
+              constructClassInstance(workInProgress2, Component11, nextProps);
+              mountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
               shouldUpdate = true;
             } else if (current2 === null) {
-              shouldUpdate = resumeMountClassInstance(workInProgress2, Component10, nextProps, renderLanes2);
+              shouldUpdate = resumeMountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
             } else {
-              shouldUpdate = updateClassInstance(current2, workInProgress2, Component10, nextProps, renderLanes2);
+              shouldUpdate = updateClassInstance(current2, workInProgress2, Component11, nextProps, renderLanes2);
             }
-            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component10, shouldUpdate, hasContext, renderLanes2);
+            var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component11, shouldUpdate, hasContext, renderLanes2);
             {
               var inst = workInProgress2.stateNode;
               if (shouldUpdate && inst.props !== nextProps) {
@@ -16631,19 +16631,19 @@
             }
             return nextUnitOfWork;
           }
-          function finishClassComponent(current2, workInProgress2, Component10, shouldUpdate, hasContext, renderLanes2) {
+          function finishClassComponent(current2, workInProgress2, Component11, shouldUpdate, hasContext, renderLanes2) {
             markRef(current2, workInProgress2);
             var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
             if (!shouldUpdate && !didCaptureError) {
               if (hasContext) {
-                invalidateContextProvider(workInProgress2, Component10, false);
+                invalidateContextProvider(workInProgress2, Component11, false);
               }
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
             }
             var instance = workInProgress2.stateNode;
             ReactCurrentOwner$1.current = workInProgress2;
             var nextChildren;
-            if (didCaptureError && typeof Component10.getDerivedStateFromError !== "function") {
+            if (didCaptureError && typeof Component11.getDerivedStateFromError !== "function") {
               nextChildren = null;
               {
                 stopProfilerTimerIfRunning();
@@ -16677,7 +16677,7 @@
             }
             workInProgress2.memoizedState = instance.state;
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component10, true);
+              invalidateContextProvider(workInProgress2, Component11, true);
             }
             return workInProgress2.child;
           }
@@ -16777,45 +16777,45 @@
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
-            var Component10 = init(payload);
-            workInProgress2.type = Component10;
-            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component10);
-            var resolvedProps = resolveDefaultProps(Component10, props);
+            var Component11 = init(payload);
+            workInProgress2.type = Component11;
+            var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component11);
+            var resolvedProps = resolveDefaultProps(Component11, props);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
                 {
-                  validateFunctionComponentInDev(workInProgress2, Component10);
-                  workInProgress2.type = Component10 = resolveFunctionForHotReloading(Component10);
+                  validateFunctionComponentInDev(workInProgress2, Component11);
+                  workInProgress2.type = Component11 = resolveFunctionForHotReloading(Component11);
                 }
-                child = updateFunctionComponent(null, workInProgress2, Component10, resolvedProps, renderLanes2);
+                child = updateFunctionComponent(null, workInProgress2, Component11, resolvedProps, renderLanes2);
                 return child;
               }
               case ClassComponent: {
                 {
-                  workInProgress2.type = Component10 = resolveClassForHotReloading(Component10);
+                  workInProgress2.type = Component11 = resolveClassForHotReloading(Component11);
                 }
-                child = updateClassComponent(null, workInProgress2, Component10, resolvedProps, renderLanes2);
+                child = updateClassComponent(null, workInProgress2, Component11, resolvedProps, renderLanes2);
                 return child;
               }
               case ForwardRef: {
                 {
-                  workInProgress2.type = Component10 = resolveForwardRefForHotReloading(Component10);
+                  workInProgress2.type = Component11 = resolveForwardRefForHotReloading(Component11);
                 }
-                child = updateForwardRef(null, workInProgress2, Component10, resolvedProps, renderLanes2);
+                child = updateForwardRef(null, workInProgress2, Component11, resolvedProps, renderLanes2);
                 return child;
               }
               case MemoComponent: {
                 {
                   if (workInProgress2.type !== workInProgress2.elementType) {
-                    var outerPropTypes = Component10.propTypes;
+                    var outerPropTypes = Component11.propTypes;
                     if (outerPropTypes) {
                       checkPropTypes(
                         outerPropTypes,
                         resolvedProps,
                         // Resolved for outer only
                         "prop",
-                        getComponentNameFromType(Component10)
+                        getComponentNameFromType(Component11)
                       );
                     }
                   }
@@ -16823,8 +16823,8 @@
                 child = updateMemoComponent(
                   null,
                   workInProgress2,
-                  Component10,
-                  resolveDefaultProps(Component10.type, resolvedProps),
+                  Component11,
+                  resolveDefaultProps(Component11.type, resolvedProps),
                   // The inner type can have defaults too
                   renderLanes2
                 );
@@ -16833,33 +16833,33 @@
             }
             var hint = "";
             {
-              if (Component10 !== null && typeof Component10 === "object" && Component10.$$typeof === REACT_LAZY_TYPE) {
+              if (Component11 !== null && typeof Component11 === "object" && Component11.$$typeof === REACT_LAZY_TYPE) {
                 hint = " Did you wrap a component in React.lazy() more than once?";
               }
             }
-            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component10 + ". " + ("Lazy element type must resolve to a class or function." + hint));
+            throw new Error("Element type is invalid. Received a promise that resolves to: " + Component11 + ". " + ("Lazy element type must resolve to a class or function." + hint));
           }
-          function mountIncompleteClassComponent(_current, workInProgress2, Component10, nextProps, renderLanes2) {
+          function mountIncompleteClassComponent(_current, workInProgress2, Component11, nextProps, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             workInProgress2.tag = ClassComponent;
             var hasContext;
-            if (isContextProvider(Component10)) {
+            if (isContextProvider(Component11)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
               hasContext = false;
             }
             prepareToReadContext(workInProgress2, renderLanes2);
-            constructClassInstance(workInProgress2, Component10, nextProps);
-            mountClassInstance(workInProgress2, Component10, nextProps, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component10, true, hasContext, renderLanes2);
+            constructClassInstance(workInProgress2, Component11, nextProps);
+            mountClassInstance(workInProgress2, Component11, nextProps, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component11, true, hasContext, renderLanes2);
           }
-          function mountIndeterminateComponent(_current, workInProgress2, Component10, renderLanes2) {
+          function mountIndeterminateComponent(_current, workInProgress2, Component11, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
             var props = workInProgress2.pendingProps;
             var context;
             {
-              var unmaskedContext = getUnmaskedContext(workInProgress2, Component10, false);
+              var unmaskedContext = getUnmaskedContext(workInProgress2, Component11, false);
               context = getMaskedContext(workInProgress2, unmaskedContext);
             }
             prepareToReadContext(workInProgress2, renderLanes2);
@@ -16869,8 +16869,8 @@
               markComponentRenderStarted(workInProgress2);
             }
             {
-              if (Component10.prototype && typeof Component10.prototype.render === "function") {
-                var componentName = getComponentNameFromType(Component10) || "Unknown";
+              if (Component11.prototype && typeof Component11.prototype.render === "function") {
+                var componentName = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutBadClass[componentName]) {
                   error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                   didWarnAboutBadClass[componentName] = true;
@@ -16881,7 +16881,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component10, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component11, props, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16891,7 +16891,7 @@
             workInProgress2.flags |= PerformedWork;
             {
               if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-                var _componentName = getComponentNameFromType(Component10) || "Unknown";
+                var _componentName = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                   didWarnAboutModulePatternComponent[_componentName] = true;
@@ -16904,7 +16904,7 @@
               typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0
             ) {
               {
-                var _componentName2 = getComponentNameFromType(Component10) || "Unknown";
+                var _componentName2 = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutModulePatternComponent[_componentName2]) {
                   error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                   didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -16914,7 +16914,7 @@
               workInProgress2.memoizedState = null;
               workInProgress2.updateQueue = null;
               var hasContext = false;
-              if (isContextProvider(Component10)) {
+              if (isContextProvider(Component11)) {
                 hasContext = true;
                 pushContextProvider(workInProgress2);
               } else {
@@ -16923,15 +16923,15 @@
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component10, props, renderLanes2);
-              return finishClassComponent(null, workInProgress2, Component10, true, hasContext, renderLanes2);
+              mountClassInstance(workInProgress2, Component11, props, renderLanes2);
+              return finishClassComponent(null, workInProgress2, Component11, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
               {
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component10, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component11, props, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16943,16 +16943,16 @@
               }
               reconcileChildren(null, workInProgress2, value, renderLanes2);
               {
-                validateFunctionComponentInDev(workInProgress2, Component10);
+                validateFunctionComponentInDev(workInProgress2, Component11);
               }
               return workInProgress2.child;
             }
           }
-          function validateFunctionComponentInDev(workInProgress2, Component10) {
+          function validateFunctionComponentInDev(workInProgress2, Component11) {
             {
-              if (Component10) {
-                if (Component10.childContextTypes) {
-                  error("%s(...): childContextTypes cannot be defined on a function component.", Component10.displayName || Component10.name || "Component");
+              if (Component11) {
+                if (Component11.childContextTypes) {
+                  error("%s(...): childContextTypes cannot be defined on a function component.", Component11.displayName || Component11.name || "Component");
                 }
               }
               if (workInProgress2.ref !== null) {
@@ -16971,22 +16971,22 @@
                   error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info2);
                 }
               }
-              if (Component10.defaultProps !== void 0) {
-                var componentName = getComponentNameFromType(Component10) || "Unknown";
+              if (Component11.defaultProps !== void 0) {
+                var componentName = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                   error("%s: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.", componentName);
                   didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
                 }
               }
-              if (typeof Component10.getDerivedStateFromProps === "function") {
-                var _componentName3 = getComponentNameFromType(Component10) || "Unknown";
+              if (typeof Component11.getDerivedStateFromProps === "function") {
+                var _componentName3 = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                   error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                   didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
                 }
               }
-              if (typeof Component10.contextType === "object" && Component10.contextType !== null) {
-                var _componentName4 = getComponentNameFromType(Component10) || "Unknown";
+              if (typeof Component11.contextType === "object" && Component11.contextType !== null) {
+                var _componentName4 = getComponentNameFromType(Component11) || "Unknown";
                 if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                   error("%s: Function components do not support contextType.", _componentName4);
                   didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -17748,8 +17748,8 @@
                 pushHostContext(workInProgress2);
                 break;
               case ClassComponent: {
-                var Component10 = workInProgress2.type;
-                if (isContextProvider(Component10)) {
+                var Component11 = workInProgress2.type;
+                if (isContextProvider(Component11)) {
                   pushContextProvider(workInProgress2);
                 }
                 break;
@@ -17876,10 +17876,10 @@
                 return mountLazyComponent(current2, workInProgress2, elementType, renderLanes2);
               }
               case FunctionComponent: {
-                var Component10 = workInProgress2.type;
+                var Component11 = workInProgress2.type;
                 var unresolvedProps = workInProgress2.pendingProps;
-                var resolvedProps = workInProgress2.elementType === Component10 ? unresolvedProps : resolveDefaultProps(Component10, unresolvedProps);
-                return updateFunctionComponent(current2, workInProgress2, Component10, resolvedProps, renderLanes2);
+                var resolvedProps = workInProgress2.elementType === Component11 ? unresolvedProps : resolveDefaultProps(Component11, unresolvedProps);
+                return updateFunctionComponent(current2, workInProgress2, Component11, resolvedProps, renderLanes2);
               }
               case ClassComponent: {
                 var _Component = workInProgress2.type;
@@ -17903,7 +17903,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment10:
+              case Fragment11:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -18175,7 +18175,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment10:
+              case Fragment11:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -18183,8 +18183,8 @@
                 bubbleProperties(workInProgress2);
                 return null;
               case ClassComponent: {
-                var Component10 = workInProgress2.type;
-                if (isContextProvider(Component10)) {
+                var Component11 = workInProgress2.type;
+                if (isContextProvider(Component11)) {
                   popContext(workInProgress2);
                 }
                 bubbleProperties(workInProgress2);
@@ -18502,8 +18502,8 @@
             popTreeContext(workInProgress2);
             switch (workInProgress2.tag) {
               case ClassComponent: {
-                var Component10 = workInProgress2.type;
-                if (isContextProvider(Component10)) {
+                var Component11 = workInProgress2.type;
+                if (isContextProvider(Component11)) {
                   popContext(workInProgress2);
                 }
                 var flags = workInProgress2.flags;
@@ -22188,18 +22188,18 @@
           var createFiber = function(tag, pendingProps, key, mode) {
             return new FiberNode(tag, pendingProps, key, mode);
           };
-          function shouldConstruct$1(Component10) {
-            var prototype = Component10.prototype;
+          function shouldConstruct$1(Component11) {
+            var prototype = Component11.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function isSimpleFunctionComponent(type) {
             return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
           }
-          function resolveLazyComponentTag(Component10) {
-            if (typeof Component10 === "function") {
-              return shouldConstruct$1(Component10) ? ClassComponent : FunctionComponent;
-            } else if (Component10 !== void 0 && Component10 !== null) {
-              var $$typeof = Component10.$$typeof;
+          function resolveLazyComponentTag(Component11) {
+            if (typeof Component11 === "function") {
+              return shouldConstruct$1(Component11) ? ClassComponent : FunctionComponent;
+            } else if (Component11 !== void 0 && Component11 !== null) {
+              var $$typeof = Component11.$$typeof;
               if ($$typeof === REACT_FORWARD_REF_TYPE) {
                 return ForwardRef;
               }
@@ -22436,7 +22436,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment10, elements, key, mode);
+            var fiber = createFiber(Fragment11, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -22640,9 +22640,9 @@
             var fiber = get(parentComponent);
             var parentContext = findCurrentUnmaskedContext(fiber);
             if (fiber.tag === ClassComponent) {
-              var Component10 = fiber.type;
-              if (isContextProvider(Component10)) {
-                return processChildContext(fiber, Component10, parentContext);
+              var Component11 = fiber.type;
+              if (isContextProvider(Component11)) {
+                return processChildContext(fiber, Component11, parentContext);
               }
             }
             return parentContext;
@@ -23949,8 +23949,8 @@
               return describeNativeComponentFrame(fn, false);
             }
           }
-          function shouldConstruct(Component10) {
-            var prototype = Component10.prototype;
+          function shouldConstruct(Component11) {
+            var prototype = Component11.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
           function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -24559,7 +24559,7 @@
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element2 = REACT_ELEMENT_TYPE;
           var ForwardRef = REACT_FORWARD_REF_TYPE;
-          var Fragment10 = REACT_FRAGMENT_TYPE;
+          var Fragment11 = REACT_FRAGMENT_TYPE;
           var Lazy = REACT_LAZY_TYPE;
           var Memo = REACT_MEMO_TYPE;
           var Portal = REACT_PORTAL_TYPE;
@@ -24618,7 +24618,7 @@
           exports.ContextProvider = ContextProvider;
           exports.Element = Element2;
           exports.ForwardRef = ForwardRef;
-          exports.Fragment = Fragment10;
+          exports.Fragment = Fragment11;
           exports.Lazy = Lazy;
           exports.Memo = Memo;
           exports.Portal = Portal;
@@ -26872,7 +26872,7 @@
   });
 
   // preview/main.jsx
-  var import_react74 = __toESM(require_react(), 1);
+  var import_react75 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // node_modules/tslib/tslib.es6.mjs
@@ -27221,9 +27221,9 @@
       console.error("Button: you must provide either visible text content or an accessible name via the aria-label or aria-labelledby properties.");
     }
     const ouiaProps = useOUIAProps(Button.displayName, ouiaId, ouiaSafe, variant);
-    const Component10 = component;
-    const isButtonElement = Component10 === "button";
-    const isInlineSpan = isInline && Component10 === "span";
+    const Component11 = component;
+    const isButtonElement = Component11 === "button";
+    const isInlineSpan = isInline && Component11 === "span";
     const isIconAlignedAtEnd = iconPosition === "end" || iconPosition === "right";
     const shouldOverrideIcon = isSettings || isHamburger || isFavorite;
     const preventedEvents = inoperableEvents.reduce((handlers, eventToPrevent) => Object.assign(Object.assign({}, handlers), { [eventToPrevent]: (event) => {
@@ -27257,7 +27257,7 @@
     const _icon = renderIcon();
     const _children = children && (0, import_jsx_runtime5.jsx)("span", { className: css("pf-v6-c-button__text"), children });
     const shouldRenderAriaDisabled = isAriaDisabled || !isButtonElement && isDisabled;
-    return (0, import_jsx_runtime5.jsxs)(Component10, Object.assign({ "aria-expanded": isExpanded }, props, isAriaDisabled ? preventedEvents : null, shouldRenderAriaDisabled && { "aria-disabled": true }, { "aria-label": ariaLabel, className: css(button_default.button, button_default.modifiers[variant], isSettings && button_default.modifiers.settings, isHamburger && button_default.modifiers.hamburger, isHamburger && hamburgerVariant && button_default.modifiers[hamburgerVariant], isBlock && button_default.modifiers.block, isDisabled && !isButtonElement && button_default.modifiers.disabled, isAriaDisabled && button_default.modifiers.ariaDisabled, isClicked && button_default.modifiers.clicked, isInline && variant === ButtonVariant.link && button_default.modifiers.inline, isFavorite && button_default.modifiers.favorite, isFavorite && isFavorited && button_default.modifiers.favorited, isDanger && (variant === ButtonVariant.secondary || variant === ButtonVariant.link) && button_default.modifiers.danger, isLoading !== null && variant !== ButtonVariant.plain && button_default.modifiers.progress, isLoading && button_default.modifiers.inProgress, hasNoPadding && variant === ButtonVariant.plain && button_default.modifiers.noPadding, variant === ButtonVariant.stateful && button_default.modifiers[state], size === ButtonSize.sm && button_default.modifiers.small, size === ButtonSize.lg && button_default.modifiers.displayLg, isCircle && button_default.modifiers.circle, isDocked && button_default.modifiers.docked, isDocked && isTextExpanded && button_default.modifiers.textExpanded, className), disabled: isButtonElement ? isDisabled : null, tabIndex: tabIndex !== null ? tabIndex : getDefaultTabIdx(), type: isButtonElement || isInlineSpan ? type : null, role: isInlineSpan ? "button" : role, ref: innerRef }, ouiaProps, { children: [isLoading && (0, import_jsx_runtime5.jsx)("span", { className: css(button_default.buttonProgress), children: (0, import_jsx_runtime5.jsx)(Spinner, { size: spinnerSize.md, isInline, "aria-valuetext": spinnerAriaValueText, "aria-label": spinnerAriaLabel, "aria-labelledby": spinnerAriaLabelledBy }) }), isIconAlignedAtEnd ? (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [_children, _icon] }) : (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [_icon, _children] }), countOptions && (0, import_jsx_runtime5.jsx)("span", { className: css(button_default.buttonCount, countOptions.className), children: (0, import_jsx_runtime5.jsx)(Badge, { isRead: countOptions.isRead, isDisabled, children: countOptions.count }) })] }));
+    return (0, import_jsx_runtime5.jsxs)(Component11, Object.assign({ "aria-expanded": isExpanded }, props, isAriaDisabled ? preventedEvents : null, shouldRenderAriaDisabled && { "aria-disabled": true }, { "aria-label": ariaLabel, className: css(button_default.button, button_default.modifiers[variant], isSettings && button_default.modifiers.settings, isHamburger && button_default.modifiers.hamburger, isHamburger && hamburgerVariant && button_default.modifiers[hamburgerVariant], isBlock && button_default.modifiers.block, isDisabled && !isButtonElement && button_default.modifiers.disabled, isAriaDisabled && button_default.modifiers.ariaDisabled, isClicked && button_default.modifiers.clicked, isInline && variant === ButtonVariant.link && button_default.modifiers.inline, isFavorite && button_default.modifiers.favorite, isFavorite && isFavorited && button_default.modifiers.favorited, isDanger && (variant === ButtonVariant.secondary || variant === ButtonVariant.link) && button_default.modifiers.danger, isLoading !== null && variant !== ButtonVariant.plain && button_default.modifiers.progress, isLoading && button_default.modifiers.inProgress, hasNoPadding && variant === ButtonVariant.plain && button_default.modifiers.noPadding, variant === ButtonVariant.stateful && button_default.modifiers[state], size === ButtonSize.sm && button_default.modifiers.small, size === ButtonSize.lg && button_default.modifiers.displayLg, isCircle && button_default.modifiers.circle, isDocked && button_default.modifiers.docked, isDocked && isTextExpanded && button_default.modifiers.textExpanded, className), disabled: isButtonElement ? isDisabled : null, tabIndex: tabIndex !== null ? tabIndex : getDefaultTabIdx(), type: isButtonElement || isInlineSpan ? type : null, role: isInlineSpan ? "button" : role, ref: innerRef }, ouiaProps, { children: [isLoading && (0, import_jsx_runtime5.jsx)("span", { className: css(button_default.buttonProgress), children: (0, import_jsx_runtime5.jsx)(Spinner, { size: spinnerSize.md, isInline, "aria-valuetext": spinnerAriaValueText, "aria-label": spinnerAriaLabel, "aria-labelledby": spinnerAriaLabelledBy }) }), isIconAlignedAtEnd ? (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [_children, _icon] }) : (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [_icon, _children] }), countOptions && (0, import_jsx_runtime5.jsx)("span", { className: css(button_default.buttonCount, countOptions.className), children: (0, import_jsx_runtime5.jsx)(Badge, { isRead: countOptions.isRead, isDisabled, children: countOptions.count }) })] }));
   };
   var Button = (0, import_react3.forwardRef)((props, ref) => (0, import_jsx_runtime5.jsx)(ButtonBase, Object.assign({ innerRef: ref }, props)));
   Button.displayName = "Button";
@@ -32024,8 +32024,8 @@
       parentInnerRef,
       ouiaSafe
     } = _a, props = __rest(_a, ["children", "tabContentRef", "ouiaId", "parentInnerRef", "ouiaSafe"]);
-    const Component10 = props.href ? "a" : "button";
-    return (0, import_jsx_runtime33.jsx)(Component10, Object.assign({}, !props.href && { type: "button" }, { ref: parentInnerRef }, getOUIAProps(TabButton.displayName, ouiaId, ouiaSafe), props, { children }));
+    const Component11 = props.href ? "a" : "button";
+    return (0, import_jsx_runtime33.jsx)(Component11, Object.assign({}, !props.href && { type: "button" }, { ref: parentInnerRef }, getOUIAProps(TabButton.displayName, ouiaId, ouiaSafe), props, { children }));
   };
   TabButton.displayName = "TabButton";
 
@@ -32570,9 +32570,9 @@
     var { children, className, itemId = null, to, hasCheckbox = false, isActive = null, isFavorited = null, isLoadButton = false, isLoading = false, flyoutMenu, direction, description = null, onClick = () => {
     }, component = "button", isDisabled = false, isAriaDisabled = false, isExternalLink = false, isSelected = null, isFocused, isDanger = false, icon, actions, onShowFlyout, drilldownMenu, isOnPath, innerRef, id, "aria-label": ariaLabel, tooltipProps, rel, target, download } = _a, props = __rest(_a, ["children", "className", "itemId", "to", "hasCheckbox", "isActive", "isFavorited", "isLoadButton", "isLoading", "flyoutMenu", "direction", "description", "onClick", "component", "isDisabled", "isAriaDisabled", "isExternalLink", "isSelected", "isFocused", "isDanger", "icon", "actions", "onShowFlyout", "drilldownMenu", "isOnPath", "innerRef", "id", "aria-label", "tooltipProps", "rel", "target", "download"]);
     const { menuId, parentMenu, onSelect, onActionClick, activeItemId, selected, drilldownItemPath, onDrillIn, onDrillOut, flyoutRef, setFlyoutRef, disableHover, role: menuRole } = (0, import_react35.useContext)(MenuContext);
-    let Component10 = to ? "a" : component;
+    let Component11 = to ? "a" : component;
     if (hasCheckbox && !to) {
-      Component10 = "label";
+      Component11 = "label";
     }
     const [flyoutTarget, setFlyoutTarget] = (0, import_react35.useState)(null);
     const flyoutContext = (0, import_react35.useContext)(FlyoutContext);
@@ -32678,7 +32678,7 @@
       }
     }
     let additionalProps = {};
-    if (Component10 === "a") {
+    if (Component11 === "a") {
       additionalProps = {
         href: to,
         "aria-disabled": isDisabled || isAriaDisabled ? true : null,
@@ -32688,7 +32688,7 @@
         rel,
         download
       };
-    } else if (Component10 === "button") {
+    } else if (Component11 === "button") {
       additionalProps = {
         type: "button",
         "aria-disabled": isAriaDisabled ? true : null
@@ -32744,7 +32744,7 @@
       }
     }, [isFocused]);
     const isSelectMenu = menuRole === "listbox";
-    const renderItem = (0, import_jsx_runtime41.jsxs)(import_jsx_runtime41.Fragment, { children: [(0, import_jsx_runtime41.jsxs)(Component10, Object.assign({ id, tabIndex: -1, className: css(menu_default.menuItem, getIsSelected() && !hasCheckbox && menu_default.modifiers.selected, className), "aria-current": getAriaCurrent() }, !hasCheckbox && { disabled: isDisabled, "aria-label": ariaLabel }, !hasCheckbox && !flyoutMenu && { role: isSelectMenu ? "option" : "menuitem" }, !hasCheckbox && !flyoutMenu && isSelectMenu && { "aria-selected": getIsSelected() }, { ref: innerComponentRef }, !hasCheckbox && {
+    const renderItem = (0, import_jsx_runtime41.jsxs)(import_jsx_runtime41.Fragment, { children: [(0, import_jsx_runtime41.jsxs)(Component11, Object.assign({ id, tabIndex: -1, className: css(menu_default.menuItem, getIsSelected() && !hasCheckbox && menu_default.modifiers.selected, className), "aria-current": getAriaCurrent() }, !hasCheckbox && { disabled: isDisabled, "aria-label": ariaLabel }, !hasCheckbox && !flyoutMenu && { role: isSelectMenu ? "option" : "menuitem" }, !hasCheckbox && !flyoutMenu && isSelectMenu && { "aria-selected": getIsSelected() }, { ref: innerComponentRef }, !hasCheckbox && {
       onClick: (event) => {
         if (!isAriaDisabled) {
           onItemSelect(event, onSelect);
@@ -33092,7 +33092,7 @@
       const filteredChildrenOverflowing = filteredChildren.slice(filteredChildren.length - overflowingTabCount);
       const overflowingTabProps = filteredChildrenOverflowing.map((child) => child.props);
       const defaultComponent = isNav && !component ? "nav" : "div";
-      const Component10 = component !== void 0 ? component : defaultComponent;
+      const Component11 = component !== void 0 ? component : defaultComponent;
       const localActiveKey = defaultActiveKey !== void 0 ? uncontrolledActiveKey : activeKey;
       const isExpandedLocal = defaultIsExpanded !== void 0 ? uncontrolledIsExpandedLocal : isExpanded;
       const toggleTabs = (event, newValue) => {
@@ -33115,7 +33115,7 @@
           setAccentStyles: this.setAccentStyles,
           handleTabClick: (...args) => this.handleTabClick(...args),
           handleTabClose: onClose
-        }, children: [(0, import_jsx_runtime45.jsxs)(Component10, Object.assign({ "aria-label": ariaLabel, className: css(tabs_default.tabs, tabs_default.modifiers.animateCurrent, isFilled && tabs_default.modifiers.fill, isSubtab && tabs_default.modifiers.subtab, isNav && tabs_default.modifiers.nav, isVertical && tabs_default.modifiers.vertical, isVertical && expandable2 && formatBreakpointMods(expandable2, tabs_default), isVertical && expandable2 && isExpandedLocal && tabs_default.modifiers.expanded, isBox && tabs_default.modifiers.box, showScrollButtons && tabs_default.modifiers.scrollable, usePageInsets && tabs_default.modifiers.pageInsets, hasNoBorderBottom && tabs_default.modifiers.noBorderBottom, formatBreakpointMods(inset, tabs_default), variantStyle2[variant], hasOverflowTab && tabs_default.modifiers.overflow, isInitializingAccent && tabs_default.modifiers.initializingAccent, className) }, getOUIAProps(_Tabs.displayName, ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe), { id: id && id }, props, { style: Object.assign({ [c_tabs_link_accent_length_default.name]: currentLinkAccentLength, [c_tabs_link_accent_start_default.name]: currentLinkAccentStart }, props.style), children: [expandable2 && isVertical && (0, import_jsx_runtime45.jsx)(GenerateId, { children: (randomId) => (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsToggle), children: (0, import_jsx_runtime45.jsx)("div", { className: "pf-v6-c-tabs__toggle-button", children: (0, import_jsx_runtime45.jsx)(Button, { onClick: (event) => toggleTabs(event, !isExpandedLocal), variant: "plain", "aria-label": toggleAriaLabel, "aria-expanded": isExpandedLocal, id: `${randomId}-button`, "aria-labelledby": `${randomId}-text ${randomId}-button`, icon: (0, import_jsx_runtime45.jsx)("span", { className: css(tabs_default.tabsToggleIcon), children: (0, import_jsx_runtime45.jsx)(rh_microns_caret_down_icon_default, {}) }), children: toggleText && (0, import_jsx_runtime45.jsx)("span", { id: `${randomId}-text`, children: toggleText }) }) }) }) }), renderScrollButtons && (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsScrollButton), children: (0, import_jsx_runtime45.jsx)(Button, { "aria-label": backScrollAriaLabel || leftScrollAriaLabel, onClick: this.scrollBack, isDisabled: disableBackScrollButton, "aria-hidden": disableBackScrollButton, ref: this.leftScrollButtonRef, variant: "plain", icon: (0, import_jsx_runtime45.jsx)(rh_microns_caret_left_icon_default, {}) }) }), (0, import_jsx_runtime45.jsxs)("ul", { "aria-label": tabListAriaLabel, "aria-labelledby": tabListAriaLabelledBy, className: css(tabs_default.tabsList), ref: this.tabList, onScroll: this.handleScrollButtons, role: "tablist", children: [isOverflowHorizontal ? filteredChildrenWithoutOverflow : filteredChildren, hasOverflowTab && (0, import_jsx_runtime45.jsx)(OverflowTab, Object.assign({ overflowingTabs: overflowingTabProps }, overflowObjectProps))] }), renderScrollButtons && (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsScrollButton), children: (0, import_jsx_runtime45.jsx)(Button, { "aria-label": forwardScrollAriaLabel || rightScrollAriaLabel, onClick: this.scrollForward, isDisabled: disableForwardScrollButton, "aria-hidden": disableForwardScrollButton, variant: "plain", icon: (0, import_jsx_runtime45.jsx)(rh_microns_caret_right_icon_default, {}) }) }), onAdd !== void 0 && (0, import_jsx_runtime45.jsx)("span", { className: css(tabs_default.tabsAdd), children: (0, import_jsx_runtime45.jsx)(Button, { variant: "plain", "aria-label": addButtonAriaLabel || "Add tab", onClick: onAdd, icon: (0, import_jsx_runtime45.jsx)(plus_icon_default, {}), isDisabled: isAddButtonDisabled }) })] })), filteredChildren.filter((child) => child.props.children && !(unmountOnExit && child.props.eventKey !== localActiveKey) && !(mountOnEnter && shownKeys.indexOf(child.props.eventKey) === -1)).map((child) => (0, import_jsx_runtime45.jsx)(TabContent, { activeKey: localActiveKey, child, id: child.props.id || uniqueId, ouiaId: child.props.ouiaId }, child.props.eventKey))] });
+        }, children: [(0, import_jsx_runtime45.jsxs)(Component11, Object.assign({ "aria-label": ariaLabel, className: css(tabs_default.tabs, tabs_default.modifiers.animateCurrent, isFilled && tabs_default.modifiers.fill, isSubtab && tabs_default.modifiers.subtab, isNav && tabs_default.modifiers.nav, isVertical && tabs_default.modifiers.vertical, isVertical && expandable2 && formatBreakpointMods(expandable2, tabs_default), isVertical && expandable2 && isExpandedLocal && tabs_default.modifiers.expanded, isBox && tabs_default.modifiers.box, showScrollButtons && tabs_default.modifiers.scrollable, usePageInsets && tabs_default.modifiers.pageInsets, hasNoBorderBottom && tabs_default.modifiers.noBorderBottom, formatBreakpointMods(inset, tabs_default), variantStyle2[variant], hasOverflowTab && tabs_default.modifiers.overflow, isInitializingAccent && tabs_default.modifiers.initializingAccent, className) }, getOUIAProps(_Tabs.displayName, ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe), { id: id && id }, props, { style: Object.assign({ [c_tabs_link_accent_length_default.name]: currentLinkAccentLength, [c_tabs_link_accent_start_default.name]: currentLinkAccentStart }, props.style), children: [expandable2 && isVertical && (0, import_jsx_runtime45.jsx)(GenerateId, { children: (randomId) => (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsToggle), children: (0, import_jsx_runtime45.jsx)("div", { className: "pf-v6-c-tabs__toggle-button", children: (0, import_jsx_runtime45.jsx)(Button, { onClick: (event) => toggleTabs(event, !isExpandedLocal), variant: "plain", "aria-label": toggleAriaLabel, "aria-expanded": isExpandedLocal, id: `${randomId}-button`, "aria-labelledby": `${randomId}-text ${randomId}-button`, icon: (0, import_jsx_runtime45.jsx)("span", { className: css(tabs_default.tabsToggleIcon), children: (0, import_jsx_runtime45.jsx)(rh_microns_caret_down_icon_default, {}) }), children: toggleText && (0, import_jsx_runtime45.jsx)("span", { id: `${randomId}-text`, children: toggleText }) }) }) }) }), renderScrollButtons && (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsScrollButton), children: (0, import_jsx_runtime45.jsx)(Button, { "aria-label": backScrollAriaLabel || leftScrollAriaLabel, onClick: this.scrollBack, isDisabled: disableBackScrollButton, "aria-hidden": disableBackScrollButton, ref: this.leftScrollButtonRef, variant: "plain", icon: (0, import_jsx_runtime45.jsx)(rh_microns_caret_left_icon_default, {}) }) }), (0, import_jsx_runtime45.jsxs)("ul", { "aria-label": tabListAriaLabel, "aria-labelledby": tabListAriaLabelledBy, className: css(tabs_default.tabsList), ref: this.tabList, onScroll: this.handleScrollButtons, role: "tablist", children: [isOverflowHorizontal ? filteredChildrenWithoutOverflow : filteredChildren, hasOverflowTab && (0, import_jsx_runtime45.jsx)(OverflowTab, Object.assign({ overflowingTabs: overflowingTabProps }, overflowObjectProps))] }), renderScrollButtons && (0, import_jsx_runtime45.jsx)("div", { className: css(tabs_default.tabsScrollButton), children: (0, import_jsx_runtime45.jsx)(Button, { "aria-label": forwardScrollAriaLabel || rightScrollAriaLabel, onClick: this.scrollForward, isDisabled: disableForwardScrollButton, "aria-hidden": disableForwardScrollButton, variant: "plain", icon: (0, import_jsx_runtime45.jsx)(rh_microns_caret_right_icon_default, {}) }) }), onAdd !== void 0 && (0, import_jsx_runtime45.jsx)("span", { className: css(tabs_default.tabsAdd), children: (0, import_jsx_runtime45.jsx)(Button, { variant: "plain", "aria-label": addButtonAriaLabel || "Add tab", onClick: onAdd, icon: (0, import_jsx_runtime45.jsx)(plus_icon_default, {}), isDisabled: isAddButtonDisabled }) })] })), filteredChildren.filter((child) => child.props.children && !(unmountOnExit && child.props.eventKey !== localActiveKey) && !(mountOnEnter && shownKeys.indexOf(child.props.eventKey) === -1)).map((child) => (0, import_jsx_runtime45.jsx)(TabContent, { activeKey: localActiveKey, child, id: child.props.id || uniqueId, ouiaId: child.props.ouiaId }, child.props.eventKey))] });
       } });
     }
   };
@@ -33235,9 +33235,56 @@
   };
   ToggleGroup.displayName = "ToggleGroup";
 
-  // node_modules/@patternfly/react-core/dist/esm/components/Card/Card.js
+  // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
   var import_jsx_runtime50 = __toESM(require_jsx_runtime());
   var import_react40 = __toESM(require_react());
+
+  // node_modules/@patternfly/react-styles/css/components/Switch/switch.mjs
+  var switch_default = {
+    "dirRtl": "pf-v6-m-dir-rtl",
+    "modifiers": {
+      "reverse": "pf-m-reverse"
+    },
+    "switch": "pf-v6-c-switch",
+    "switchInput": "pf-v6-c-switch__input",
+    "switchLabel": "pf-v6-c-switch__label",
+    "switchToggle": "pf-v6-c-switch__toggle",
+    "switchToggleIcon": "pf-v6-c-switch__toggle-icon"
+  };
+
+  // node_modules/@patternfly/react-core/dist/esm/components/Switch/Switch.js
+  var Switch = class _Switch extends import_react40.Component {
+    constructor(props) {
+      super(props);
+      if (!props.label && !props["aria-label"] && !props["aria-labelledby"]) {
+        console.error("Switch: Switch requires at least one of label, aria-labelledby, or aria-label props to be specified");
+      }
+    }
+    render() {
+      const _a = this.props, { id: idProp, className, label, isChecked, defaultChecked, hasCheckIcon, isDisabled, onChange, isReversed, ouiaId, ouiaSafe, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy } = _a, props = __rest(_a, ["id", "className", "label", "isChecked", "defaultChecked", "hasCheckIcon", "isDisabled", "onChange", "isReversed", "ouiaId", "ouiaSafe", "aria-label", "aria-labelledby"]);
+      return (0, import_jsx_runtime50.jsx)(SSRSafeIds, { prefix: "pf-switch-", ouiaComponentType: "Switch", children: (generatedId, generatedOuiaId) => {
+        const id = idProp || generatedId;
+        const hasAccessibleName = label || ariaLabel || ariaLabelledBy;
+        const isAriaLabelledBy = hasAccessibleName && (!ariaLabel || ariaLabelledBy);
+        const useDefaultAriaLabelledBy = !ariaLabelledBy && !ariaLabel;
+        const ariaLabelledByIds = ariaLabelledBy !== null && ariaLabelledBy !== void 0 ? ariaLabelledBy : `${id}-label`;
+        return (0, import_jsx_runtime50.jsxs)("label", Object.assign({ className: css(switch_default.switch, isReversed && switch_default.modifiers.reverse, className), htmlFor: id }, getOUIAProps(_Switch.displayName, ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe), { children: [(0, import_jsx_runtime50.jsx)("input", Object.assign({ id, className: css(switch_default.switchInput), type: "checkbox", role: "switch", onChange: (event) => onChange(event, event.target.checked) }, defaultChecked !== void 0 ? { defaultChecked } : { checked: isChecked }, { disabled: isDisabled, "aria-labelledby": isAriaLabelledBy ? ariaLabelledByIds : null, "aria-label": ariaLabel }, props)), label !== void 0 ? (0, import_jsx_runtime50.jsxs)(import_react40.Fragment, { children: [(0, import_jsx_runtime50.jsx)("span", { className: css(switch_default.switchToggle), children: hasCheckIcon && (0, import_jsx_runtime50.jsx)("span", { className: css(switch_default.switchToggleIcon), children: (0, import_jsx_runtime50.jsx)(check_icon_default, {}) }) }), (0, import_jsx_runtime50.jsx)("span", { className: css(switch_default.switchLabel), id: isAriaLabelledBy && useDefaultAriaLabelledBy ? `${id}-label` : null, "aria-hidden": "true", children: label })] }) : (0, import_jsx_runtime50.jsx)("span", { className: css(switch_default.switchToggle), children: (0, import_jsx_runtime50.jsx)("div", { className: css(switch_default.switchToggleIcon), children: (0, import_jsx_runtime50.jsx)(check_icon_default, {}) }) })] }));
+      } });
+    }
+  };
+  Switch.displayName = "Switch";
+  Switch.defaultProps = {
+    isChecked: true,
+    isDisabled: false,
+    isReversed: false,
+    "aria-label": void 0,
+    "aria-labelledby": void 0,
+    onChange: () => void 0
+  };
+
+  // node_modules/@patternfly/react-core/dist/esm/components/Card/Card.js
+  var import_jsx_runtime51 = __toESM(require_jsx_runtime());
+  var import_react41 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Card/card.mjs
   var card_default = {
@@ -33288,7 +33335,7 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/Card.js
-  var CardContext = (0, import_react40.createContext)({
+  var CardContext = (0, import_react41.createContext)({
     cardId: "",
     isExpanded: false,
     isClickable: false,
@@ -33299,7 +33346,7 @@
   });
   var CardBase = (_a) => {
     var { children, id = "", className, component = "div", isCompact = false, isSelectable = false, isClickable = false, isDisabled = false, isSelected = false, isClicked = false, isExpanded = false, isLarge = false, isFullHeight = false, isPlain = false, isGlass = false, variant = "default", ouiaId, ouiaSafe = true, innerRef } = _a, props = __rest(_a, ["children", "id", "className", "component", "isCompact", "isSelectable", "isClickable", "isDisabled", "isSelected", "isClicked", "isExpanded", "isLarge", "isFullHeight", "isPlain", "isGlass", "variant", "ouiaId", "ouiaSafe", "innerRef"]);
-    const Component10 = component;
+    const Component11 = component;
     const ouiaProps = useOUIAProps(Card.displayName, ouiaId, ouiaSafe);
     if (isCompact && isLarge) {
       console.warn("Card: Cannot use isCompact with isLarge. Defaulting to isCompact");
@@ -33317,7 +33364,7 @@
       }
       return "";
     };
-    return (0, import_jsx_runtime50.jsx)(CardContext.Provider, { value: {
+    return (0, import_jsx_runtime51.jsx)(CardContext.Provider, { value: {
       cardId: id,
       isExpanded,
       isClickable,
@@ -33325,73 +33372,73 @@
       isSelected,
       isClicked,
       isDisabled
-    }, children: (0, import_jsx_runtime50.jsx)(Component10, Object.assign({ ref: innerRef, id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, isGlass && card_default.modifiers.glass, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps, { children })) });
+    }, children: (0, import_jsx_runtime51.jsx)(Component11, Object.assign({ ref: innerRef, id, className: css(card_default.card, isCompact && card_default.modifiers.compact, isExpanded && card_default.modifiers.expanded, isLarge && card_default.modifiers.displayLg, isFullHeight && card_default.modifiers.fullHeight, isPlain && card_default.modifiers.plain, isGlass && card_default.modifiers.glass, variant === "secondary" && card_default.modifiers.secondary, getSelectableModifiers(), isDisabled && card_default.modifiers.disabled, className) }, props, ouiaProps, { children })) });
   };
-  var Card = (0, import_react40.forwardRef)((props, ref) => (0, import_jsx_runtime50.jsx)(CardBase, Object.assign({}, props, { innerRef: ref })));
+  var Card = (0, import_react41.forwardRef)((props, ref) => (0, import_jsx_runtime51.jsx)(CardBase, Object.assign({}, props, { innerRef: ref })));
   Card.displayName = "Card";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardBody.js
-  var import_jsx_runtime51 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime52 = __toESM(require_jsx_runtime());
   var CardBody = (_a) => {
     var { children, className, component = "div", isFilled = true } = _a, props = __rest(_a, ["children", "className", "component", "isFilled"]);
-    const Component10 = component;
-    return (0, import_jsx_runtime51.jsx)(Component10, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props, { children }));
+    const Component11 = component;
+    return (0, import_jsx_runtime52.jsx)(Component11, Object.assign({ className: css(card_default.cardBody, !isFilled && card_default.modifiers.noFill, className) }, props, { children }));
   };
   CardBody.displayName = "CardBody";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardTitle.js
-  var import_jsx_runtime53 = __toESM(require_jsx_runtime());
-  var import_react41 = __toESM(require_react());
+  var import_jsx_runtime54 = __toESM(require_jsx_runtime());
+  var import_react42 = __toESM(require_react());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardSubtitle.js
-  var import_jsx_runtime52 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime53 = __toESM(require_jsx_runtime());
   var CardSubtitle = (_a) => {
     var { children = null, id = "" } = _a, props = __rest(_a, ["children", "id"]);
-    return (0, import_jsx_runtime52.jsx)("div", Object.assign({}, props, { id, className: css(card_default.cardSubtitle), children }));
+    return (0, import_jsx_runtime53.jsx)("div", Object.assign({}, props, { id, className: css(card_default.cardSubtitle), children }));
   };
   CardSubtitle.displayName = "CardSubtitle";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardTitle.js
   var CardTitle = (_a) => {
     var { children, className, component = "div", subtitle } = _a, props = __rest(_a, ["children", "className", "component", "subtitle"]);
-    const { cardId } = (0, import_react41.useContext)(CardContext);
-    const Component10 = component;
+    const { cardId } = (0, import_react42.useContext)(CardContext);
+    const Component11 = component;
     const titleId = cardId ? `${cardId}-title` : "";
     const subtitleId = cardId ? `${cardId}-subtitle` : "";
-    return (0, import_jsx_runtime53.jsxs)("div", { className: css(card_default.cardTitle), children: [(0, import_jsx_runtime53.jsx)(Component10, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props, { children })), subtitle && (0, import_jsx_runtime53.jsx)(CardSubtitle, { id: subtitleId, children: subtitle })] });
+    return (0, import_jsx_runtime54.jsxs)("div", { className: css(card_default.cardTitle), children: [(0, import_jsx_runtime54.jsx)(Component11, Object.assign({ className: css(card_default.cardTitleText, className), id: titleId || void 0 }, props, { children })), subtitle && (0, import_jsx_runtime54.jsx)(CardSubtitle, { id: subtitleId, children: subtitle })] });
   };
   CardTitle.displayName = "CardTitle";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardHeader.js
-  var import_jsx_runtime58 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime59 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardHeaderMain.js
-  var import_jsx_runtime54 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime55 = __toESM(require_jsx_runtime());
   var CardHeaderMain = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime54.jsx)("div", Object.assign({ className: css(card_default.cardHeaderMain, className) }, props, { children }));
+    return (0, import_jsx_runtime55.jsx)("div", Object.assign({ className: css(card_default.cardHeaderMain, className) }, props, { children }));
   };
   CardHeaderMain.displayName = "CardHeaderMain";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardActions.js
-  var import_jsx_runtime55 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime56 = __toESM(require_jsx_runtime());
   var CardActions = (_a) => {
     var { children, className, hasNoOffset = false } = _a, props = __rest(_a, ["children", "className", "hasNoOffset"]);
-    return (0, import_jsx_runtime55.jsx)("div", Object.assign({ className: css(card_default.cardActions, hasNoOffset && card_default.modifiers.noOffset, className) }, props, { children }));
+    return (0, import_jsx_runtime56.jsx)("div", Object.assign({ className: css(card_default.cardActions, hasNoOffset && card_default.modifiers.noOffset, className) }, props, { children }));
   };
   CardActions.displayName = "CardActions";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Card/CardSelectableActions.js
-  var import_jsx_runtime56 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime57 = __toESM(require_jsx_runtime());
   var CardSelectableActions = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime56.jsx)("div", Object.assign({ className: css(card_default.cardSelectableActions, className) }, props, { children }));
+    return (0, import_jsx_runtime57.jsx)("div", Object.assign({ className: css(card_default.cardSelectableActions, className) }, props, { children }));
   };
   CardSelectableActions.displayName = "CardSelectableActions";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Radio/Radio.js
-  var import_jsx_runtime57 = __toESM(require_jsx_runtime());
-  var import_react42 = __toESM(require_react());
+  var import_jsx_runtime58 = __toESM(require_jsx_runtime());
+  var import_react43 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Radio/radio.mjs
   var radio_default = {
@@ -33407,7 +33454,7 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/Radio/Radio.js
-  var Radio = class _Radio extends import_react42.Component {
+  var Radio = class _Radio extends import_react43.Component {
     constructor(props) {
       super(props);
       this.handleChange = (event) => {
@@ -33442,19 +33489,19 @@
       if (!props.id) {
         console.error("Radio:", "id is required to make input accessible");
       }
-      return (0, import_jsx_runtime57.jsx)(SSRSafeIds, { prefix: "pf-radio-description-", ouiaComponentType: "Radio", children: (descriptionId, generatedOuiaId) => {
+      return (0, import_jsx_runtime58.jsx)(SSRSafeIds, { prefix: "pf-radio-description-", ouiaComponentType: "Radio", children: (descriptionId, generatedOuiaId) => {
         let ariaDescribedByValue;
         if (ariaDescribedBy !== void 0) {
           ariaDescribedByValue = ariaDescribedBy === "" ? void 0 : ariaDescribedBy;
         } else if (description) {
           ariaDescribedByValue = descriptionId;
         }
-        const inputRendered = (0, import_jsx_runtime57.jsx)("input", Object.assign({}, props, { className: css(radio_default.radioInput, inputClassName), type: "radio", onChange: this.handleChange, "aria-invalid": !isValid, "aria-describedby": ariaDescribedByValue, disabled: isDisabled, checked: checked || isChecked }, checked === void 0 && { defaultChecked }, !label && { "aria-label": ariaLabel }, getOUIAProps(_Radio.displayName, ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe)));
+        const inputRendered = (0, import_jsx_runtime58.jsx)("input", Object.assign({}, props, { className: css(radio_default.radioInput, inputClassName), type: "radio", onChange: this.handleChange, "aria-invalid": !isValid, "aria-describedby": ariaDescribedByValue, disabled: isDisabled, checked: checked || isChecked }, checked === void 0 && { defaultChecked }, !label && { "aria-label": ariaLabel }, getOUIAProps(_Radio.displayName, ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe)));
         const wrapWithLabel = isLabelWrapped && !component || component === "label";
         const Label = wrapWithLabel ? "span" : "label";
-        const labelRendered = label ? (0, import_jsx_runtime57.jsx)(Label, { className: css(radio_default.radioLabel, isDisabled && radio_default.modifiers.disabled), htmlFor: !wrapWithLabel ? props.id : void 0, children: label }) : null;
+        const labelRendered = label ? (0, import_jsx_runtime58.jsx)(Label, { className: css(radio_default.radioLabel, isDisabled && radio_default.modifiers.disabled), htmlFor: !wrapWithLabel ? props.id : void 0, children: label }) : null;
         const WrapperComponent = component !== null && component !== void 0 ? component : wrapWithLabel ? "label" : "div";
-        return (0, import_jsx_runtime57.jsxs)(WrapperComponent, { className: css(radio_default.radio, !label && radio_default.modifiers.standalone, className), htmlFor: wrapWithLabel ? props.id : void 0, children: [labelPosition === "start" ? (0, import_jsx_runtime57.jsxs)(import_jsx_runtime57.Fragment, { children: [labelRendered, inputRendered] }) : (0, import_jsx_runtime57.jsxs)(import_jsx_runtime57.Fragment, { children: [inputRendered, labelRendered] }), description && (0, import_jsx_runtime57.jsx)("span", { id: descriptionId, className: css(radio_default.radioDescription), children: description }), body && (0, import_jsx_runtime57.jsx)("span", { className: css(radio_default.radioBody), children: body })] });
+        return (0, import_jsx_runtime58.jsxs)(WrapperComponent, { className: css(radio_default.radio, !label && radio_default.modifiers.standalone, className), htmlFor: wrapWithLabel ? props.id : void 0, children: [labelPosition === "start" ? (0, import_jsx_runtime58.jsxs)(import_jsx_runtime58.Fragment, { children: [labelRendered, inputRendered] }) : (0, import_jsx_runtime58.jsxs)(import_jsx_runtime58.Fragment, { children: [inputRendered, labelRendered] }), description && (0, import_jsx_runtime58.jsx)("span", { id: descriptionId, className: css(radio_default.radioDescription), children: description }), body && (0, import_jsx_runtime58.jsx)("span", { className: css(radio_default.radioBody), children: body })] });
       } });
     }
   };
@@ -33471,10 +33518,10 @@
   var CardHeader = (_a) => {
     var { children, className, actions, selectableActions, id, onExpand, toggleButtonProps, isToggleRightAligned, hasWrap } = _a, props = __rest(_a, ["children", "className", "actions", "selectableActions", "id", "onExpand", "toggleButtonProps", "isToggleRightAligned", "hasWrap"]);
     const randomId = useSSRSafeId();
-    return (0, import_jsx_runtime58.jsx)(CardContext.Consumer, { children: ({ cardId, isClickable, isSelectable, isSelected, isDisabled: isCardDisabled }) => {
-      const cardHeaderToggle = (0, import_jsx_runtime58.jsx)("div", { className: css(card_default.cardHeaderToggle), children: (0, import_jsx_runtime58.jsx)(Button, Object.assign({ variant: "plain", type: "button", onClick: (evt) => {
+    return (0, import_jsx_runtime59.jsx)(CardContext.Consumer, { children: ({ cardId, isClickable, isSelectable, isSelected, isDisabled: isCardDisabled }) => {
+      const cardHeaderToggle = (0, import_jsx_runtime59.jsx)("div", { className: css(card_default.cardHeaderToggle), children: (0, import_jsx_runtime59.jsx)(Button, Object.assign({ variant: "plain", type: "button", onClick: (evt) => {
         onExpand(evt, cardId);
-      } }, toggleButtonProps, { icon: (0, import_jsx_runtime58.jsx)("span", { className: css(card_default.cardHeaderToggleIcon), children: (0, import_jsx_runtime58.jsx)(rh_microns_caret_down_icon_default, {}) }) })) });
+      } }, toggleButtonProps, { icon: (0, import_jsx_runtime59.jsx)("span", { className: css(card_default.cardHeaderToggleIcon), children: (0, import_jsx_runtime59.jsx)(rh_microns_caret_down_icon_default, {}) }) })) });
       const isClickableOrSelectableOnly = isClickable && !isSelectable || isSelectable && !isClickable;
       if ((actions === null || actions === void 0 ? void 0 : actions.actions) && isClickableOrSelectableOnly) {
         console.error(`Card: ${isClickable ? "Clickable" : "Selectable"} only cards should not contain any other actions. If you wish to include additional actions, use a clickable and selectable card.`);
@@ -33486,7 +33533,7 @@
       const SelectableCardInput = (selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.variant) === "single" ? Radio : Checkbox;
       const getSelectableProps = () => {
         var _a2, _b;
-        return Object.assign({ className: css("pf-m-standalone"), inputClassName: css((selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.isHidden) && "pf-v6-screen-reader"), label: (0, import_jsx_runtime58.jsx)(import_jsx_runtime58.Fragment, {}), "aria-label": selectableActions.selectableActionAriaLabel, "aria-labelledby": selectableActions.selectableActionAriaLabelledby, id: (_a2 = selectableActions.selectableActionId) !== null && _a2 !== void 0 ? _a2 : `card-selectable-${randomId}`, name: selectableActions.name, isDisabled: isCardDisabled, onChange: selectableActions.onChange, isChecked: (_b = selectableActions.isChecked) !== null && _b !== void 0 ? _b : isSelected }, selectableActions.selectableActionProps);
+        return Object.assign({ className: css("pf-m-standalone"), inputClassName: css((selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.isHidden) && "pf-v6-screen-reader"), label: (0, import_jsx_runtime59.jsx)(import_jsx_runtime59.Fragment, {}), "aria-label": selectableActions.selectableActionAriaLabel, "aria-labelledby": selectableActions.selectableActionAriaLabelledby, id: (_a2 = selectableActions.selectableActionId) !== null && _a2 !== void 0 ? _a2 : `card-selectable-${randomId}`, name: selectableActions.name, isDisabled: isCardDisabled, onChange: selectableActions.onChange, isChecked: (_b = selectableActions.isChecked) !== null && _b !== void 0 ? _b : isSelected }, selectableActions.selectableActionProps);
       };
       const isClickableLinkCard = (selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.to) !== void 0;
       const ClickableCardComponent = isClickableLinkCard ? "a" : "button";
@@ -33498,23 +33545,23 @@
         }
         return Object.assign(Object.assign({}, baseProps), { type: "button", disabled: isCardDisabled, onClick: selectableActions.onClickAction });
       };
-      return (0, import_jsx_runtime58.jsxs)("div", Object.assign({ className: css(card_default.cardHeader, isToggleRightAligned && card_default.modifiers.toggleRight, hasWrap && card_default.modifiers.wrap, className), id }, props, { children: [onExpand && !isToggleRightAligned && cardHeaderToggle, (actions || selectableActions && (isClickable || isSelectable)) && (0, import_jsx_runtime58.jsxs)(CardActions, { className: actions === null || actions === void 0 ? void 0 : actions.className, hasNoOffset: (actions === null || actions === void 0 ? void 0 : actions.hasNoOffset) || (selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.hasNoOffset), children: [actions === null || actions === void 0 ? void 0 : actions.actions, selectableActions && (isClickable || isSelectable) && (0, import_jsx_runtime58.jsxs)(CardSelectableActions, { className: selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.className, children: [isSelectable && (0, import_jsx_runtime58.jsx)(SelectableCardInput, Object.assign({}, getSelectableProps())), isClickableOnlyCard && (0, import_jsx_runtime58.jsx)(ClickableCardComponent, Object.assign({}, getClickableProps()))] })] }), children && (0, import_jsx_runtime58.jsx)(CardHeaderMain, { children }), onExpand && isToggleRightAligned && cardHeaderToggle] }));
+      return (0, import_jsx_runtime59.jsxs)("div", Object.assign({ className: css(card_default.cardHeader, isToggleRightAligned && card_default.modifiers.toggleRight, hasWrap && card_default.modifiers.wrap, className), id }, props, { children: [onExpand && !isToggleRightAligned && cardHeaderToggle, (actions || selectableActions && (isClickable || isSelectable)) && (0, import_jsx_runtime59.jsxs)(CardActions, { className: actions === null || actions === void 0 ? void 0 : actions.className, hasNoOffset: (actions === null || actions === void 0 ? void 0 : actions.hasNoOffset) || (selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.hasNoOffset), children: [actions === null || actions === void 0 ? void 0 : actions.actions, selectableActions && (isClickable || isSelectable) && (0, import_jsx_runtime59.jsxs)(CardSelectableActions, { className: selectableActions === null || selectableActions === void 0 ? void 0 : selectableActions.className, children: [isSelectable && (0, import_jsx_runtime59.jsx)(SelectableCardInput, Object.assign({}, getSelectableProps())), isClickableOnlyCard && (0, import_jsx_runtime59.jsx)(ClickableCardComponent, Object.assign({}, getClickableProps()))] })] }), children && (0, import_jsx_runtime59.jsx)(CardHeaderMain, { children }), onExpand && isToggleRightAligned && cardHeaderToggle] }));
     } });
   };
   CardHeader.displayName = "CardHeader";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Select/Select.js
-  var import_jsx_runtime59 = __toESM(require_jsx_runtime());
-  var import_react43 = __toESM(require_react());
+  var import_jsx_runtime60 = __toESM(require_jsx_runtime());
+  var import_react44 = __toESM(require_react());
   var SelectBase = (_a) => {
     var { children, className, onSelect, isOpen, selected, toggle, shouldFocusToggleOnSelect = false, shouldFocusFirstItemOnOpen = false, onOpenChange, onOpenChangeKeys = ["Escape", "Tab"], onToggleKeydown, variant, isPlain, innerRef, zIndex = 9999, role = "listbox", popperProps, menuHeight, maxMenuHeight, isScrollable, shouldPreventScrollOnItemFocus = true, focusTimeoutDelay = 0 } = _a, props = __rest(_a, ["children", "className", "onSelect", "isOpen", "selected", "toggle", "shouldFocusToggleOnSelect", "shouldFocusFirstItemOnOpen", "onOpenChange", "onOpenChangeKeys", "onToggleKeydown", "variant", "isPlain", "innerRef", "zIndex", "role", "popperProps", "menuHeight", "maxMenuHeight", "isScrollable", "shouldPreventScrollOnItemFocus", "focusTimeoutDelay"]);
     const generatedOuiaId = useOUIAId(Select.displayName, props.ouiaId);
-    const localMenuRef = (0, import_react43.useRef)(void 0);
-    const localToggleRef = (0, import_react43.useRef)(void 0);
+    const localMenuRef = (0, import_react44.useRef)(void 0);
+    const localToggleRef = (0, import_react44.useRef)(void 0);
     const menuRef = innerRef || localMenuRef;
     const toggleRef = typeof toggle === "function" || typeof toggle !== "function" && !toggle.toggleRef ? localToggleRef : toggle === null || toggle === void 0 ? void 0 : toggle.toggleRef;
-    const prevIsOpen = (0, import_react43.useRef)(isOpen);
-    (0, import_react43.useEffect)(() => {
+    const prevIsOpen = (0, import_react44.useRef)(isOpen);
+    (0, import_react44.useEffect)(() => {
       if (prevIsOpen.current === false && isOpen === true && shouldFocusFirstItemOnOpen) {
         setTimeout(() => {
           var _a2;
@@ -33524,7 +33571,7 @@
       }
       prevIsOpen.current = isOpen;
     }, [isOpen]);
-    (0, import_react43.useEffect)(() => {
+    (0, import_react44.useEffect)(() => {
       const handleMenuKeys = (event) => {
         var _a2, _b, _c, _d;
         if (isOpen && onOpenChange && (((_a2 = menuRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(event.target)) || ((_b = toggleRef.current) === null || _b === void 0 ? void 0 : _b.contains(event.target)))) {
@@ -33567,35 +33614,35 @@
       shouldFocusFirstItemOnOpen,
       focusTimeoutDelay
     ]);
-    const menu = (0, import_jsx_runtime59.jsx)(Menu, Object.assign({ role, className: css(className), ref: menuRef, onSelect: (event, value) => {
+    const menu = (0, import_jsx_runtime60.jsx)(Menu, Object.assign({ role, className: css(className), ref: menuRef, onSelect: (event, value) => {
       onSelect && onSelect(event, value);
       shouldFocusToggleOnSelect && toggleRef.current.focus();
-    }, isPlain, selected, isScrollable: isScrollable !== null && isScrollable !== void 0 ? isScrollable : menuHeight !== void 0 || maxMenuHeight !== void 0 }, getOUIAProps(Select.displayName, generatedOuiaId, props.ouiaSafe !== void 0 ? props.ouiaSafe : true), props, { children: (0, import_jsx_runtime59.jsx)(MenuContent, { menuHeight, maxMenuHeight, children }) }));
-    return (0, import_jsx_runtime59.jsx)(Popper, Object.assign({ trigger: typeof toggle === "function" ? toggle(toggleRef) : toggle.toggleNode, triggerRef: toggleRef, popper: menu, popperRef: menuRef, isVisible: isOpen, zIndex }, popperProps));
+    }, isPlain, selected, isScrollable: isScrollable !== null && isScrollable !== void 0 ? isScrollable : menuHeight !== void 0 || maxMenuHeight !== void 0 }, getOUIAProps(Select.displayName, generatedOuiaId, props.ouiaSafe !== void 0 ? props.ouiaSafe : true), props, { children: (0, import_jsx_runtime60.jsx)(MenuContent, { menuHeight, maxMenuHeight, children }) }));
+    return (0, import_jsx_runtime60.jsx)(Popper, Object.assign({ trigger: typeof toggle === "function" ? toggle(toggleRef) : toggle.toggleNode, triggerRef: toggleRef, popper: menu, popperRef: menuRef, isVisible: isOpen, zIndex }, popperProps));
   };
-  var Select = (0, import_react43.forwardRef)((props, ref) => (0, import_jsx_runtime59.jsx)(SelectBase, Object.assign({ innerRef: ref }, props)));
+  var Select = (0, import_react44.forwardRef)((props, ref) => (0, import_jsx_runtime60.jsx)(SelectBase, Object.assign({ innerRef: ref }, props)));
   Select.displayName = "Select";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Select/SelectGroup.js
-  var import_jsx_runtime60 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime61 = __toESM(require_jsx_runtime());
   var SelectGroup = (_a) => {
     var { children, className, label } = _a, props = __rest(_a, ["children", "className", "label"]);
-    return (0, import_jsx_runtime60.jsx)(MenuGroup, Object.assign({ className: css(className), label }, props, { children }));
+    return (0, import_jsx_runtime61.jsx)(MenuGroup, Object.assign({ className: css(className), label }, props, { children }));
   };
   SelectGroup.displayName = "SelectGroup";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Select/SelectOption.js
-  var import_jsx_runtime61 = __toESM(require_jsx_runtime());
-  var import_react44 = __toESM(require_react());
+  var import_jsx_runtime62 = __toESM(require_jsx_runtime());
+  var import_react45 = __toESM(require_react());
   var SelectOptionBase = (_a) => {
     var { children, className, innerRef, value } = _a, props = __rest(_a, ["children", "className", "innerRef", "value"]);
-    return (0, import_jsx_runtime61.jsx)(MenuItem, Object.assign({ itemId: value, ref: innerRef, className: css(className) }, props, { children }));
+    return (0, import_jsx_runtime62.jsx)(MenuItem, Object.assign({ itemId: value, ref: innerRef, className: css(className) }, props, { children }));
   };
-  var SelectOption = (0, import_react44.forwardRef)((props, ref) => (0, import_jsx_runtime61.jsx)(SelectOptionBase, Object.assign({}, props, { innerRef: ref })));
+  var SelectOption = (0, import_react45.forwardRef)((props, ref) => (0, import_jsx_runtime62.jsx)(SelectOptionBase, Object.assign({}, props, { innerRef: ref })));
   SelectOption.displayName = "SelectOption";
 
   // node_modules/@patternfly/react-core/dist/esm/components/FileUpload/FileUploadField.js
-  var import_jsx_runtime63 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime64 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-styles/css/components/FileUpload/file-upload.mjs
   var file_upload_default = {
@@ -33613,8 +33660,8 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/TextArea/TextArea.js
-  var import_jsx_runtime62 = __toESM(require_jsx_runtime());
-  var import_react45 = __toESM(require_react());
+  var import_jsx_runtime63 = __toESM(require_jsx_runtime());
+  var import_react46 = __toESM(require_react());
   var TextAreResizeOrientation;
   (function(TextAreResizeOrientation2) {
     TextAreResizeOrientation2["horizontal"] = "horizontal";
@@ -33627,10 +33674,10 @@
     TextAreaReadOnlyVariant2["default"] = "default";
     TextAreaReadOnlyVariant2["plain"] = "plain";
   })(TextAreaReadOnlyVariant || (TextAreaReadOnlyVariant = {}));
-  var TextAreaBase = class extends import_react45.Component {
+  var TextAreaBase = class extends import_react46.Component {
     constructor(props) {
       super(props);
-      this.inputRef = (0, import_react45.createRef)();
+      this.inputRef = (0, import_react46.createRef)();
       this.setAutoHeight = (field) => {
         const parent = field.parentElement;
         parent.style.setProperty("height", "inherit");
@@ -33679,12 +33726,12 @@
       } = _a, props = __rest(_a, ["className", "value", "validated", "isRequired", "isDisabled", "readOnlyVariant", "resizeOrientation", "innerRef", "disabled", "autoResize", "onChange", "onBlur", "onFocus"]);
       const orientation = resizeOrientation !== "none" ? `resize${capitalize(resizeOrientation)}` : void 0;
       const hasStatusIcon = ["success", "error", "warning"].includes(validated);
-      return (0, import_jsx_runtime62.jsxs)("span", { className: css(form_control_default.formControl, form_control_default.modifiers.textarea, readOnlyVariant && form_control_default.modifiers.readonly, readOnlyVariant === "plain" && form_control_default.modifiers.plain, resizeOrientation !== "none" && form_control_default.modifiers[orientation], isDisabled && form_control_default.modifiers.disabled, hasStatusIcon && form_control_default.modifiers[validated], className), children: [(0, import_jsx_runtime62.jsx)("textarea", Object.assign({ onChange: this.handleChange, onFocus, onBlur }, typeof this.props.defaultValue !== "string" && { value }, { "aria-invalid": validated === ValidatedOptions.error, required: isRequired, disabled: isDisabled || disabled, readOnly: !!readOnlyVariant, ref: innerRef || this.inputRef }, props)), hasStatusIcon && (0, import_jsx_runtime62.jsx)("span", { className: css(form_control_default.formControlUtilities), children: (0, import_jsx_runtime62.jsx)(FormControlIcon, { status: validated }) })] });
+      return (0, import_jsx_runtime63.jsxs)("span", { className: css(form_control_default.formControl, form_control_default.modifiers.textarea, readOnlyVariant && form_control_default.modifiers.readonly, readOnlyVariant === "plain" && form_control_default.modifiers.plain, resizeOrientation !== "none" && form_control_default.modifiers[orientation], isDisabled && form_control_default.modifiers.disabled, hasStatusIcon && form_control_default.modifiers[validated], className), children: [(0, import_jsx_runtime63.jsx)("textarea", Object.assign({ onChange: this.handleChange, onFocus, onBlur }, typeof this.props.defaultValue !== "string" && { value }, { "aria-invalid": validated === ValidatedOptions.error, required: isRequired, disabled: isDisabled || disabled, readOnly: !!readOnlyVariant, ref: innerRef || this.inputRef }, props)), hasStatusIcon && (0, import_jsx_runtime63.jsx)("span", { className: css(form_control_default.formControlUtilities), children: (0, import_jsx_runtime63.jsx)(FormControlIcon, { status: validated }) })] });
     }
   };
   TextAreaBase.displayName = "TextArea";
   TextAreaBase.defaultProps = {
-    innerRef: (0, import_react45.createRef)(),
+    innerRef: (0, import_react46.createRef)(),
     className: "",
     isRequired: false,
     isDisabled: false,
@@ -33692,7 +33739,7 @@
     resizeOrientation: "both",
     "aria-label": null
   };
-  var TextArea = (0, import_react45.forwardRef)((props, ref) => (0, import_jsx_runtime62.jsx)(TextAreaBase, Object.assign({}, props, { innerRef: ref })));
+  var TextArea = (0, import_react46.forwardRef)((props, ref) => (0, import_jsx_runtime63.jsx)(TextAreaBase, Object.assign({}, props, { innerRef: ref })));
   TextArea.displayName = "TextArea";
 
   // node_modules/@patternfly/react-core/dist/esm/helpers/fileUtils.js
@@ -33724,7 +33771,7 @@
     const onTextAreaChange = (event, newValue) => {
       onTextChange === null || onTextChange === void 0 ? void 0 : onTextChange(event, newValue);
     };
-    return (0, import_jsx_runtime63.jsxs)("div", Object.assign({ className: css(file_upload_default.fileUpload, isDragActive && file_upload_default.modifiers.dragHover, isLoading && file_upload_default.modifiers.loading, className), ref: containerRef }, props, { children: [(0, import_jsx_runtime63.jsx)("div", { className: file_upload_default.fileUploadFileSelect, children: (0, import_jsx_runtime63.jsxs)(InputGroup, { children: [(0, import_jsx_runtime63.jsx)(InputGroupItem, { isFill: true, children: (0, import_jsx_runtime63.jsx)(TextInput, {
+    return (0, import_jsx_runtime64.jsxs)("div", Object.assign({ className: css(file_upload_default.fileUpload, isDragActive && file_upload_default.modifiers.dragHover, isLoading && file_upload_default.modifiers.loading, className), ref: containerRef }, props, { children: [(0, import_jsx_runtime64.jsx)("div", { className: file_upload_default.fileUploadFileSelect, children: (0, import_jsx_runtime64.jsxs)(InputGroup, { children: [(0, import_jsx_runtime64.jsx)(InputGroupItem, { isFill: true, children: (0, import_jsx_runtime64.jsx)(TextInput, {
       readOnlyVariant: "default",
       isDisabled,
       id: `${id}-filename`,
@@ -33732,15 +33779,15 @@
       "aria-label": filenameAriaLabel,
       placeholder: filenamePlaceholder,
       value: filename
-    }) }), (0, import_jsx_runtime63.jsx)(InputGroupItem, { children: (0, import_jsx_runtime63.jsx)(Button, { variant: ButtonVariant.control, onClick: onBrowseButtonClick, isDisabled: isDisabled || isBrowseButtonDisabled, "aria-describedby": browseButtonAriaDescribedby, children: browseButtonText }) }), (0, import_jsx_runtime63.jsx)(InputGroupItem, { children: (0, import_jsx_runtime63.jsx)(Button, { variant: ButtonVariant.control, isDisabled: isDisabled || isClearButtonDisabled, onClick: onClearButtonClick, children: clearButtonText }) })] }) }), (isLoading || !hideDefaultPreview && type === fileReaderType.text) && (0, import_jsx_runtime63.jsxs)("div", { className: file_upload_default.fileUploadFileDetails, children: [!hideDefaultPreview && type === fileReaderType.text && (0, import_jsx_runtime63.jsx)(TextArea, { readOnly: isReadOnly || !!filename && !allowEditingUploadedText, disabled: isDisabled, isRequired, resizeOrientation: TextAreResizeOrientation.vertical, validated, id, "aria-label": ariaLabel, value, onChange: onTextAreaChange, onClick: onTextAreaClick, onBlur: onTextAreaBlur, placeholder: textAreaPlaceholder }), isLoading && (0, import_jsx_runtime63.jsx)("div", { className: file_upload_default.fileUploadFileDetailsSpinner, children: (0, import_jsx_runtime63.jsx)(Spinner, { size: spinnerSize.lg, "aria-valuetext": spinnerAriaValueText }) })] }), children] }));
+    }) }), (0, import_jsx_runtime64.jsx)(InputGroupItem, { children: (0, import_jsx_runtime64.jsx)(Button, { variant: ButtonVariant.control, onClick: onBrowseButtonClick, isDisabled: isDisabled || isBrowseButtonDisabled, "aria-describedby": browseButtonAriaDescribedby, children: browseButtonText }) }), (0, import_jsx_runtime64.jsx)(InputGroupItem, { children: (0, import_jsx_runtime64.jsx)(Button, { variant: ButtonVariant.control, isDisabled: isDisabled || isClearButtonDisabled, onClick: onClearButtonClick, children: clearButtonText }) })] }) }), (isLoading || !hideDefaultPreview && type === fileReaderType.text) && (0, import_jsx_runtime64.jsxs)("div", { className: file_upload_default.fileUploadFileDetails, children: [!hideDefaultPreview && type === fileReaderType.text && (0, import_jsx_runtime64.jsx)(TextArea, { readOnly: isReadOnly || !!filename && !allowEditingUploadedText, disabled: isDisabled, isRequired, resizeOrientation: TextAreResizeOrientation.vertical, validated, id, "aria-label": ariaLabel, value, onChange: onTextAreaChange, onClick: onTextAreaClick, onBlur: onTextAreaBlur, placeholder: textAreaPlaceholder }), isLoading && (0, import_jsx_runtime64.jsx)("div", { className: file_upload_default.fileUploadFileDetailsSpinner, children: (0, import_jsx_runtime64.jsx)(Spinner, { size: spinnerSize.lg, "aria-valuetext": spinnerAriaValueText }) })] }), children] }));
   };
   FileUploadField.displayName = "FileUploadField";
 
   // node_modules/@patternfly/react-core/dist/esm/components/FileUpload/FileUpload.js
-  var import_jsx_runtime64 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime65 = __toESM(require_jsx_runtime());
 
   // node_modules/react-dropzone/dist/es/index.js
-  var import_react46 = __toESM(require_react(), 1);
+  var import_react47 = __toESM(require_react(), 1);
   var import_prop_types = __toESM(require_prop_types(), 1);
 
   // node_modules/file-selector/dist/es2015/file.js
@@ -35509,15 +35556,15 @@
     }
     return target;
   }
-  var Dropzone = /* @__PURE__ */ (0, import_react46.forwardRef)(function(_ref, ref) {
+  var Dropzone = /* @__PURE__ */ (0, import_react47.forwardRef)(function(_ref, ref) {
     var children = _ref.children, params = _objectWithoutProperties(_ref, _excluded);
     var _useDropzone = useDropzone(params), open = _useDropzone.open, props = _objectWithoutProperties(_useDropzone, _excluded2);
-    (0, import_react46.useImperativeHandle)(ref, function() {
+    (0, import_react47.useImperativeHandle)(ref, function() {
       return {
         open
       };
     }, [open]);
-    return /* @__PURE__ */ import_react46.default.createElement(import_react46.Fragment, null, children(_objectSpread3(_objectSpread3({}, props), {}, {
+    return /* @__PURE__ */ import_react47.default.createElement(import_react47.Fragment, null, children(_objectSpread3(_objectSpread3({}, props), {}, {
       open
     })));
   });
@@ -35721,23 +35768,23 @@
   function useDropzone() {
     var props = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
     var _defaultProps$props = _objectSpread3(_objectSpread3({}, defaultProps), props), accept = _defaultProps$props.accept, disabled = _defaultProps$props.disabled, getFilesFromEvent = _defaultProps$props.getFilesFromEvent, maxSize = _defaultProps$props.maxSize, minSize = _defaultProps$props.minSize, multiple = _defaultProps$props.multiple, maxFiles = _defaultProps$props.maxFiles, onDragEnter = _defaultProps$props.onDragEnter, onDragLeave = _defaultProps$props.onDragLeave, onDragOver = _defaultProps$props.onDragOver, onDrop = _defaultProps$props.onDrop, onDropAccepted = _defaultProps$props.onDropAccepted, onDropRejected = _defaultProps$props.onDropRejected, onFileDialogCancel = _defaultProps$props.onFileDialogCancel, onFileDialogOpen = _defaultProps$props.onFileDialogOpen, useFsAccessApi = _defaultProps$props.useFsAccessApi, autoFocus = _defaultProps$props.autoFocus, preventDropOnDocument = _defaultProps$props.preventDropOnDocument, noClick = _defaultProps$props.noClick, noKeyboard = _defaultProps$props.noKeyboard, noDrag = _defaultProps$props.noDrag, noDragEventsBubbling = _defaultProps$props.noDragEventsBubbling, onError = _defaultProps$props.onError, validator = _defaultProps$props.validator;
-    var acceptAttr = (0, import_react46.useMemo)(function() {
+    var acceptAttr = (0, import_react47.useMemo)(function() {
       return acceptPropAsAcceptAttr(accept);
     }, [accept]);
-    var pickerTypes = (0, import_react46.useMemo)(function() {
+    var pickerTypes = (0, import_react47.useMemo)(function() {
       return pickerOptionsFromAccept(accept);
     }, [accept]);
-    var onFileDialogOpenCb = (0, import_react46.useMemo)(function() {
+    var onFileDialogOpenCb = (0, import_react47.useMemo)(function() {
       return typeof onFileDialogOpen === "function" ? onFileDialogOpen : noop;
     }, [onFileDialogOpen]);
-    var onFileDialogCancelCb = (0, import_react46.useMemo)(function() {
+    var onFileDialogCancelCb = (0, import_react47.useMemo)(function() {
       return typeof onFileDialogCancel === "function" ? onFileDialogCancel : noop;
     }, [onFileDialogCancel]);
-    var rootRef = (0, import_react46.useRef)(null);
-    var inputRef = (0, import_react46.useRef)(null);
-    var _useReducer = (0, import_react46.useReducer)(reducer, initialState), _useReducer2 = _slicedToArray2(_useReducer, 2), state = _useReducer2[0], dispatch = _useReducer2[1];
+    var rootRef = (0, import_react47.useRef)(null);
+    var inputRef = (0, import_react47.useRef)(null);
+    var _useReducer = (0, import_react47.useReducer)(reducer, initialState), _useReducer2 = _slicedToArray2(_useReducer, 2), state = _useReducer2[0], dispatch = _useReducer2[1];
     var isFocused = state.isFocused, isFileDialogActive = state.isFileDialogActive;
-    var fsAccessApiWorksRef = (0, import_react46.useRef)(typeof window !== "undefined" && window.isSecureContext && useFsAccessApi && canUseFileSystemAccessAPI());
+    var fsAccessApiWorksRef = (0, import_react47.useRef)(typeof window !== "undefined" && window.isSecureContext && useFsAccessApi && canUseFileSystemAccessAPI());
     var onWindowFocus = function onWindowFocus2() {
       if (!fsAccessApiWorksRef.current && isFileDialogActive) {
         setTimeout(function() {
@@ -35753,14 +35800,14 @@
         }, 300);
       }
     };
-    (0, import_react46.useEffect)(function() {
+    (0, import_react47.useEffect)(function() {
       window.addEventListener("focus", onWindowFocus, false);
       return function() {
         window.removeEventListener("focus", onWindowFocus, false);
       };
     }, [inputRef, isFileDialogActive, onFileDialogCancelCb, fsAccessApiWorksRef]);
-    var dragTargetsRef = (0, import_react46.useRef)([]);
-    var globalDragTargetsRef = (0, import_react46.useRef)([]);
+    var dragTargetsRef = (0, import_react47.useRef)([]);
+    var globalDragTargetsRef = (0, import_react47.useRef)([]);
     var onDocumentDrop = function onDocumentDrop2(event) {
       if (rootRef.current && rootRef.current.contains(event.target)) {
         return;
@@ -35768,7 +35815,7 @@
       event.preventDefault();
       dragTargetsRef.current = [];
     };
-    (0, import_react46.useEffect)(function() {
+    (0, import_react47.useEffect)(function() {
       if (preventDropOnDocument) {
         document.addEventListener("dragover", onDocumentDragOver, false);
         document.addEventListener("drop", onDocumentDrop, false);
@@ -35780,7 +35827,7 @@
         }
       };
     }, [rootRef, preventDropOnDocument]);
-    (0, import_react46.useEffect)(function() {
+    (0, import_react47.useEffect)(function() {
       var onDocumentDragEnter = function onDocumentDragEnter2(event) {
         globalDragTargetsRef.current = [].concat(_toConsumableArray3(globalDragTargetsRef.current), [event.target]);
         if (isEvtWithFiles(event)) {
@@ -35827,21 +35874,21 @@
         document.removeEventListener("drop", onDocumentDropGlobal);
       };
     }, [rootRef]);
-    (0, import_react46.useEffect)(function() {
+    (0, import_react47.useEffect)(function() {
       if (!disabled && autoFocus && rootRef.current) {
         rootRef.current.focus();
       }
       return function() {
       };
     }, [rootRef, autoFocus, disabled]);
-    var onErrCb = (0, import_react46.useCallback)(function(e) {
+    var onErrCb = (0, import_react47.useCallback)(function(e) {
       if (onError) {
         onError(e);
       } else {
         console.error(e);
       }
     }, [onError]);
-    var onDragEnterCb = (0, import_react46.useCallback)(function(event) {
+    var onDragEnterCb = (0, import_react47.useCallback)(function(event) {
       event.preventDefault();
       event.persist();
       stopPropagation(event);
@@ -35876,7 +35923,7 @@
         });
       }
     }, [getFilesFromEvent, onDragEnter, onErrCb, noDragEventsBubbling, acceptAttr, minSize, maxSize, multiple, maxFiles, validator]);
-    var onDragOverCb = (0, import_react46.useCallback)(function(event) {
+    var onDragOverCb = (0, import_react47.useCallback)(function(event) {
       event.preventDefault();
       event.persist();
       stopPropagation(event);
@@ -35892,7 +35939,7 @@
       }
       return false;
     }, [onDragOver, noDragEventsBubbling]);
-    var onDragLeaveCb = (0, import_react46.useCallback)(function(event) {
+    var onDragLeaveCb = (0, import_react47.useCallback)(function(event) {
       event.preventDefault();
       event.persist();
       stopPropagation(event);
@@ -35917,7 +35964,7 @@
         onDragLeave(event);
       }
     }, [rootRef, onDragLeave, noDragEventsBubbling]);
-    var setFiles = (0, import_react46.useCallback)(function(files, event) {
+    var setFiles = (0, import_react47.useCallback)(function(files, event) {
       var acceptedFiles = [];
       var fileRejections = [];
       files.forEach(function(file) {
@@ -35964,7 +36011,7 @@
         onDropAccepted(acceptedFiles, event);
       }
     }, [dispatch, multiple, acceptAttr, minSize, maxSize, maxFiles, onDrop, onDropAccepted, onDropRejected, validator]);
-    var onDropCb = (0, import_react46.useCallback)(function(event) {
+    var onDropCb = (0, import_react47.useCallback)(function(event) {
       event.preventDefault();
       event.persist();
       stopPropagation(event);
@@ -35983,7 +36030,7 @@
         type: "reset"
       });
     }, [getFilesFromEvent, setFiles, onErrCb, noDragEventsBubbling]);
-    var openFileDialog = (0, import_react46.useCallback)(function() {
+    var openFileDialog = (0, import_react47.useCallback)(function() {
       if (fsAccessApiWorksRef.current) {
         dispatch({
           type: "openDialog"
@@ -36029,7 +36076,7 @@
         inputRef.current.click();
       }
     }, [dispatch, onFileDialogOpenCb, onFileDialogCancelCb, useFsAccessApi, setFiles, onErrCb, pickerTypes, multiple]);
-    var onKeyDownCb = (0, import_react46.useCallback)(function(event) {
+    var onKeyDownCb = (0, import_react47.useCallback)(function(event) {
       if (!rootRef.current || !rootRef.current.isEqualNode(event.target)) {
         return;
       }
@@ -36038,17 +36085,17 @@
         openFileDialog();
       }
     }, [rootRef, openFileDialog]);
-    var onFocusCb = (0, import_react46.useCallback)(function() {
+    var onFocusCb = (0, import_react47.useCallback)(function() {
       dispatch({
         type: "focus"
       });
     }, []);
-    var onBlurCb = (0, import_react46.useCallback)(function() {
+    var onBlurCb = (0, import_react47.useCallback)(function() {
       dispatch({
         type: "blur"
       });
     }, []);
-    var onClickCb = (0, import_react46.useCallback)(function() {
+    var onClickCb = (0, import_react47.useCallback)(function() {
       if (noClick) {
         return;
       }
@@ -36072,7 +36119,7 @@
         event.stopPropagation();
       }
     };
-    var getRootProps = (0, import_react46.useMemo)(function() {
+    var getRootProps = (0, import_react47.useMemo)(function() {
       return function() {
         var _ref2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref2$refKey = _ref2.refKey, refKey = _ref2$refKey === void 0 ? "ref" : _ref2$refKey, role = _ref2.role, onKeyDown = _ref2.onKeyDown, onFocus = _ref2.onFocus, onBlur = _ref2.onBlur, onClick = _ref2.onClick, onDragEnter2 = _ref2.onDragEnter, onDragOver2 = _ref2.onDragOver, onDragLeave2 = _ref2.onDragLeave, onDrop2 = _ref2.onDrop, rest = _objectWithoutProperties(_ref2, _excluded3);
         return _objectSpread3(_objectSpread3(_defineProperty3({
@@ -36090,10 +36137,10 @@
         } : {}), rest);
       };
     }, [rootRef, onKeyDownCb, onFocusCb, onBlurCb, onClickCb, onDragEnterCb, onDragOverCb, onDragLeaveCb, onDropCb, noKeyboard, noDrag, disabled]);
-    var onInputElementClick = (0, import_react46.useCallback)(function(event) {
+    var onInputElementClick = (0, import_react47.useCallback)(function(event) {
       event.stopPropagation();
     }, []);
-    var getInputProps = (0, import_react46.useMemo)(function() {
+    var getInputProps = (0, import_react47.useMemo)(function() {
       return function() {
         var _ref3 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref3$refKey = _ref3.refKey, refKey = _ref3$refKey === void 0 ? "ref" : _ref3$refKey, onChange = _ref3.onChange, onClick = _ref3.onClick, rest = _objectWithoutProperties(_ref3, _excluded4);
         var inputProps = _defineProperty3({
@@ -36233,9 +36280,25 @@
       onClick,
       refKey: "containerRef"
     }));
-    return (0, import_jsx_runtime64.jsxs)(FileUploadField, Object.assign({}, rootProps, { children: [(0, import_jsx_runtime64.jsx)("input", Object.assign({}, inputProps, { hidden: true })), children] }));
+    return (0, import_jsx_runtime65.jsxs)(FileUploadField, Object.assign({}, rootProps, { children: [(0, import_jsx_runtime65.jsx)("input", Object.assign({}, inputProps, { hidden: true })), children] }));
   };
   FileUpload.displayName = "FileUpload";
+
+  // node_modules/@patternfly/react-icons/dist/esm/icons/angle-down-icon.js
+  var AngleDownIconConfig = {
+    name: "AngleDownIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 320, "height": 512, "svgPathData": "M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z" },
+    rhUiIcon: { "xOffset": 0, "yOffset": 0, "width": 32, "height": 32, "svgPathData": "M16 24.792c-.384 0-.769-.146-1.061-.438L2.293 11.707a.999.999 0 1 1 1.414-1.414L16 22.586l12.293-12.293a.999.999 0 1 1 1.414 1.414L17.061 24.353a1.497 1.497 0 0 1-1.061.438Z" }
+  };
+  var AngleDownIcon = createIconBase(AngleDownIconConfig);
+
+  // node_modules/@patternfly/react-icons/dist/esm/icons/arrow-right-icon.js
+  var ArrowRightIconConfig = {
+    name: "ArrowRightIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 448, "height": 512, "svgPathData": "M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z" },
+    rhUiIcon: { "xOffset": 0, "yOffset": 0, "width": 32, "height": 32, "svgPathData": "M30.354 14.939 19.708 4.293a.999.999 0 1 0-1.414 1.414L27.587 15H2a1 1 0 0 0 0 2h25.586l-9.293 9.293a.999.999 0 1 0 1.414 1.414l10.646-10.646c.283-.283.439-.66.439-1.061s-.156-.777-.439-1.061Z" }
+  };
+  var ArrowRightIcon = createIconBase(ArrowRightIconConfig);
 
   // node_modules/@patternfly/react-icons/dist/esm/icons/arrows-alt-v-icon.js
   var ArrowsAltVIconConfig = {
@@ -36272,6 +36335,15 @@
   };
   var MinusCircleIcon = createIconBase(MinusCircleIconConfig);
 
+  // node_modules/@patternfly/react-icons/dist/esm/icons/outlined-moon-icon.js
+  var OutlinedMoonIconConfig = {
+    name: "OutlinedMoonIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 512, "height": 512, "svgPathData": "M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z" },
+    rhUiIcon: null
+  };
+  var OutlinedMoonIcon = createIconBase(OutlinedMoonIconConfig);
+  var outlined_moon_icon_default = OutlinedMoonIcon;
+
   // node_modules/@patternfly/react-icons/dist/esm/icons/plus-circle-icon.js
   var PlusCircleIconConfig = {
     name: "PlusCircleIcon",
@@ -36287,6 +36359,24 @@
     rhUiIcon: null
   };
   var RedhatIcon = createIconBase(RedhatIconConfig);
+
+  // node_modules/@patternfly/react-icons/dist/esm/icons/rh-ui-check-clipboard-icon.js
+  var RhUiCheckClipboardIconConfig = {
+    name: "RhUiCheckClipboardIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 32, "height": 32, "svgPathData": "M22.707 14.293a.999.999 0 0 1 0 1.414l-7.646 7.646c-.292.293-.676.438-1.061.438s-.768-.146-1.061-.438l-3.646-3.646a.999.999 0 1 1 1.414-1.414L14 21.586l7.293-7.293a.999.999 0 0 1 1.414 0ZM27 7.5v22c0 .827-.673 1.5-1.5 1.5h-19c-.827 0-1.5-.673-1.5-1.5v-22C5 6.673 5.673 6 6.5 6H9v-.5c0-.827.673-1.5 1.5-1.5h1.626c.445-1.724 2.013-3 3.874-3s3.428 1.276 3.874 3H21.5c.827 0 1.5.673 1.5 1.5V6h2.5c.827 0 1.5.673 1.5 1.5ZM11 8h10V6h-2a1 1 0 0 1-1-1c0-1.103-.897-2-2-2s-2 .897-2 2a1 1 0 0 1-1 1h-2v2Zm14 0h-2v.5c0 .827-.673 1.5-1.5 1.5h-11C9.673 10 9 9.327 9 8.5V8H7v21h18V8Z" },
+    rhUiIcon: null
+  };
+  var RhUiCheckClipboardIcon = createIconBase(RhUiCheckClipboardIconConfig);
+  var rh_ui_check_clipboard_icon_default = RhUiCheckClipboardIcon;
+
+  // node_modules/@patternfly/react-icons/dist/esm/icons/rh-ui-cubes-icon.js
+  var RhUiCubesIconConfig = {
+    name: "RhUiCubesIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 32, "height": 32, "svgPathData": "M12.5 12h7c.827 0 1.5-.673 1.5-1.5v-7c0-.827-.673-1.5-1.5-1.5h-7c-.827 0-1.5.673-1.5 1.5v7c0 .827.673 1.5 1.5 1.5Zm.5-8h6v6h-6V4ZM5.5 25h7c.827 0 1.5-.673 1.5-1.5v-7c0-.827-.673-1.5-1.5-1.5h-7c-.827 0-1.5.673-1.5 1.5v7c0 .827.673 1.5 1.5 1.5Zm.5-8h6v6H6v-6Zm24 12a1 1 0 0 1-1 1H3a1 1 0 0 1 0-2h26a1 1 0 0 1 1 1ZM18 16.5v7c0 .827.673 1.5 1.5 1.5h7c.827 0 1.5-.673 1.5-1.5v-7c0-.827-.673-1.5-1.5-1.5h-7c-.827 0-1.5.673-1.5 1.5Zm2 .5h6v6h-6v-6Z" },
+    rhUiIcon: null
+  };
+  var RhUiCubesIcon = createIconBase(RhUiCubesIconConfig);
+  var rh_ui_cubes_icon_default = RhUiCubesIcon;
 
   // node_modules/@patternfly/react-icons/dist/esm/icons/rh-ui-ellipsis-horizontal-fill-icon.js
   var RhUiEllipsisHorizontalFillIconConfig = {
@@ -36333,6 +36423,15 @@
   var RhUiTemplateIcon = createIconBase(RhUiTemplateIconConfig);
   var rh_ui_template_icon_default = RhUiTemplateIcon;
 
+  // node_modules/@patternfly/react-icons/dist/esm/icons/sun-icon.js
+  var SunIconConfig = {
+    name: "SunIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 512, "height": 512, "svgPathData": "M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z" },
+    rhUiIcon: null
+  };
+  var SunIcon = createIconBase(SunIconConfig);
+  var sun_icon_default = SunIcon;
+
   // node_modules/@patternfly/react-icons/dist/esm/icons/times-icon.js
   var TimesIconConfig = {
     name: "TimesIcon",
@@ -36342,8 +36441,8 @@
   var TimesIcon = createIconBase(TimesIconConfig);
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/Wizard.js
-  var import_jsx_runtime76 = __toESM(require_jsx_runtime());
-  var import_react55 = __toESM(require_react());
+  var import_jsx_runtime77 = __toESM(require_jsx_runtime());
+  var import_react56 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Wizard/wizard.mjs
   var wizard_default = {
@@ -36401,7 +36500,7 @@
   var c_wizard_Height_default = c_wizard_Height;
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/types.js
-  var import_react47 = __toESM(require_react());
+  var import_react48 = __toESM(require_react());
   var WizardNavItemStatus;
   (function(WizardNavItemStatus2) {
     WizardNavItemStatus2["Default"] = "default";
@@ -36416,13 +36515,13 @@
     WizardStepChangeScope2["Nav"] = "nav";
   })(WizardStepChangeScope || (WizardStepChangeScope = {}));
   function isCustomWizardNav(nav) {
-    return typeof nav === "function" || (0, import_react47.isValidElement)(nav);
+    return typeof nav === "function" || (0, import_react48.isValidElement)(nav);
   }
   function isCustomWizardNavItem(navItem) {
-    return typeof navItem === "function" || (0, import_react47.isValidElement)(navItem);
+    return typeof navItem === "function" || (0, import_react48.isValidElement)(navItem);
   }
   function isCustomWizardFooter(footer) {
-    return typeof footer === "function" || (0, import_react47.isValidElement)(footer);
+    return typeof footer === "function" || (0, import_react48.isValidElement)(footer);
   }
   function isWizardBasicStep(step) {
     return (step === null || step === void 0 ? void 0 : step.subStepIds) === void 0 && !isWizardSubStep(step);
@@ -36435,21 +36534,21 @@
   }
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/utils.js
-  var import_react50 = __toESM(require_react());
+  var import_react51 = __toESM(require_react());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardStep.js
+  var import_jsx_runtime71 = __toESM(require_jsx_runtime());
+  var import_react50 = __toESM(require_react());
+
+  // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardContext.js
   var import_jsx_runtime70 = __toESM(require_jsx_runtime());
   var import_react49 = __toESM(require_react());
 
-  // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardContext.js
-  var import_jsx_runtime69 = __toESM(require_jsx_runtime());
-  var import_react48 = __toESM(require_react());
-
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardFooter.js
-  var import_jsx_runtime68 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime69 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-core/dist/esm/components/ActionList/ActionList.js
-  var import_jsx_runtime65 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime66 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-styles/css/components/ActionList/action-list.mjs
   var action_list_default = {
@@ -36464,49 +36563,49 @@
   // node_modules/@patternfly/react-core/dist/esm/components/ActionList/ActionList.js
   var ActionList = (_a) => {
     var { children, isIconList, className, isVertical = false } = _a, props = __rest(_a, ["children", "isIconList", "className", "isVertical"]);
-    return (0, import_jsx_runtime65.jsx)("div", Object.assign({ className: css(action_list_default.actionList, isIconList && action_list_default.modifiers.icons, isVertical && action_list_default.modifiers.vertical, className) }, props, { children }));
+    return (0, import_jsx_runtime66.jsx)("div", Object.assign({ className: css(action_list_default.actionList, isIconList && action_list_default.modifiers.icons, isVertical && action_list_default.modifiers.vertical, className) }, props, { children }));
   };
   ActionList.displayName = "ActionList";
 
   // node_modules/@patternfly/react-core/dist/esm/components/ActionList/ActionListGroup.js
-  var import_jsx_runtime66 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime67 = __toESM(require_jsx_runtime());
   var ActionListGroup = (_a) => {
     var { children, className, isIconGroup } = _a, props = __rest(_a, ["children", "className", "isIconGroup"]);
-    return (0, import_jsx_runtime66.jsx)("div", Object.assign({ className: css(action_list_default.actionListGroup, isIconGroup && action_list_default.modifiers.icons, className) }, props, { children }));
+    return (0, import_jsx_runtime67.jsx)("div", Object.assign({ className: css(action_list_default.actionListGroup, isIconGroup && action_list_default.modifiers.icons, className) }, props, { children }));
   };
   ActionListGroup.displayName = "ActionListGroup";
 
   // node_modules/@patternfly/react-core/dist/esm/components/ActionList/ActionListItem.js
-  var import_jsx_runtime67 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime68 = __toESM(require_jsx_runtime());
   var ActionListItem = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime67.jsx)("div", Object.assign({ className: css(`${action_list_default.actionList}__item`, className) }, props, { children }));
+    return (0, import_jsx_runtime68.jsx)("div", Object.assign({ className: css(`${action_list_default.actionList}__item`, className) }, props, { children }));
   };
   ActionListItem.displayName = "ActionListItem";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardFooter.js
   var WizardFooterWrapper = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime68.jsx)("footer", Object.assign({ className: css(wizard_default.wizardFooter, className) }, props, { children }));
+    return (0, import_jsx_runtime69.jsx)("footer", Object.assign({ className: css(wizard_default.wizardFooter, className) }, props, { children }));
   };
   var WizardFooter = (_a) => {
     var { activeStep } = _a, internalProps = __rest(_a, ["activeStep"]);
     const activeStepFooter = !isCustomWizardFooter(activeStep === null || activeStep === void 0 ? void 0 : activeStep.footer) && (activeStep === null || activeStep === void 0 ? void 0 : activeStep.footer);
-    return (0, import_jsx_runtime68.jsx)(InternalWizardFooter, Object.assign({}, internalProps, activeStepFooter));
+    return (0, import_jsx_runtime69.jsx)(InternalWizardFooter, Object.assign({}, internalProps, activeStepFooter));
   };
   var InternalWizardFooter = (_a) => {
     var { onNext, onBack, onClose, isNextDisabled, isBackDisabled, isBackHidden, isCancelHidden, nextButtonText = "Next", backButtonText = "Back", cancelButtonText = "Cancel", nextButtonProps, backButtonProps, cancelButtonProps, className } = _a, props = __rest(_a, ["onNext", "onBack", "onClose", "isNextDisabled", "isBackDisabled", "isBackHidden", "isCancelHidden", "nextButtonText", "backButtonText", "cancelButtonText", "nextButtonProps", "backButtonProps", "cancelButtonProps", "className"]);
-    return (0, import_jsx_runtime68.jsx)(WizardFooterWrapper, Object.assign({ className }, props, { children: (0, import_jsx_runtime68.jsxs)(ActionList, { children: [(0, import_jsx_runtime68.jsxs)(ActionListGroup, { children: [!isBackHidden && (0, import_jsx_runtime68.jsx)(ActionListItem, { children: (0, import_jsx_runtime68.jsx)(Button, Object.assign({ variant: ButtonVariant.secondary, onClick: onBack, isDisabled: isBackDisabled }, backButtonProps, { children: backButtonText })) }), (0, import_jsx_runtime68.jsx)(ActionListItem, { children: (0, import_jsx_runtime68.jsx)(Button, Object.assign({ variant: ButtonVariant.primary, type: "submit", onClick: onNext, isDisabled: isNextDisabled }, nextButtonProps, { children: nextButtonText })) })] }), !isCancelHidden && (0, import_jsx_runtime68.jsx)(ActionListGroup, { children: (0, import_jsx_runtime68.jsx)(ActionListItem, { children: (0, import_jsx_runtime68.jsx)(Button, Object.assign({ variant: ButtonVariant.link, onClick: onClose }, cancelButtonProps, { children: cancelButtonText })) }) })] }) }));
+    return (0, import_jsx_runtime69.jsx)(WizardFooterWrapper, Object.assign({ className }, props, { children: (0, import_jsx_runtime69.jsxs)(ActionList, { children: [(0, import_jsx_runtime69.jsxs)(ActionListGroup, { children: [!isBackHidden && (0, import_jsx_runtime69.jsx)(ActionListItem, { children: (0, import_jsx_runtime69.jsx)(Button, Object.assign({ variant: ButtonVariant.secondary, onClick: onBack, isDisabled: isBackDisabled }, backButtonProps, { children: backButtonText })) }), (0, import_jsx_runtime69.jsx)(ActionListItem, { children: (0, import_jsx_runtime69.jsx)(Button, Object.assign({ variant: ButtonVariant.primary, type: "submit", onClick: onNext, isDisabled: isNextDisabled }, nextButtonProps, { children: nextButtonText })) })] }), !isCancelHidden && (0, import_jsx_runtime69.jsx)(ActionListGroup, { children: (0, import_jsx_runtime69.jsx)(ActionListItem, { children: (0, import_jsx_runtime69.jsx)(Button, Object.assign({ variant: ButtonVariant.link, onClick: onClose }, cancelButtonProps, { children: cancelButtonText })) }) })] }) }));
   };
   WizardFooterWrapper.displayName = "WizardFooterWrapper";
   WizardFooter.displayName = "WizardFooter";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardContext.js
-  var WizardContext = (0, import_react48.createContext)({});
+  var WizardContext = (0, import_react49.createContext)({});
   var WizardContextProvider = ({ steps: initialSteps, footer: initialFooter, activeStepIndex, children, onNext, onBack, onClose, goToStepById, goToStepByName, goToStepByIndex, shouldFocusContent, mainWrapperRef }) => {
-    const [currentSteps, setCurrentSteps] = (0, import_react48.useState)(initialSteps);
-    const [currentFooter, setCurrentFooter] = (0, import_react48.useState)();
-    (0, import_react48.useEffect)(() => {
+    const [currentSteps, setCurrentSteps] = (0, import_react49.useState)(initialSteps);
+    const [currentFooter, setCurrentFooter] = (0, import_react49.useState)();
+    (0, import_react49.useEffect)(() => {
       if (currentSteps.length !== initialSteps.length) {
         const newSteps = initialSteps.map((newStep) => {
           const currentStepMatch = currentSteps.find((step) => step.id === newStep.id);
@@ -36518,27 +36617,27 @@
         setCurrentSteps(newSteps);
       }
     }, [currentSteps, initialSteps]);
-    const steps = (0, import_react48.useMemo)(() => currentSteps.map((currentStepProps, index) => Object.assign(Object.assign({}, currentStepProps), initialSteps[index])), [initialSteps, currentSteps]);
-    const activeStep = (0, import_react48.useMemo)(() => steps.find((step) => step.index === activeStepIndex), [activeStepIndex, steps]);
-    const close = (0, import_react48.useCallback)(() => onClose === null || onClose === void 0 ? void 0 : onClose(null), [onClose]);
-    const goToNextStep = (0, import_react48.useCallback)(() => onNext(null, steps), [onNext, steps]);
-    const goToPrevStep = (0, import_react48.useCallback)(() => onBack(null, steps), [onBack, steps]);
-    const footer = (0, import_react48.useMemo)(() => {
+    const steps = (0, import_react49.useMemo)(() => currentSteps.map((currentStepProps, index) => Object.assign(Object.assign({}, currentStepProps), initialSteps[index])), [initialSteps, currentSteps]);
+    const activeStep = (0, import_react49.useMemo)(() => steps.find((step) => step.index === activeStepIndex), [activeStepIndex, steps]);
+    const close = (0, import_react49.useCallback)(() => onClose === null || onClose === void 0 ? void 0 : onClose(null), [onClose]);
+    const goToNextStep = (0, import_react49.useCallback)(() => onNext(null, steps), [onNext, steps]);
+    const goToPrevStep = (0, import_react49.useCallback)(() => onBack(null, steps), [onBack, steps]);
+    const footer = (0, import_react49.useMemo)(() => {
       const wizardFooter = (activeStep === null || activeStep === void 0 ? void 0 : activeStep.footer) || currentFooter || initialFooter;
       if (isCustomWizardFooter(wizardFooter)) {
         const customFooter = wizardFooter;
         return typeof customFooter === "function" ? customFooter(activeStep, goToNextStep, goToPrevStep, close) : customFooter;
       }
-      return (0, import_jsx_runtime69.jsx)(WizardFooter, Object.assign({ activeStep, onNext: goToNextStep, onBack: goToPrevStep, onClose: close, isBackDisabled: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.index) === 1 || isWizardSubStep(activeStep) && (activeStep === null || activeStep === void 0 ? void 0 : activeStep.index) === 2 }, wizardFooter));
+      return (0, import_jsx_runtime70.jsx)(WizardFooter, Object.assign({ activeStep, onNext: goToNextStep, onBack: goToPrevStep, onClose: close, isBackDisabled: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.index) === 1 || isWizardSubStep(activeStep) && (activeStep === null || activeStep === void 0 ? void 0 : activeStep.index) === 2 }, wizardFooter));
     }, [currentFooter, initialFooter, activeStep, goToNextStep, goToPrevStep, close]);
-    const getStep = (0, import_react48.useCallback)((stepId) => steps.find((step) => step.id === stepId), [steps]);
-    const setStep = (0, import_react48.useCallback)((step) => setCurrentSteps((prevSteps) => prevSteps.map((prevStep) => {
+    const getStep = (0, import_react49.useCallback)((stepId) => steps.find((step) => step.id === stepId), [steps]);
+    const setStep = (0, import_react49.useCallback)((step) => setCurrentSteps((prevSteps) => prevSteps.map((prevStep) => {
       if (prevStep.id === step.id) {
         return Object.assign(Object.assign({}, prevStep), step);
       }
       return prevStep;
     })), []);
-    return (0, import_jsx_runtime69.jsx)(WizardContext.Provider, { value: {
+    return (0, import_jsx_runtime70.jsx)(WizardContext.Provider, { value: {
       steps,
       activeStep,
       footer,
@@ -36548,15 +36647,15 @@
       goToNextStep,
       goToPrevStep,
       setFooter: setCurrentFooter,
-      goToStepById: (0, import_react48.useCallback)((id) => goToStepById(steps, id), [goToStepById, steps]),
-      goToStepByName: (0, import_react48.useCallback)((name) => goToStepByName(steps, name), [goToStepByName, steps]),
-      goToStepByIndex: (0, import_react48.useCallback)((index) => goToStepByIndex(null, steps, index), [goToStepByIndex, steps]),
+      goToStepById: (0, import_react49.useCallback)((id) => goToStepById(steps, id), [goToStepById, steps]),
+      goToStepByName: (0, import_react49.useCallback)((name) => goToStepByName(steps, name), [goToStepByName, steps]),
+      goToStepByIndex: (0, import_react49.useCallback)((index) => goToStepByIndex(null, steps, index), [goToStepByIndex, steps]),
       shouldFocusContent,
       mainWrapperRef
     }, children });
   };
   WizardContextProvider.displayName = "WizardContextProvider";
-  var useWizardContext = () => (0, import_react48.useContext)(WizardContext);
+  var useWizardContext = () => (0, import_react49.useContext)(WizardContext);
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardStep.js
   var WizardStep = (_a) => {
@@ -36564,7 +36663,7 @@
     const { activeStep, setStep } = useWizardContext();
     const { id, name, body, isDisabled, isHidden: isHidden3, navItem, footer, status } = props;
     const isParentStep = isWizardParentStep(activeStep);
-    (0, import_react49.useEffect)(() => {
+    (0, import_react50.useEffect)(() => {
       setStep(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({
         id,
         name
@@ -36583,12 +36682,12 @@
       activeStep === null || activeStep === void 0 ? void 0 : activeStep.id,
       activeStep === null || activeStep === void 0 ? void 0 : activeStep.isVisited
     ]);
-    return (0, import_jsx_runtime70.jsx)(import_jsx_runtime70.Fragment, { children });
+    return (0, import_jsx_runtime71.jsx)(import_jsx_runtime71.Fragment, { children });
   };
   WizardStep.displayName = "WizardStep";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/utils.js
-  var buildSteps = (children) => import_react50.Children.toArray(children).reduce((acc, child, index) => {
+  var buildSteps = (children) => import_react51.Children.toArray(children).reduce((acc, child, index) => {
     if (isWizardStep(child)) {
       const { props: childProps } = child;
       const { steps: childStepComponents, id } = childProps;
@@ -36606,7 +36705,7 @@
     return acc;
   }, []);
   function isWizardStep(child) {
-    return (0, import_react50.isValidElement)(child) && child.type === WizardStep;
+    return (0, import_react51.isValidElement)(child) && child.type === WizardStep;
   }
   var normalizeStepProps = (_a) => {
     var { children: _children, steps: _steps } = _a, controlStep = __rest(_a, ["children", "steps"]);
@@ -36627,20 +36726,20 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardToggle.js
-  var import_jsx_runtime72 = __toESM(require_jsx_runtime());
-  var import_react52 = __toESM(require_react());
+  var import_jsx_runtime73 = __toESM(require_jsx_runtime());
+  var import_react53 = __toESM(require_react());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardBody.js
-  var import_jsx_runtime71 = __toESM(require_jsx_runtime());
-  var import_react51 = __toESM(require_react());
+  var import_jsx_runtime72 = __toESM(require_jsx_runtime());
+  var import_react52 = __toESM(require_react());
   var WizardBody = (_a) => {
     var { children, className, hasNoPadding = false, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, component = "div" } = _a, props = __rest(_a, ["children", "className", "hasNoPadding", "aria-label", "aria-labelledby", "component"]);
-    const [hasScrollbar, setHasScrollbar] = (0, import_react51.useState)(false);
-    const [previousWidth, setPreviousWidth] = (0, import_react51.useState)(void 0);
+    const [hasScrollbar, setHasScrollbar] = (0, import_react52.useState)(false);
+    const [previousWidth, setPreviousWidth] = (0, import_react52.useState)(void 0);
     const WrapperComponent = component;
-    const { activeStep, shouldFocusContent, mainWrapperRef } = (0, import_react51.useContext)(WizardContext);
+    const { activeStep, shouldFocusContent, mainWrapperRef } = (0, import_react52.useContext)(WizardContext);
     const defaultAriaLabel = ariaLabel || `${activeStep === null || activeStep === void 0 ? void 0 : activeStep.name} content`;
-    (0, import_react51.useEffect)(() => {
+    (0, import_react52.useEffect)(() => {
       const resize = () => {
         if (mainWrapperRef === null || mainWrapperRef === void 0 ? void 0 : mainWrapperRef.current) {
           const { offsetWidth, offsetHeight, scrollHeight } = mainWrapperRef.current;
@@ -36663,7 +36762,7 @@
         observer();
       };
     }, [previousWidth]);
-    return (0, import_jsx_runtime71.jsx)(WrapperComponent, Object.assign({ ref: mainWrapperRef }, shouldFocusContent && { tabIndex: -1 }, component === "div" && hasScrollbar && { role: "region" }, hasScrollbar && { "aria-label": defaultAriaLabel, "aria-labelledby": ariaLabelledBy, tabIndex: 0 }, { className: css(wizard_default.wizardMain, className) }, props, { children: (0, import_jsx_runtime71.jsx)("div", { className: css(wizard_default.wizardMainBody, hasNoPadding && wizard_default.modifiers.noPadding), children }) }));
+    return (0, import_jsx_runtime72.jsx)(WrapperComponent, Object.assign({ ref: mainWrapperRef }, shouldFocusContent && { tabIndex: -1 }, component === "div" && hasScrollbar && { role: "region" }, hasScrollbar && { "aria-label": defaultAriaLabel, "aria-labelledby": ariaLabelledBy, tabIndex: 0 }, { className: css(wizard_default.wizardMain, className) }, props, { children: (0, import_jsx_runtime72.jsx)("div", { className: css(wizard_default.wizardMainBody, hasNoPadding && wizard_default.modifiers.noPadding), children }) }));
   };
   WizardBody.displayName = "WizardBody";
 
@@ -36674,12 +36773,12 @@
     const nonSubSteps = steps.filter((step) => !isWizardSubStep(step));
     const wizardToggleIndex = nonSubSteps.indexOf(parentStep || activeStep) + 1;
     const isActiveStepStatus = activeStep.status;
-    const handleKeyClicks = (0, import_react52.useCallback)((event) => {
+    const handleKeyClicks = (0, import_react53.useCallback)((event) => {
       if (isNavExpanded && event.key === KeyTypes.Escape) {
         toggleNavExpanded === null || toggleNavExpanded === void 0 ? void 0 : toggleNavExpanded(event);
       }
     }, [isNavExpanded, toggleNavExpanded]);
-    (0, import_react52.useEffect)(() => {
+    (0, import_react53.useEffect)(() => {
       const target = typeof document !== "undefined" ? document.body : null;
       target === null || target === void 0 ? void 0 : target.addEventListener("keydown", handleKeyClicks, false);
       return () => {
@@ -36690,30 +36789,30 @@
       var _a;
       const props = ((_a = step.component) === null || _a === void 0 ? void 0 : _a.props) || {};
       const { children, body } = props, propsWithoutChildren = __rest(props, ["children", "body"]);
-      return (0, import_jsx_runtime72.jsxs)(import_react52.Fragment, { children: [(activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === step.id && (0, import_jsx_runtime72.jsx)(WizardBody, Object.assign({}, body, { children })), (0, import_jsx_runtime72.jsx)("div", { style: { display: "none" }, children: (0, import_jsx_runtime72.jsx)(WizardStep, Object.assign({}, propsWithoutChildren)) }, step.id)] }, step.id);
+      return (0, import_jsx_runtime73.jsxs)(import_react53.Fragment, { children: [(activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === step.id && (0, import_jsx_runtime73.jsx)(WizardBody, Object.assign({}, body, { children })), (0, import_jsx_runtime73.jsx)("div", { style: { display: "none" }, children: (0, import_jsx_runtime73.jsx)(WizardStep, Object.assign({}, propsWithoutChildren)) }, step.id)] }, step.id);
     });
-    return (0, import_jsx_runtime72.jsxs)(import_jsx_runtime72.Fragment, { children: [(0, import_jsx_runtime72.jsxs)("button", { onClick: toggleNavExpanded, className: css(wizard_default.wizardToggle, isNavExpanded && "pf-m-expanded"), "aria-label": ariaLabel, "aria-expanded": isNavExpanded, children: [(0, import_jsx_runtime72.jsxs)("span", { className: css(wizard_default.wizardToggleList), children: [(0, import_jsx_runtime72.jsxs)("span", { className: css(wizard_default.wizardToggleListItem, isActiveStepStatus === "error" && wizard_default.modifiers.danger, isActiveStepStatus === "success" && wizard_default.modifiers.success), children: [isActiveStepStatus === "error" && (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleStatusIcon), children: (0, import_jsx_runtime72.jsx)(rh_ui_error_fill_icon_default, {}) }), isActiveStepStatus === "success" && (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleStatusIcon), children: (0, import_jsx_runtime72.jsx)(rh_ui_check_circle_fill_icon_default, {}) }), isActiveStepStatus !== "success" && isActiveStepStatus !== "error" && (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleNum), children: wizardToggleIndex }), " ", (parentStep === null || parentStep === void 0 ? void 0 : parentStep.name) || (activeStep === null || activeStep === void 0 ? void 0 : activeStep.name), isActiveSubStep && (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleSeparator), children: (0, import_jsx_runtime72.jsx)(rh_microns_caret_right_icon_default, {}) })] }), isActiveSubStep && (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleListItem), children: activeStep === null || activeStep === void 0 ? void 0 : activeStep.name })] }), (0, import_jsx_runtime72.jsx)("span", { className: css(wizard_default.wizardToggleIcon), children: (0, import_jsx_runtime72.jsx)(rh_microns_caret_down_icon_default, {}) })] }), (0, import_jsx_runtime72.jsxs)("div", { className: css(wizard_default.wizardOuterWrap), children: [(0, import_jsx_runtime72.jsxs)("div", { className: css(wizard_default.wizardInnerWrap), children: [nav, bodyContent] }), footer] })] });
+    return (0, import_jsx_runtime73.jsxs)(import_jsx_runtime73.Fragment, { children: [(0, import_jsx_runtime73.jsxs)("button", { onClick: toggleNavExpanded, className: css(wizard_default.wizardToggle, isNavExpanded && "pf-m-expanded"), "aria-label": ariaLabel, "aria-expanded": isNavExpanded, children: [(0, import_jsx_runtime73.jsxs)("span", { className: css(wizard_default.wizardToggleList), children: [(0, import_jsx_runtime73.jsxs)("span", { className: css(wizard_default.wizardToggleListItem, isActiveStepStatus === "error" && wizard_default.modifiers.danger, isActiveStepStatus === "success" && wizard_default.modifiers.success), children: [isActiveStepStatus === "error" && (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleStatusIcon), children: (0, import_jsx_runtime73.jsx)(rh_ui_error_fill_icon_default, {}) }), isActiveStepStatus === "success" && (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleStatusIcon), children: (0, import_jsx_runtime73.jsx)(rh_ui_check_circle_fill_icon_default, {}) }), isActiveStepStatus !== "success" && isActiveStepStatus !== "error" && (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleNum), children: wizardToggleIndex }), " ", (parentStep === null || parentStep === void 0 ? void 0 : parentStep.name) || (activeStep === null || activeStep === void 0 ? void 0 : activeStep.name), isActiveSubStep && (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleSeparator), children: (0, import_jsx_runtime73.jsx)(rh_microns_caret_right_icon_default, {}) })] }), isActiveSubStep && (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleListItem), children: activeStep === null || activeStep === void 0 ? void 0 : activeStep.name })] }), (0, import_jsx_runtime73.jsx)("span", { className: css(wizard_default.wizardToggleIcon), children: (0, import_jsx_runtime73.jsx)(rh_microns_caret_down_icon_default, {}) })] }), (0, import_jsx_runtime73.jsxs)("div", { className: css(wizard_default.wizardOuterWrap), children: [(0, import_jsx_runtime73.jsxs)("div", { className: css(wizard_default.wizardInnerWrap), children: [nav, bodyContent] }), footer] })] });
   };
   WizardToggle.displayName = "WizardToggle";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardNavInternal.js
-  var import_jsx_runtime75 = __toESM(require_jsx_runtime());
-  var import_react54 = __toESM(require_react());
+  var import_jsx_runtime76 = __toESM(require_jsx_runtime());
+  var import_react55 = __toESM(require_react());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardNav.js
-  var import_jsx_runtime73 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime74 = __toESM(require_jsx_runtime());
   var WizardNav = (_a) => {
     var { children, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, isExpanded = false, isInnerList = false, className } = _a, props = __rest(_a, ["children", "aria-label", "aria-labelledby", "isExpanded", "isInnerList", "className"]);
     if (isInnerList) {
-      return (0, import_jsx_runtime73.jsx)("ol", Object.assign({ className: css(wizard_default.wizardNavList, className), role: "list" }, props, { children }));
+      return (0, import_jsx_runtime74.jsx)("ol", Object.assign({ className: css(wizard_default.wizardNavList, className), role: "list" }, props, { children }));
     }
-    return (0, import_jsx_runtime73.jsx)("nav", Object.assign({ className: css(wizard_default.wizardNav, isExpanded && wizard_default.modifiers.expanded, className), "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy }, props, { children: (0, import_jsx_runtime73.jsx)("ol", { className: css(wizard_default.wizardNavList), role: "list", children }) }));
+    return (0, import_jsx_runtime74.jsx)("nav", Object.assign({ className: css(wizard_default.wizardNav, isExpanded && wizard_default.modifiers.expanded, className), "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy }, props, { children: (0, import_jsx_runtime74.jsx)("ol", { className: css(wizard_default.wizardNavList), role: "list", children }) }));
   };
   WizardNav.displayName = "WizardNav";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/WizardNavItem.js
-  var import_jsx_runtime74 = __toESM(require_jsx_runtime());
-  var import_react53 = __toESM(require_react());
+  var import_jsx_runtime75 = __toESM(require_jsx_runtime());
+  var import_react54 = __toESM(require_react());
   var WizardNavItem = (_a) => {
     var {
       children = null,
@@ -36734,18 +36833,18 @@
       ouiaSafe = true,
       className
     } = _a, props = __rest(_a, ["children", "content", "isCurrent", "isDisabled", "isVisited", "stepIndex", "onClick", "component", "href", "isExpandable", "id", "status", "target", "ouiaId", "ouiaSafe", "className"]);
-    const [isExpanded, setIsExpanded] = (0, import_react53.useState)(false);
+    const [isExpanded, setIsExpanded] = (0, import_react54.useState)(false);
     const ouiaProps = useOUIAProps(WizardNavItem.displayName, ouiaId, ouiaSafe);
-    (0, import_react53.useEffect)(() => {
+    (0, import_react54.useEffect)(() => {
       setIsExpanded(isCurrent);
     }, [isCurrent]);
     if (NavItemComponent === "a" && !href && true) {
       console.error("WizardNavItem: When using an anchor, please provide an href");
     }
-    return (0, import_jsx_runtime74.jsxs)("li", Object.assign({ className: css(wizard_default.wizardNavItem, isExpandable && wizard_default.modifiers.expandable, isExpandable && isExpanded && wizard_default.modifiers.expanded, className) }, props, { children: [(0, import_jsx_runtime74.jsxs)(NavItemComponent, Object.assign({}, NavItemComponent === "a" ? { tabIndex: isDisabled ? -1 : void 0, href, target } : { disabled: isDisabled }, id && { id: id.toString() }, { onClick: (e) => {
+    return (0, import_jsx_runtime75.jsxs)("li", Object.assign({ className: css(wizard_default.wizardNavItem, isExpandable && wizard_default.modifiers.expandable, isExpandable && isExpanded && wizard_default.modifiers.expanded, className) }, props, { children: [(0, import_jsx_runtime75.jsxs)(NavItemComponent, Object.assign({}, NavItemComponent === "a" ? { tabIndex: isDisabled ? -1 : void 0, href, target } : { disabled: isDisabled }, id && { id: id.toString() }, { onClick: (e) => {
       e.stopPropagation();
       isExpandable ? setIsExpanded(!isExpanded || isCurrent) : onClick === null || onClick === void 0 ? void 0 : onClick(e, stepIndex);
-    }, className: css(wizard_default.wizardNavLink, isCurrent && wizard_default.modifiers.current, isDisabled && wizard_default.modifiers.disabled, status === WizardNavItemStatus.Error && wizard_default.modifiers.danger, status === WizardNavItemStatus.Success && wizard_default.modifiers.success, status === WizardNavItemStatus.Warning && wizard_default.modifiers.warning), "aria-disabled": isDisabled ? true : null, "aria-current": isCurrent && !children ? "step" : false }, isExpandable && { "aria-expanded": isExpanded }, ouiaProps, { children: [status !== WizardNavItemStatus.Default && (0, import_jsx_runtime74.jsxs)(import_jsx_runtime74.Fragment, { children: [(0, import_jsx_runtime74.jsxs)("span", { className: "pf-v6-screen-reader", children: [", ", status] }), (0, import_jsx_runtime74.jsxs)("span", { className: css(wizard_default.wizardNavLinkStatusIcon), children: [status === WizardNavItemStatus.Error && (0, import_jsx_runtime74.jsx)(rh_ui_error_fill_icon_default, {}), status === WizardNavItemStatus.Success && (0, import_jsx_runtime74.jsx)(rh_ui_check_circle_fill_icon_default, {}), status === WizardNavItemStatus.Warning && (0, import_jsx_runtime74.jsx)(rh_ui_warning_fill_icon_default, {})] })] }), (0, import_jsx_runtime74.jsx)("span", { className: css(wizard_default.wizardNavLinkMain), children: isExpandable ? (0, import_jsx_runtime74.jsxs)(import_jsx_runtime74.Fragment, { children: [(0, import_jsx_runtime74.jsx)("span", { className: "pf-v6-c-wizard__nav-link-text", children: content }), (0, import_jsx_runtime74.jsx)("span", { className: css(wizard_default.wizardNavLinkToggle), children: (0, import_jsx_runtime74.jsx)("span", { className: css(wizard_default.wizardNavLinkToggleIcon), children: (0, import_jsx_runtime74.jsx)(rh_microns_caret_down_icon_default, { "aria-label": `${isCurrent ? "Collapse" : "Expand"} step icon` }) }) })] }) : (0, import_jsx_runtime74.jsx)(import_jsx_runtime74.Fragment, { children: content }) })] })), children] }));
+    }, className: css(wizard_default.wizardNavLink, isCurrent && wizard_default.modifiers.current, isDisabled && wizard_default.modifiers.disabled, status === WizardNavItemStatus.Error && wizard_default.modifiers.danger, status === WizardNavItemStatus.Success && wizard_default.modifiers.success, status === WizardNavItemStatus.Warning && wizard_default.modifiers.warning), "aria-disabled": isDisabled ? true : null, "aria-current": isCurrent && !children ? "step" : false }, isExpandable && { "aria-expanded": isExpanded }, ouiaProps, { children: [status !== WizardNavItemStatus.Default && (0, import_jsx_runtime75.jsxs)(import_jsx_runtime75.Fragment, { children: [(0, import_jsx_runtime75.jsxs)("span", { className: "pf-v6-screen-reader", children: [", ", status] }), (0, import_jsx_runtime75.jsxs)("span", { className: css(wizard_default.wizardNavLinkStatusIcon), children: [status === WizardNavItemStatus.Error && (0, import_jsx_runtime75.jsx)(rh_ui_error_fill_icon_default, {}), status === WizardNavItemStatus.Success && (0, import_jsx_runtime75.jsx)(rh_ui_check_circle_fill_icon_default, {}), status === WizardNavItemStatus.Warning && (0, import_jsx_runtime75.jsx)(rh_ui_warning_fill_icon_default, {})] })] }), (0, import_jsx_runtime75.jsx)("span", { className: css(wizard_default.wizardNavLinkMain), children: isExpandable ? (0, import_jsx_runtime75.jsxs)(import_jsx_runtime75.Fragment, { children: [(0, import_jsx_runtime75.jsx)("span", { className: "pf-v6-c-wizard__nav-link-text", children: content }), (0, import_jsx_runtime75.jsx)("span", { className: css(wizard_default.wizardNavLinkToggle), children: (0, import_jsx_runtime75.jsx)("span", { className: css(wizard_default.wizardNavLinkToggleIcon), children: (0, import_jsx_runtime75.jsx)(rh_microns_caret_down_icon_default, { "aria-label": `${isCurrent ? "Collapse" : "Expand"} step icon` }) }) })] }) : (0, import_jsx_runtime75.jsx)(import_jsx_runtime75.Fragment, { children: content }) })] })), children] }));
   };
   WizardNavItem.displayName = "WizardNavItem";
 
@@ -36755,11 +36854,11 @@
     const wizardNavProps = Object.assign({ isExpanded: isNavExpanded, "aria-label": navAriaLabel || (nav === null || nav === void 0 ? void 0 : nav["aria-label"]) || "Wizard steps" }, (nav === null || nav === void 0 ? void 0 : nav["aria-labelledby"]) && {
       "aria-labelledby": nav["aria-labelledby"]
     });
-    return (0, import_jsx_runtime75.jsx)(WizardNav, Object.assign({}, wizardNavProps, { children: steps.map((step, stepIndex) => {
+    return (0, import_jsx_runtime76.jsx)(WizardNav, Object.assign({}, wizardNavProps, { children: steps.map((step, stepIndex) => {
       var _a;
       const hasVisitedNextStep = steps.some((step2) => step2.index > stepIndex + 1 && step2.isVisited);
       const isStepDisabled = step.isDisabled || isVisitRequired && !step.isVisited && !hasVisitedNextStep;
-      const customStepNavItem = isCustomWizardNavItem(step.navItem) && (0, import_jsx_runtime75.jsx)(import_react54.Fragment, { children: typeof step.navItem === "function" ? step.navItem(step, activeStep, steps, goToStepByIndex) : step.navItem }, step.id);
+      const customStepNavItem = isCustomWizardNavItem(step.navItem) && (0, import_jsx_runtime76.jsx)(import_react55.Fragment, { children: typeof step.navItem === "function" ? step.navItem(step, activeStep, steps, goToStepByIndex) : step.navItem }, step.id);
       if (isWizardParentStep(step) && !step.isHidden) {
         let firstSubStepIndex;
         let hasActiveChild = false;
@@ -36767,7 +36866,7 @@
           const subStep = steps.find((step2) => step2.id === subStepId);
           const hasVisitedNextStep2 = steps.some((step2) => step2.index > subStep.index && step2.isVisited);
           const isSubStepDisabled = subStep.isDisabled || isVisitRequired && !subStep.isVisited && !hasVisitedNextStep2;
-          const customSubStepNavItem = isCustomWizardNavItem(subStep.navItem) && (0, import_jsx_runtime75.jsx)(import_react54.Fragment, { children: typeof subStep.navItem === "function" ? subStep.navItem(subStep, activeStep, steps, goToStepByIndex) : subStep.navItem }, subStep.id);
+          const customSubStepNavItem = isCustomWizardNavItem(subStep.navItem) && (0, import_jsx_runtime76.jsx)(import_react55.Fragment, { children: typeof subStep.navItem === "function" ? subStep.navItem(subStep, activeStep, steps, goToStepByIndex) : subStep.navItem }, subStep.id);
           if (subStep.isHidden) {
             return;
           }
@@ -36778,16 +36877,16 @@
             hasActiveChild = true;
           }
           if (!isProgressive || isProgressive && subStep.index <= activeStep.index) {
-            return customSubStepNavItem || (0, import_jsx_runtime75.jsx)(WizardNavItem, Object.assign({ id: subStep.id, content: subStep.name, isCurrent: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === subStep.id, isDisabled: isSubStepDisabled || isStepDisabled, isVisited: subStep.isVisited, stepIndex: subStep.index, onClick: () => goToStepByIndex(subStep.index), status: subStep.status }, subStep.navItem), subStep.id);
+            return customSubStepNavItem || (0, import_jsx_runtime76.jsx)(WizardNavItem, Object.assign({ id: subStep.id, content: subStep.name, isCurrent: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === subStep.id, isDisabled: isSubStepDisabled || isStepDisabled, isVisited: subStep.isVisited, stepIndex: subStep.index, onClick: () => goToStepByIndex(subStep.index), status: subStep.status }, subStep.navItem), subStep.id);
           }
         });
-        const hasEnabledChildren = import_react54.Children.toArray(subNavItems).some((child) => (0, import_react54.isValidElement)(child) && !child.props.isDisabled);
+        const hasEnabledChildren = import_react55.Children.toArray(subNavItems).some((child) => (0, import_react55.isValidElement)(child) && !child.props.isDisabled);
         if (!isProgressive || isProgressive && step.index <= activeStep.index) {
-          return customStepNavItem || (0, import_jsx_runtime75.jsx)(WizardNavItem, Object.assign({ id: step.id, content: step.name, isExpandable: step.isExpandable, isCurrent: hasActiveChild, isDisabled: !hasEnabledChildren || isStepDisabled, isVisited: step.isVisited, stepIndex: firstSubStepIndex, onClick: () => goToStepByIndex(firstSubStepIndex), status: step.status }, step.navItem, { children: (0, import_jsx_runtime75.jsx)(WizardNav, Object.assign({}, wizardNavProps, { isInnerList: true, children: subNavItems })) }), step.id);
+          return customStepNavItem || (0, import_jsx_runtime76.jsx)(WizardNavItem, Object.assign({ id: step.id, content: step.name, isExpandable: step.isExpandable, isCurrent: hasActiveChild, isDisabled: !hasEnabledChildren || isStepDisabled, isVisited: step.isVisited, stepIndex: firstSubStepIndex, onClick: () => goToStepByIndex(firstSubStepIndex), status: step.status }, step.navItem, { children: (0, import_jsx_runtime76.jsx)(WizardNav, Object.assign({}, wizardNavProps, { isInnerList: true, children: subNavItems })) }), step.id);
         }
       }
       if (isWizardBasicStep(step) && !step.isHidden && (!isProgressive || isProgressive && step.index <= activeStep.index)) {
-        return customStepNavItem || (0, import_jsx_runtime75.jsx)(WizardNavItem, Object.assign({ id: step.id, content: step.name, isCurrent: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === step.id, isDisabled: isStepDisabled, isVisited: step.isVisited, stepIndex: step.index, onClick: () => goToStepByIndex(step.index), status: step.status }, step.navItem), step.id);
+        return customStepNavItem || (0, import_jsx_runtime76.jsx)(WizardNavItem, Object.assign({ id: step.id, content: step.name, isCurrent: (activeStep === null || activeStep === void 0 ? void 0 : activeStep.id) === step.id, isDisabled: isStepDisabled, isVisited: step.isVisited, stepIndex: step.index, onClick: () => goToStepByIndex(step.index), status: step.status }, step.navItem), step.id);
       }
     }) }));
   };
@@ -36795,16 +36894,16 @@
   // node_modules/@patternfly/react-core/dist/esm/components/Wizard/Wizard.js
   var Wizard = (_a) => {
     var { children, footer, height, width, className, header, nav, navAriaLabel, startIndex = 1, isVisitRequired = false, isProgressive = false, onStepChange, onSave, onClose, shouldFocusContent = true, isPlain = false, isNoPlainOnGlass = false } = _a, wrapperProps = __rest(_a, ["children", "footer", "height", "width", "className", "header", "nav", "navAriaLabel", "startIndex", "isVisitRequired", "isProgressive", "onStepChange", "onSave", "onClose", "shouldFocusContent", "isPlain", "isNoPlainOnGlass"]);
-    const [activeStepIndex, setActiveStepIndex] = (0, import_react55.useState)(startIndex);
+    const [activeStepIndex, setActiveStepIndex] = (0, import_react56.useState)(startIndex);
     const initialSteps = buildSteps(children);
-    const firstStepRef = (0, import_react55.useRef)(initialSteps[startIndex - 1]);
-    const wrapperRef = (0, import_react55.useRef)(null);
-    (0, import_react55.useEffect)(() => {
+    const firstStepRef = (0, import_react56.useRef)(initialSteps[startIndex - 1]);
+    const wrapperRef = (0, import_react56.useRef)(null);
+    (0, import_react56.useEffect)(() => {
       if (isWizardParentStep(firstStepRef.current)) {
         setActiveStepIndex(startIndex + 1);
       }
     }, [startIndex]);
-    (0, import_react55.useEffect)(() => {
+    (0, import_react56.useEffect)(() => {
       if (activeStepIndex > initialSteps.length) {
         setActiveStepIndex(startIndex);
       }
@@ -36856,40 +36955,40 @@
         setActiveStepIndex(stepIndex);
       }
     };
-    return (0, import_jsx_runtime76.jsx)(WizardContextProvider, { steps: initialSteps, activeStepIndex, footer, onNext: goToNextStep, onBack: goToPrevStep, onClose, goToStepById, goToStepByName, goToStepByIndex, shouldFocusContent, mainWrapperRef: wrapperRef, children: (0, import_jsx_runtime76.jsxs)("div", Object.assign({ className: css(wizard_default.wizard, isPlain && wizard_default.modifiers.plain, isNoPlainOnGlass && wizard_default.modifiers.noPlainOnGlass, className), style: Object.assign(Object.assign({}, height ? { [c_wizard_Height_default.name]: typeof height === "number" ? `${height}px` : height } : {}), width ? { width } : {}) }, wrapperProps, { children: [header, (0, import_jsx_runtime76.jsx)(WizardInternal, { nav, navAriaLabel, isVisitRequired, isProgressive })] })) });
+    return (0, import_jsx_runtime77.jsx)(WizardContextProvider, { steps: initialSteps, activeStepIndex, footer, onNext: goToNextStep, onBack: goToPrevStep, onClose, goToStepById, goToStepByName, goToStepByIndex, shouldFocusContent, mainWrapperRef: wrapperRef, children: (0, import_jsx_runtime77.jsxs)("div", Object.assign({ className: css(wizard_default.wizard, isPlain && wizard_default.modifiers.plain, isNoPlainOnGlass && wizard_default.modifiers.noPlainOnGlass, className), style: Object.assign(Object.assign({}, height ? { [c_wizard_Height_default.name]: typeof height === "number" ? `${height}px` : height } : {}), width ? { width } : {}) }, wrapperProps, { children: [header, (0, import_jsx_runtime77.jsx)(WizardInternal, { nav, navAriaLabel, isVisitRequired, isProgressive })] })) });
   };
   var WizardInternal = ({ nav, navAriaLabel, isVisitRequired, isProgressive }) => {
     const { activeStep, steps, footer, goToStepByIndex } = useWizardContext();
-    const [isNavExpanded, setIsNavExpanded] = (0, import_react55.useState)(false);
-    const wizardNav = (0, import_react55.useMemo)(() => {
+    const [isNavExpanded, setIsNavExpanded] = (0, import_react56.useState)(false);
+    const wizardNav = (0, import_react56.useMemo)(() => {
       if (isCustomWizardNav(nav)) {
         return typeof nav === "function" ? nav(isNavExpanded, steps, activeStep, goToStepByIndex) : nav;
       }
-      return (0, import_jsx_runtime76.jsx)(WizardNavInternal, { nav, navAriaLabel, isNavExpanded, isVisitRequired, isProgressive });
+      return (0, import_jsx_runtime77.jsx)(WizardNavInternal, { nav, navAriaLabel, isNavExpanded, isVisitRequired, isProgressive });
     }, [activeStep, isVisitRequired, isProgressive, goToStepByIndex, isNavExpanded, nav, navAriaLabel, steps]);
-    return (0, import_jsx_runtime76.jsx)(WizardToggle, { nav: wizardNav, footer, steps, activeStep, isNavExpanded, toggleNavExpanded: () => setIsNavExpanded((prevIsExpanded) => !prevIsExpanded) });
+    return (0, import_jsx_runtime77.jsx)(WizardToggle, { nav: wizardNav, footer, steps, activeStep, isNavExpanded, toggleNavExpanded: () => setIsNavExpanded((prevIsExpanded) => !prevIsExpanded) });
   };
   Wizard.displayName = "Wizard";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/ActionsColumn.js
-  var import_jsx_runtime82 = __toESM(require_jsx_runtime());
-  var import_react59 = __toESM(require_react());
+  var import_jsx_runtime83 = __toESM(require_jsx_runtime());
   var import_react60 = __toESM(require_react());
+  var import_react61 = __toESM(require_react());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Dropdown/Dropdown.js
-  var import_jsx_runtime77 = __toESM(require_jsx_runtime());
-  var import_react56 = __toESM(require_react());
+  var import_jsx_runtime78 = __toESM(require_jsx_runtime());
+  var import_react57 = __toESM(require_react());
   var DropdownBase = (_a) => {
     var { children, className, onSelect, isOpen, toggle, shouldFocusToggleOnSelect = false, onOpenChange, onToggleKeydown, isPlain, isScrollable, innerRef, ouiaId, ouiaSafe = true, zIndex = 9999, popperProps, onOpenChangeKeys = ["Escape", "Tab"], menuHeight, maxMenuHeight, shouldFocusFirstItemOnOpen = false, shouldPreventScrollOnItemFocus = true, focusTimeoutDelay = 0, containerOuiaId, containerOuiaSafe = true, containerComponent = "span" } = _a, props = __rest(_a, ["children", "className", "onSelect", "isOpen", "toggle", "shouldFocusToggleOnSelect", "onOpenChange", "onToggleKeydown", "isPlain", "isScrollable", "innerRef", "ouiaId", "ouiaSafe", "zIndex", "popperProps", "onOpenChangeKeys", "menuHeight", "maxMenuHeight", "shouldFocusFirstItemOnOpen", "shouldPreventScrollOnItemFocus", "focusTimeoutDelay", "containerOuiaId", "containerOuiaSafe", "containerComponent"]);
-    const localMenuRef = (0, import_react56.useRef)(void 0);
-    const localToggleRef = (0, import_react56.useRef)(void 0);
+    const localMenuRef = (0, import_react57.useRef)(void 0);
+    const localToggleRef = (0, import_react57.useRef)(void 0);
     const ouiaProps = useOUIAProps(Dropdown.displayName, ouiaId, ouiaSafe);
     const ContainerComponent = containerComponent;
     const containerOuiaProps = useOUIAProps("Dropdown container", containerOuiaId, containerOuiaSafe);
     const menuRef = innerRef || localMenuRef;
     const toggleRef = typeof toggle === "function" || typeof toggle !== "function" && !toggle.toggleRef ? localToggleRef : toggle === null || toggle === void 0 ? void 0 : toggle.toggleRef;
-    const prevIsOpen = (0, import_react56.useRef)(isOpen);
-    (0, import_react56.useEffect)(() => {
+    const prevIsOpen = (0, import_react57.useRef)(isOpen);
+    (0, import_react57.useEffect)(() => {
       if (prevIsOpen.current === false && isOpen === true && shouldFocusFirstItemOnOpen) {
         setTimeout(() => {
           var _a2;
@@ -36899,7 +36998,7 @@
       }
       prevIsOpen.current = isOpen;
     }, [isOpen]);
-    (0, import_react56.useEffect)(() => {
+    (0, import_react57.useEffect)(() => {
       const handleMenuKeys = (event) => {
         var _a2, _b, _c, _d;
         if (isOpen && onOpenChange && (((_a2 = menuRef.current) === null || _a2 === void 0 ? void 0 : _a2.contains(event.target)) || ((_b = toggleRef.current) === null || _b === void 0 ? void 0 : _b.contains(event.target)))) {
@@ -36942,38 +37041,38 @@
       focusTimeoutDelay
     ]);
     const scrollable = maxMenuHeight !== void 0 || menuHeight !== void 0 || isScrollable;
-    const menu = (0, import_jsx_runtime77.jsx)(Menu, Object.assign({ className: css(className), ref: menuRef, onSelect: (event, value) => {
+    const menu = (0, import_jsx_runtime78.jsx)(Menu, Object.assign({ className: css(className), ref: menuRef, onSelect: (event, value) => {
       var _a2;
       onSelect && onSelect(event, value);
       shouldFocusToggleOnSelect && ((_a2 = toggleRef.current) === null || _a2 === void 0 ? void 0 : _a2.focus());
-    }, isPlain, isScrollable: scrollable }, props, ouiaProps, { children: (0, import_jsx_runtime77.jsx)(MenuContent, { menuHeight, maxMenuHeight, children }) }));
-    const popper2 = (0, import_jsx_runtime77.jsx)(Popper, Object.assign({ trigger: typeof toggle === "function" ? toggle(toggleRef) : toggle.toggleNode, triggerRef: toggleRef, popper: menu, popperRef: menuRef, isVisible: isOpen, zIndex }, popperProps));
-    return containerOuiaId ? (0, import_jsx_runtime77.jsx)(ContainerComponent, Object.assign({}, containerOuiaProps, { children: popper2 })) : popper2;
+    }, isPlain, isScrollable: scrollable }, props, ouiaProps, { children: (0, import_jsx_runtime78.jsx)(MenuContent, { menuHeight, maxMenuHeight, children }) }));
+    const popper2 = (0, import_jsx_runtime78.jsx)(Popper, Object.assign({ trigger: typeof toggle === "function" ? toggle(toggleRef) : toggle.toggleNode, triggerRef: toggleRef, popper: menu, popperRef: menuRef, isVisible: isOpen, zIndex }, popperProps));
+    return containerOuiaId ? (0, import_jsx_runtime78.jsx)(ContainerComponent, Object.assign({}, containerOuiaProps, { children: popper2 })) : popper2;
   };
-  var Dropdown = (0, import_react56.forwardRef)((props, ref) => (0, import_jsx_runtime77.jsx)(DropdownBase, Object.assign({ innerRef: ref }, props)));
+  var Dropdown = (0, import_react57.forwardRef)((props, ref) => (0, import_jsx_runtime78.jsx)(DropdownBase, Object.assign({ innerRef: ref }, props)));
   Dropdown.displayName = "Dropdown";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Dropdown/DropdownItem.js
-  var import_jsx_runtime78 = __toESM(require_jsx_runtime());
-  var import_react57 = __toESM(require_react());
+  var import_jsx_runtime79 = __toESM(require_jsx_runtime());
+  var import_react58 = __toESM(require_react());
   var DropdownItemBase = (_a) => {
     var { children, className, description, isDisabled, isAriaDisabled, value, onClick, ouiaId, ouiaSafe, innerRef, tooltipProps } = _a, props = __rest(_a, ["children", "className", "description", "isDisabled", "isAriaDisabled", "value", "onClick", "ouiaId", "ouiaSafe", "innerRef", "tooltipProps"]);
     const ouiaProps = useOUIAProps(DropdownItem.displayName, ouiaId, ouiaSafe);
-    return (0, import_jsx_runtime78.jsx)(MenuItem, Object.assign({ className: css(className), description, isDisabled, isAriaDisabled, itemId: value, onClick, tooltipProps, ref: innerRef }, ouiaProps, props, { children }));
+    return (0, import_jsx_runtime79.jsx)(MenuItem, Object.assign({ className: css(className), description, isDisabled, isAriaDisabled, itemId: value, onClick, tooltipProps, ref: innerRef }, ouiaProps, props, { children }));
   };
-  var DropdownItem = (0, import_react57.forwardRef)((props, ref) => (0, import_jsx_runtime78.jsx)(DropdownItemBase, Object.assign({}, props, { innerRef: ref })));
+  var DropdownItem = (0, import_react58.forwardRef)((props, ref) => (0, import_jsx_runtime79.jsx)(DropdownItemBase, Object.assign({}, props, { innerRef: ref })));
   DropdownItem.displayName = "DropdownItem";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Dropdown/DropdownList.js
-  var import_jsx_runtime79 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime80 = __toESM(require_jsx_runtime());
   var DropdownList = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime79.jsx)(MenuList, Object.assign({ className: css(className) }, props, { children }));
+    return (0, import_jsx_runtime80.jsx)(MenuList, Object.assign({ className: css(className) }, props, { children }));
   };
   DropdownList.displayName = "DropdownList";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Divider/Divider.js
-  var import_jsx_runtime80 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime81 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-styles/css/components/Divider/divider.mjs
   var divider_default = {
@@ -37062,14 +37161,14 @@
   })(DividerVariant || (DividerVariant = {}));
   var Divider = (_a) => {
     var { className, component = DividerVariant.hr, inset, orientation, role = "separator" } = _a, props = __rest(_a, ["className", "component", "inset", "orientation", "role"]);
-    const Component10 = component;
-    return (0, import_jsx_runtime80.jsx)(Component10, Object.assign({ className: css(divider_default.divider, formatBreakpointMods(inset, divider_default), formatBreakpointMods(orientation, divider_default), className) }, component !== "hr" && { role }, props));
+    const Component11 = component;
+    return (0, import_jsx_runtime81.jsx)(Component11, Object.assign({ className: css(divider_default.divider, formatBreakpointMods(inset, divider_default), formatBreakpointMods(orientation, divider_default), className) }, component !== "hr" && { role }, props));
   };
   Divider.displayName = "Divider";
 
   // node_modules/@patternfly/react-core/dist/esm/components/MenuToggle/MenuToggle.js
-  var import_jsx_runtime81 = __toESM(require_jsx_runtime());
-  var import_react58 = __toESM(require_react());
+  var import_jsx_runtime82 = __toESM(require_jsx_runtime());
+  var import_react59 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/MenuToggle/menu-toggle.mjs
   var menu_toggle_default = {
@@ -37126,7 +37225,7 @@
     MenuToggleSize2["default"] = "default";
     MenuToggleSize2["sm"] = "sm";
   })(MenuToggleSize || (MenuToggleSize = {}));
-  var MenuToggleBase = class extends import_react58.Component {
+  var MenuToggleBase = class extends import_react59.Component {
     constructor() {
       super(...arguments);
       this.displayName = "MenuToggleBase";
@@ -37136,33 +37235,33 @@
       const isPlain = variant === "plain";
       const isPlainText = variant === "plainText";
       const isTypeahead = variant === "typeahead";
-      return (0, import_jsx_runtime81.jsx)(SSRSafeIds, { prefix: "pf-", ouiaComponentType: `MenuToggle${variant ? `-${variant}` : ""}`, children: (_, generatedOuiaId) => {
+      return (0, import_jsx_runtime82.jsx)(SSRSafeIds, { prefix: "pf-", ouiaComponentType: `MenuToggle${variant ? `-${variant}` : ""}`, children: (_, generatedOuiaId) => {
         const ouiaProps = getOUIAProps(MenuToggle.displayName, ouiaId !== null && ouiaId !== void 0 ? ouiaId : generatedOuiaId, ouiaSafe);
         let _statusIcon = statusIcon;
         if (!statusIcon) {
           switch (status) {
             case MenuToggleStatus.success:
-              _statusIcon = (0, import_jsx_runtime81.jsx)(rh_ui_check_circle_fill_icon_default, {});
+              _statusIcon = (0, import_jsx_runtime82.jsx)(rh_ui_check_circle_fill_icon_default, {});
               break;
             case MenuToggleStatus.warning:
-              _statusIcon = (0, import_jsx_runtime81.jsx)(rh_ui_warning_fill_icon_default, {});
+              _statusIcon = (0, import_jsx_runtime82.jsx)(rh_ui_warning_fill_icon_default, {});
               break;
             case MenuToggleStatus.danger:
-              _statusIcon = (0, import_jsx_runtime81.jsx)(rh_ui_error_fill_icon_default, {});
+              _statusIcon = (0, import_jsx_runtime82.jsx)(rh_ui_error_fill_icon_default, {});
               break;
           }
         }
-        const toggleControls = (0, import_jsx_runtime81.jsxs)("span", { className: css(menu_toggle_default.menuToggleControls), children: [status !== void 0 && (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleStatusIcon), children: _statusIcon }), (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleToggleIcon), children: (0, import_jsx_runtime81.jsx)(rh_microns_caret_down_fill_icon_default, {}) })] });
-        const content = (0, import_jsx_runtime81.jsxs)(import_jsx_runtime81.Fragment, { children: [(icon || isSettings) && (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleIcon), children: isSettings ? (0, import_jsx_runtime81.jsx)(rh_ui_settings_fill_icon_default, {}) : icon }), isTypeahead ? children : children && (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleText), children }), (0, import_react58.isValidElement)(badge) && (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleCount), children: badge }), isTypeahead ? (0, import_jsx_runtime81.jsx)("button", Object.assign({ type: "button", className: css(menu_toggle_default.menuToggleButton), "aria-expanded": isExpanded, onClick, "aria-label": ariaLabel || "Menu toggle", tabIndex: -1 }, ouiaProps, { children: toggleControls })) : !isPlain && toggleControls] });
+        const toggleControls = (0, import_jsx_runtime82.jsxs)("span", { className: css(menu_toggle_default.menuToggleControls), children: [status !== void 0 && (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleStatusIcon), children: _statusIcon }), (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleToggleIcon), children: (0, import_jsx_runtime82.jsx)(rh_microns_caret_down_fill_icon_default, {}) })] });
+        const content = (0, import_jsx_runtime82.jsxs)(import_jsx_runtime82.Fragment, { children: [(icon || isSettings) && (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleIcon), children: isSettings ? (0, import_jsx_runtime82.jsx)(rh_ui_settings_fill_icon_default, {}) : icon }), isTypeahead ? children : children && (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleText), children }), (0, import_react59.isValidElement)(badge) && (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleCount), children: badge }), isTypeahead ? (0, import_jsx_runtime82.jsx)("button", Object.assign({ type: "button", className: css(menu_toggle_default.menuToggleButton), "aria-expanded": isExpanded, onClick, "aria-label": ariaLabel || "Menu toggle", tabIndex: -1 }, ouiaProps, { children: toggleControls })) : !isPlain && toggleControls] });
         const commonStyles = css(menu_toggle_default.menuToggle, isExpanded && menu_toggle_default.modifiers.expanded, variant === "primary" && menu_toggle_default.modifiers.primary, variant === "secondary" && menu_toggle_default.modifiers.secondary, status && menu_toggle_default.modifiers[status], (isPlain || isPlainText) && menu_toggle_default.modifiers.plain, isPlainText && menu_toggle_default.modifiers.text, isFullHeight && menu_toggle_default.modifiers.fullHeight, isFullWidth && menu_toggle_default.modifiers.fullWidth, isInForm && menu_toggle_default.modifiers.form, isDisabled && menu_toggle_default.modifiers.disabled, isPlaceholder && menu_toggle_default.modifiers.placeholder, isSettings && menu_toggle_default.modifiers.settings, isDocked && menu_toggle_default.modifiers.docked, isDocked && isTextExpanded && menu_toggle_default.modifiers.textExpanded, size === MenuToggleSize.sm && menu_toggle_default.modifiers.small, className);
         const componentProps = Object.assign(Object.assign({ children: content }, isDisabled && { disabled: true }), otherProps);
         if (isTypeahead) {
-          return (0, import_jsx_runtime81.jsx)("div", Object.assign({ ref: innerRef, className: css(commonStyles, menu_toggle_default.modifiers.typeahead) }, componentProps));
+          return (0, import_jsx_runtime82.jsx)("div", Object.assign({ ref: innerRef, className: css(commonStyles, menu_toggle_default.modifiers.typeahead) }, componentProps));
         }
         if (splitButtonItems) {
-          return (0, import_jsx_runtime81.jsxs)("div", { ref: innerRef, className: css(commonStyles, menu_toggle_default.modifiers.splitButton), children: [splitButtonItems, (0, import_jsx_runtime81.jsxs)("button", Object.assign({ className: css(menu_toggle_default.menuToggleButton, children && menu_toggle_default.modifiers.text), type: "button", "aria-expanded": isExpanded, "aria-label": ariaLabel, disabled: isDisabled, onClick }, otherProps, ouiaProps, { children: [children && (0, import_jsx_runtime81.jsx)("span", { className: css(menu_toggle_default.menuToggleText), children }), toggleControls] }))] });
+          return (0, import_jsx_runtime82.jsxs)("div", { ref: innerRef, className: css(commonStyles, menu_toggle_default.modifiers.splitButton), children: [splitButtonItems, (0, import_jsx_runtime82.jsxs)("button", Object.assign({ className: css(menu_toggle_default.menuToggleButton, children && menu_toggle_default.modifiers.text), type: "button", "aria-expanded": isExpanded, "aria-label": ariaLabel, disabled: isDisabled, onClick }, otherProps, ouiaProps, { children: [children && (0, import_jsx_runtime82.jsx)("span", { className: css(menu_toggle_default.menuToggleText), children }), toggleControls] }))] });
         }
-        return (0, import_jsx_runtime81.jsx)("button", Object.assign({ className: css(commonStyles, isCircle && isPlain && menu_toggle_default.modifiers.circle), type: "button", "aria-label": ariaLabel, "aria-expanded": isExpanded, ref: innerRef, disabled: isDisabled, onClick }, componentProps, ouiaProps));
+        return (0, import_jsx_runtime82.jsx)("button", Object.assign({ className: css(commonStyles, isCircle && isPlain && menu_toggle_default.modifiers.circle), type: "button", "aria-label": ariaLabel, "aria-expanded": isExpanded, ref: innerRef, disabled: isDisabled, onClick }, componentProps, ouiaProps));
       } });
     }
   };
@@ -37180,7 +37279,7 @@
     size: "default",
     ouiaSafe: true
   };
-  var MenuToggle = (0, import_react58.forwardRef)((props, ref) => (0, import_jsx_runtime81.jsx)(MenuToggleBase, Object.assign({ innerRef: ref }, props)));
+  var MenuToggle = (0, import_react59.forwardRef)((props, ref) => (0, import_jsx_runtime82.jsx)(MenuToggleBase, Object.assign({ innerRef: ref }, props)));
   MenuToggle.displayName = "MenuToggle";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/ActionsColumn.js
@@ -37189,7 +37288,7 @@
       position: "end",
       direction: "down"
     }, innerRef, firstActionItemRef, isOnOpenChangeDisabled = false } = _a, props = __rest(_a, ["items", "isDisabled", "rowData", "extraData", "actionsToggle", "popperProps", "innerRef", "firstActionItemRef", "isOnOpenChangeDisabled"]);
-    const [isOpen, setIsOpen] = (0, import_react60.useState)(false);
+    const [isOpen, setIsOpen] = (0, import_react61.useState)(false);
     const onToggle = () => {
       setIsOpen(!isOpen);
     };
@@ -37199,31 +37298,31 @@
         onClick(event, extraData && extraData.rowIndex, rowData, extraData);
       }
     };
-    return (0, import_jsx_runtime82.jsxs)(import_react60.Fragment, { children: [items.filter((item) => item.isOutsideDropdown).map((_a2, key) => {
+    return (0, import_jsx_runtime83.jsxs)(import_react61.Fragment, { children: [items.filter((item) => item.isOutsideDropdown).map((_a2, key) => {
       var { title, itemKey, onClick, isOutsideDropdown } = _a2, props2 = __rest(_a2, ["title", "itemKey", "onClick", "isOutsideDropdown"]);
-      return typeof title === "string" ? (0, import_react59.createElement)(Button, Object.assign({ onClick: (event) => onActionClick(event, onClick) }, props2, { isDisabled, key: itemKey || `outside_dropdown_${key}`, "data-key": itemKey || `outside_dropdown_${key}` }), title) : (0, import_react60.cloneElement)(title, Object.assign({ onClick, isDisabled }, props2));
-    }), (0, import_jsx_runtime82.jsx)(Dropdown, Object.assign({ isOpen, onOpenChange: !isOnOpenChangeDisabled ? (isOpen2) => setIsOpen(isOpen2) : void 0, toggle: (toggleRef) => actionsToggle ? actionsToggle({ onToggle, isOpen, isDisabled, toggleRef }) : (0, import_jsx_runtime82.jsx)(MenuToggle, { "aria-label": "Kebab toggle", ref: toggleRef, onClick: onToggle, isExpanded: isOpen, isDisabled, variant: "plain", icon: (0, import_jsx_runtime82.jsx)(rh_ui_ellipsis_vertical_fill_icon_default, {}) }) }, rowData && rowData.actionProps, { ref: innerRef }, props, { popperProps, children: (0, import_jsx_runtime82.jsx)(DropdownList, { children: items.filter((item) => !item.isOutsideDropdown).map((_a2, index) => {
+      return typeof title === "string" ? (0, import_react60.createElement)(Button, Object.assign({ onClick: (event) => onActionClick(event, onClick) }, props2, { isDisabled, key: itemKey || `outside_dropdown_${key}`, "data-key": itemKey || `outside_dropdown_${key}` }), title) : (0, import_react61.cloneElement)(title, Object.assign({ onClick, isDisabled }, props2));
+    }), (0, import_jsx_runtime83.jsx)(Dropdown, Object.assign({ isOpen, onOpenChange: !isOnOpenChangeDisabled ? (isOpen2) => setIsOpen(isOpen2) : void 0, toggle: (toggleRef) => actionsToggle ? actionsToggle({ onToggle, isOpen, isDisabled, toggleRef }) : (0, import_jsx_runtime83.jsx)(MenuToggle, { "aria-label": "Kebab toggle", ref: toggleRef, onClick: onToggle, isExpanded: isOpen, isDisabled, variant: "plain", icon: (0, import_jsx_runtime83.jsx)(rh_ui_ellipsis_vertical_fill_icon_default, {}) }) }, rowData && rowData.actionProps, { ref: innerRef }, props, { popperProps, children: (0, import_jsx_runtime83.jsx)(DropdownList, { children: items.filter((item) => !item.isOutsideDropdown).map((_a2, index) => {
       var { title, itemKey, onClick, tooltipProps, isSeparator, shouldCloseOnClick = true } = _a2, props2 = __rest(_a2, ["title", "itemKey", "onClick", "tooltipProps", "isSeparator", "shouldCloseOnClick"]);
       if (isSeparator) {
-        return (0, import_jsx_runtime82.jsx)(Divider, { "data-key": itemKey || index }, itemKey || index);
+        return (0, import_jsx_runtime83.jsx)(Divider, { "data-key": itemKey || index }, itemKey || index);
       }
-      const item = (0, import_react59.createElement)(DropdownItem, Object.assign({ onClick: (event) => {
+      const item = (0, import_react60.createElement)(DropdownItem, Object.assign({ onClick: (event) => {
         onActionClick(event, onClick);
         shouldCloseOnClick && onToggle();
       } }, props2, { key: itemKey || index, "data-key": itemKey || index, ref: index === 0 ? firstActionItemRef : void 0 }), title);
       if (tooltipProps === null || tooltipProps === void 0 ? void 0 : tooltipProps.content) {
-        return (0, import_jsx_runtime82.jsx)(Tooltip, Object.assign({}, tooltipProps, { children: item }), itemKey || index);
+        return (0, import_jsx_runtime83.jsx)(Tooltip, Object.assign({}, tooltipProps, { children: item }), itemKey || index);
       } else {
         return item;
       }
     }) }) }))] });
   };
-  var ActionsColumn = (0, import_react60.forwardRef)((props, ref) => (0, import_jsx_runtime82.jsx)(ActionsColumnBase, Object.assign({}, props, { innerRef: ref })));
+  var ActionsColumn = (0, import_react61.forwardRef)((props, ref) => (0, import_jsx_runtime83.jsx)(ActionsColumnBase, Object.assign({}, props, { innerRef: ref })));
   ActionsColumn.displayName = "ActionsColumn";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/CollapseColumn.js
-  var import_jsx_runtime83 = __toESM(require_jsx_runtime());
-  var import_react61 = __toESM(require_react());
+  var import_jsx_runtime84 = __toESM(require_jsx_runtime());
+  var import_react62 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Table/table.mjs
   var table_default = {
@@ -37331,15 +37430,15 @@
   // node_modules/@patternfly/react-table/dist/esm/components/Table/CollapseColumn.js
   var CollapseColumn = (_a) => {
     var { className = "", children = null, isOpen, onToggle, variant } = _a, props = __rest(_a, ["className", "children", "isOpen", "onToggle", "variant"]);
-    return (0, import_jsx_runtime83.jsxs)(import_react61.Fragment, { children: [isOpen !== void 0 && (0, import_jsx_runtime83.jsx)(Button, Object.assign({ className: css(className, isOpen && table_default.modifiers.expanded), size: variant === "compact" ? "sm" : void 0 }, props, { variant: "plain", "aria-label": props["aria-label"] || "Details", onClick: onToggle, "aria-expanded": isOpen, icon: (0, import_jsx_runtime83.jsx)("div", { className: css(table_default.tableToggleIcon), children: (0, import_jsx_runtime83.jsx)(rh_microns_caret_down_icon_default, {}) }) })), children] });
+    return (0, import_jsx_runtime84.jsxs)(import_react62.Fragment, { children: [isOpen !== void 0 && (0, import_jsx_runtime84.jsx)(Button, Object.assign({ className: css(className, isOpen && table_default.modifiers.expanded), size: variant === "compact" ? "sm" : void 0 }, props, { variant: "plain", "aria-label": props["aria-label"] || "Details", onClick: onToggle, "aria-expanded": isOpen, icon: (0, import_jsx_runtime84.jsx)("div", { className: css(table_default.tableToggleIcon), children: (0, import_jsx_runtime84.jsx)(rh_microns_caret_down_icon_default, {}) }) })), children] });
   };
   CollapseColumn.displayName = "CollapseColumn";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/DraggableCell.js
-  var import_jsx_runtime84 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime85 = __toESM(require_jsx_runtime());
   var DraggableCell = (_a) => {
     var { className, onClick, "aria-label": ariaLabel, id } = _a, props = __rest(_a, ["className", "onClick", "aria-label", "id"]);
-    return (0, import_jsx_runtime84.jsx)(Button, Object.assign({ id, variant: "plain", className, type: "button", "aria-label": ariaLabel || `Draggable row draggable button`, onClick }, props, { icon: (0, import_jsx_runtime84.jsx)(rh_ui_grip_vertical_fill_icon_default, {}) }));
+    return (0, import_jsx_runtime85.jsx)(Button, Object.assign({ id, variant: "plain", className, type: "button", "aria-label": ariaLabel || `Draggable row draggable button`, onClick }, props, { icon: (0, import_jsx_runtime85.jsx)(rh_ui_grip_vertical_fill_icon_default, {}) }));
   };
   DraggableCell.displayName = "DraggableCell";
 
@@ -37368,11 +37467,11 @@
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/HeaderCellInfoWrapper.js
-  var import_jsx_runtime95 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime96 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/Popover.js
-  var import_jsx_runtime93 = __toESM(require_jsx_runtime());
-  var import_react63 = __toESM(require_react());
+  var import_jsx_runtime94 = __toESM(require_jsx_runtime());
+  var import_react64 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Popover/popover.mjs
   var popover_default = {
@@ -37410,73 +37509,73 @@
   };
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverContext.js
-  var import_react62 = __toESM(require_react());
-  var PopoverContext = (0, import_react62.createContext)({});
+  var import_react63 = __toESM(require_react());
+  var PopoverContext = (0, import_react63.createContext)({});
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverContent.js
-  var import_jsx_runtime85 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime86 = __toESM(require_jsx_runtime());
   var PopoverContent = (_a) => {
     var { className = null, children } = _a, props = __rest(_a, ["className", "children"]);
-    return (0, import_jsx_runtime85.jsx)("div", Object.assign({ className: css(popover_default.popoverContent, className) }, props, { children }));
+    return (0, import_jsx_runtime86.jsx)("div", Object.assign({ className: css(popover_default.popoverContent, className) }, props, { children }));
   };
   PopoverContent.displayName = "PopoverContent";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverBody.js
-  var import_jsx_runtime86 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime87 = __toESM(require_jsx_runtime());
   var PopoverBody = (_a) => {
     var { children, id, className } = _a, props = __rest(_a, ["children", "id", "className"]);
-    return (0, import_jsx_runtime86.jsx)("div", Object.assign({ className: css(popover_default.popoverBody, className), id }, props, { children }));
+    return (0, import_jsx_runtime87.jsx)("div", Object.assign({ className: css(popover_default.popoverBody, className), id }, props, { children }));
   };
   PopoverBody.displayName = "PopoverBody";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverHeader.js
-  var import_jsx_runtime89 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime90 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverHeaderIcon.js
-  var import_jsx_runtime87 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime88 = __toESM(require_jsx_runtime());
   var PopoverHeaderIcon = (_a) => {
     var { children, className } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime87.jsx)("span", Object.assign({ className: css(popover_default.popoverTitleIcon, className) }, props, { children }));
+    return (0, import_jsx_runtime88.jsx)("span", Object.assign({ className: css(popover_default.popoverTitleIcon, className) }, props, { children }));
   };
   PopoverHeaderIcon.displayName = "PopoverHeaderIcon";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverHeaderText.js
-  var import_jsx_runtime88 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime89 = __toESM(require_jsx_runtime());
   var PopoverHeaderText = (_a) => {
     var { children, className, headingLevel } = _a, props = __rest(_a, ["children", "className", "headingLevel"]);
     const HeadingLevel = headingLevel;
-    return (0, import_jsx_runtime88.jsx)(HeadingLevel, Object.assign({ className: css(popover_default.popoverTitleText, className) }, props, { children }));
+    return (0, import_jsx_runtime89.jsx)(HeadingLevel, Object.assign({ className: css(popover_default.popoverTitleText, className) }, props, { children }));
   };
   PopoverHeaderText.displayName = "PopoverHeaderText";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverHeader.js
   var PopoverHeader = (_a) => {
     var { children, icon, className, titleHeadingLevel = "h6", alertSeverityVariant, id, alertSeverityScreenReaderText } = _a, props = __rest(_a, ["children", "icon", "className", "titleHeadingLevel", "alertSeverityVariant", "id", "alertSeverityScreenReaderText"]);
-    return (0, import_jsx_runtime89.jsx)("header", Object.assign({ className: css(popover_default.popoverHeader, className) }, props, { children: (0, import_jsx_runtime89.jsxs)("div", { className: css(popover_default.popoverTitle), id, children: [icon && (0, import_jsx_runtime89.jsx)(PopoverHeaderIcon, { children: icon }), (0, import_jsx_runtime89.jsxs)(PopoverHeaderText, { headingLevel: titleHeadingLevel, children: [alertSeverityVariant && alertSeverityScreenReaderText && (0, import_jsx_runtime89.jsx)("span", { className: "pf-v6-screen-reader", children: alertSeverityScreenReaderText }), children] })] }) }));
+    return (0, import_jsx_runtime90.jsx)("header", Object.assign({ className: css(popover_default.popoverHeader, className) }, props, { children: (0, import_jsx_runtime90.jsxs)("div", { className: css(popover_default.popoverTitle), id, children: [icon && (0, import_jsx_runtime90.jsx)(PopoverHeaderIcon, { children: icon }), (0, import_jsx_runtime90.jsxs)(PopoverHeaderText, { headingLevel: titleHeadingLevel, children: [alertSeverityVariant && alertSeverityScreenReaderText && (0, import_jsx_runtime90.jsx)("span", { className: "pf-v6-screen-reader", children: alertSeverityScreenReaderText }), children] })] }) }));
   };
   PopoverHeader.displayName = "PopoverHeader";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverFooter.js
-  var import_jsx_runtime90 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime91 = __toESM(require_jsx_runtime());
   var PopoverFooter = (_a) => {
     var { children, className = "" } = _a, props = __rest(_a, ["children", "className"]);
-    return (0, import_jsx_runtime90.jsx)("footer", Object.assign({ className: css(popover_default.popoverFooter, className) }, props, { children }));
+    return (0, import_jsx_runtime91.jsx)("footer", Object.assign({ className: css(popover_default.popoverFooter, className) }, props, { children }));
   };
   PopoverFooter.displayName = "PopoverFooter";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverCloseButton.js
-  var import_jsx_runtime91 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime92 = __toESM(require_jsx_runtime());
   var PopoverCloseButton = (_a) => {
     var { onClose = () => void 0 } = _a, props = __rest(_a, ["onClose"]);
-    return (0, import_jsx_runtime91.jsx)("div", { className: css(popover_default.popoverClose), children: (0, import_jsx_runtime91.jsx)(Button, Object.assign({ onClick: onClose, variant: "plain", "aria-label": true }, props, { style: { pointerEvents: "auto" }, icon: (0, import_jsx_runtime91.jsx)(rh_microns_close_icon_default, {}) })) });
+    return (0, import_jsx_runtime92.jsx)("div", { className: css(popover_default.popoverClose), children: (0, import_jsx_runtime92.jsx)(Button, Object.assign({ onClick: onClose, variant: "plain", "aria-label": true }, props, { style: { pointerEvents: "auto" }, icon: (0, import_jsx_runtime92.jsx)(rh_microns_close_icon_default, {}) })) });
   };
   PopoverCloseButton.displayName = "PopoverCloseButton";
 
   // node_modules/@patternfly/react-core/dist/esm/components/Popover/PopoverArrow.js
-  var import_jsx_runtime92 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime93 = __toESM(require_jsx_runtime());
   var PopoverArrow = (_a) => {
     var { className = "" } = _a, props = __rest(_a, ["className"]);
-    return (0, import_jsx_runtime92.jsx)("div", Object.assign({ className: css(popover_default.popoverArrow, className) }, props));
+    return (0, import_jsx_runtime93.jsx)("div", Object.assign({ className: css(popover_default.popoverArrow, className) }, props));
   };
   PopoverArrow.displayName = "PopoverArrow";
 
@@ -37538,13 +37637,13 @@
     const generatedId = useSSRSafeId();
     const uniqueId = id || generatedId;
     const triggerManually = isVisible !== null;
-    const [visible, setVisible] = (0, import_react63.useState)(false);
-    const [focusTrapActive, setFocusTrapActive] = (0, import_react63.useState)(Boolean(propWithFocusTrap));
-    const popoverRef = (0, import_react63.useRef)(null);
-    (0, import_react63.useEffect)(() => {
+    const [visible, setVisible] = (0, import_react64.useState)(false);
+    const [focusTrapActive, setFocusTrapActive] = (0, import_react64.useState)(Boolean(propWithFocusTrap));
+    const popoverRef = (0, import_react64.useRef)(null);
+    (0, import_react64.useEffect)(() => {
       onMount();
     }, []);
-    (0, import_react63.useEffect)(() => {
+    (0, import_react64.useEffect)(() => {
       if (triggerManually) {
         if (isVisible) {
           show(void 0, true);
@@ -37657,7 +37756,7 @@
         hide2(event);
       }
     };
-    const content = (0, import_jsx_runtime93.jsxs)(FocusTrap, Object.assign({ ref: popoverRef, active: focusTrapActive, focusTrapOptions: {
+    const content = (0, import_jsx_runtime94.jsxs)(FocusTrap, Object.assign({ ref: popoverRef, active: focusTrapActive, focusTrapOptions: {
       returnFocusOnDeactivate: propWithFocusTrap !== false,
       clickOutsideDeactivates: true,
       // FocusTrap's initialFocus can accept false as a value to prevent initial focus.
@@ -37690,14 +37789,14 @@
     }, preventScrollOnDeactivate: true, className: css(popover_default.popover, alertSeverityVariant && alertStyle[alertSeverityVariant], hasNoPadding && popover_default.modifiers.noPadding, hasAutoWidth && popover_default.modifiers.widthAuto, className), role: "dialog", "aria-modal": "true", "aria-label": headerContent ? void 0 : ariaLabel, "aria-labelledby": headerContent ? `popover-${uniqueId}-header` : void 0, "aria-describedby": `popover-${uniqueId}-body`, onMouseDown: onContentMouseDown, style: {
       minWidth: hasCustomMinWidth ? minWidth : null,
       maxWidth: hasCustomMaxWidth ? maxWidth : null
-    } }, rest, { children: [(0, import_jsx_runtime93.jsx)(PopoverArrow, {}), (0, import_jsx_runtime93.jsxs)(PopoverContent, { children: [showClose && triggerAction === "click" && (0, import_jsx_runtime93.jsx)(PopoverCloseButton, { onClose: closePopover, "aria-label": closeBtnAriaLabel }), headerContent && (0, import_jsx_runtime93.jsx)(PopoverHeader, { id: `popover-${uniqueId}-header`, icon: headerIcon, alertSeverityVariant, alertSeverityScreenReaderText: alertSeverityScreenReaderText || `${alertSeverityVariant} alert:`, titleHeadingLevel: headerComponent, children: typeof headerContent === "function" ? headerContent(hide2) : headerContent }), (0, import_jsx_runtime93.jsx)(PopoverBody, { id: `popover-${uniqueId}-body`, children: typeof bodyContent === "function" ? bodyContent(hide2) : bodyContent }), footerContent && (0, import_jsx_runtime93.jsx)(PopoverFooter, { id: `popover-${uniqueId}-footer`, children: typeof footerContent === "function" ? footerContent(hide2) : footerContent })] })] }));
-    return (0, import_jsx_runtime93.jsx)(PopoverContext.Provider, { value: { headerComponent }, children: (0, import_jsx_runtime93.jsx)(Popper, { trigger: children, triggerRef, popper: content, popperRef: popoverRef, minWidth, appendTo, isVisible: visible, onMouseEnter: triggerAction === "hover" && onMouseEnter, onMouseLeave: triggerAction === "hover" && onMouseLeave, onPopperMouseEnter: triggerAction === "hover" && onMouseEnter, onPopperMouseLeave: triggerAction === "hover" && onMouseLeave, onFocus: triggerAction === "hover" && onFocus, onBlur: triggerAction === "hover" && onBlur, positionModifiers, distance, placement: position, onTriggerClick: triggerAction === "click" && onTriggerClick, onDocumentClick, onDocumentKeyDown, enableFlip, zIndex, flipBehavior, animationDuration, onHidden, onShown, onHide: () => setFocusTrapActive(false) }) });
+    } }, rest, { children: [(0, import_jsx_runtime94.jsx)(PopoverArrow, {}), (0, import_jsx_runtime94.jsxs)(PopoverContent, { children: [showClose && triggerAction === "click" && (0, import_jsx_runtime94.jsx)(PopoverCloseButton, { onClose: closePopover, "aria-label": closeBtnAriaLabel }), headerContent && (0, import_jsx_runtime94.jsx)(PopoverHeader, { id: `popover-${uniqueId}-header`, icon: headerIcon, alertSeverityVariant, alertSeverityScreenReaderText: alertSeverityScreenReaderText || `${alertSeverityVariant} alert:`, titleHeadingLevel: headerComponent, children: typeof headerContent === "function" ? headerContent(hide2) : headerContent }), (0, import_jsx_runtime94.jsx)(PopoverBody, { id: `popover-${uniqueId}-body`, children: typeof bodyContent === "function" ? bodyContent(hide2) : bodyContent }), footerContent && (0, import_jsx_runtime94.jsx)(PopoverFooter, { id: `popover-${uniqueId}-footer`, children: typeof footerContent === "function" ? footerContent(hide2) : footerContent })] })] }));
+    return (0, import_jsx_runtime94.jsx)(PopoverContext.Provider, { value: { headerComponent }, children: (0, import_jsx_runtime94.jsx)(Popper, { trigger: children, triggerRef, popper: content, popperRef: popoverRef, minWidth, appendTo, isVisible: visible, onMouseEnter: triggerAction === "hover" && onMouseEnter, onMouseLeave: triggerAction === "hover" && onMouseLeave, onPopperMouseEnter: triggerAction === "hover" && onMouseEnter, onPopperMouseLeave: triggerAction === "hover" && onMouseLeave, onFocus: triggerAction === "hover" && onFocus, onBlur: triggerAction === "hover" && onBlur, positionModifiers, distance, placement: position, onTriggerClick: triggerAction === "click" && onTriggerClick, onDocumentClick, onDocumentKeyDown, enableFlip, zIndex, flipBehavior, animationDuration, onHidden, onShown, onHide: () => setFocusTrapActive(false) }) });
   };
   Popover.displayName = "Popover";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/TableText.js
-  var import_jsx_runtime94 = __toESM(require_jsx_runtime());
-  var import_react64 = __toESM(require_react());
+  var import_jsx_runtime95 = __toESM(require_jsx_runtime());
+  var import_react65 = __toESM(require_react());
   var TableTextVariant;
   (function(TableTextVariant2) {
     TableTextVariant2["div"] = "div";
@@ -37714,9 +37813,9 @@
   var TableText = (_a) => {
     var { children = null, className = "", variant = "span", wrapModifier = null, tooltip: tooltipProp = "", tooltipProps = {}, onMouseEnter: onMouseEnterProp = () => {
     }, focused = false, tooltipHasDefaultBehavior = false } = _a, props = __rest(_a, ["children", "className", "variant", "wrapModifier", "tooltip", "tooltipProps", "onMouseEnter", "focused", "tooltipHasDefaultBehavior"]);
-    const Component10 = variant;
-    const textRef = (0, import_react64.createRef)();
-    const [tooltip, setTooltip] = (0, import_react64.useState)(tooltipProp);
+    const Component11 = variant;
+    const textRef = (0, import_react65.createRef)();
+    const [tooltip, setTooltip] = (0, import_react65.useState)(tooltipProp);
     const onMouseEnter = (event) => {
       if (event.target.offsetWidth < event.target.scrollWidth) {
         setTooltip(tooltipProp || event.target.innerText);
@@ -37732,8 +37831,8 @@
         setTooltip("");
       }
     };
-    const text = (0, import_jsx_runtime94.jsx)(Component10, Object.assign({ ref: textRef, onMouseEnter: !tooltipHasDefaultBehavior ? onMouseEnter : void 0, className: css(className, wrapModifier && table_default.modifiers[wrapModifier], table_default.tableText) }, props, { children }));
-    (0, import_react64.useEffect)(() => {
+    const text = (0, import_jsx_runtime95.jsx)(Component11, Object.assign({ ref: textRef, onMouseEnter: !tooltipHasDefaultBehavior ? onMouseEnter : void 0, className: css(className, wrapModifier && table_default.modifiers[wrapModifier], table_default.tableText) }, props, { children }));
+    (0, import_react65.useEffect)(() => {
       if (!tooltipHasDefaultBehavior) {
         if (focused) {
           onFocus(textRef.current);
@@ -37742,21 +37841,21 @@
         }
       }
     }, [focused, tooltipHasDefaultBehavior]);
-    return tooltip !== "" ? (0, import_jsx_runtime94.jsx)(Tooltip, Object.assign({ triggerRef: textRef, content: tooltip }, !tooltipHasDefaultBehavior && { isVisible: true }, tooltipProps, { children: text })) : text;
+    return tooltip !== "" ? (0, import_jsx_runtime95.jsx)(Tooltip, Object.assign({ triggerRef: textRef, content: tooltip }, !tooltipHasDefaultBehavior && { isVisible: true }, tooltipProps, { children: text })) : text;
   };
   TableText.displayName = "TableText";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/HeaderCellInfoWrapper.js
-  var HeaderCellInfoWrapper = ({ children, info: info2, className, variant = "tooltip", popoverProps, tooltipProps, ariaLabel }) => (0, import_jsx_runtime95.jsxs)("div", { className: css(table_default.tableColumnHelp, className), children: [typeof children === "string" ? (0, import_jsx_runtime95.jsx)(TableText, { children }) : children, (0, import_jsx_runtime95.jsx)("span", { className: css(table_default.tableColumnHelpAction), children: variant === "tooltip" ? (0, import_jsx_runtime95.jsx)(Tooltip, Object.assign({ content: info2 }, tooltipProps, { children: (0, import_jsx_runtime95.jsx)(Button, { variant: "plain", hasNoPadding: true, "aria-label": ariaLabel || typeof info2 === "string" && info2 || "More info", icon: (0, import_jsx_runtime95.jsx)(help_icon_default, {}) }) })) : (0, import_jsx_runtime95.jsx)(Popover, Object.assign({ bodyContent: info2 }, popoverProps, { children: (0, import_jsx_runtime95.jsx)(Button, { variant: "plain", hasNoPadding: true, "aria-label": ariaLabel || typeof info2 === "string" && info2 || "More info", icon: (0, import_jsx_runtime95.jsx)(help_icon_default, {}) }) })) })] });
+  var HeaderCellInfoWrapper = ({ children, info: info2, className, variant = "tooltip", popoverProps, tooltipProps, ariaLabel }) => (0, import_jsx_runtime96.jsxs)("div", { className: css(table_default.tableColumnHelp, className), children: [typeof children === "string" ? (0, import_jsx_runtime96.jsx)(TableText, { children }) : children, (0, import_jsx_runtime96.jsx)("span", { className: css(table_default.tableColumnHelpAction), children: variant === "tooltip" ? (0, import_jsx_runtime96.jsx)(Tooltip, Object.assign({ content: info2 }, tooltipProps, { children: (0, import_jsx_runtime96.jsx)(Button, { variant: "plain", hasNoPadding: true, "aria-label": ariaLabel || typeof info2 === "string" && info2 || "More info", icon: (0, import_jsx_runtime96.jsx)(help_icon_default, {}) }) })) : (0, import_jsx_runtime96.jsx)(Popover, Object.assign({ bodyContent: info2 }, popoverProps, { children: (0, import_jsx_runtime96.jsx)(Button, { variant: "plain", hasNoPadding: true, "aria-label": ariaLabel || typeof info2 === "string" && info2 || "More info", icon: (0, import_jsx_runtime96.jsx)(help_icon_default, {}) }) })) })] });
   HeaderCellInfoWrapper.displayName = "HeaderCellInfoWrapper";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Tr.js
-  var import_jsx_runtime108 = __toESM(require_jsx_runtime());
-  var import_react68 = __toESM(require_react());
+  var import_jsx_runtime109 = __toESM(require_jsx_runtime());
+  var import_react69 = __toESM(require_react());
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Table.js
-  var import_jsx_runtime107 = __toESM(require_jsx_runtime());
-  var import_react67 = __toESM(require_react());
+  var import_jsx_runtime108 = __toESM(require_jsx_runtime());
+  var import_react68 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Table/table-grid.mjs
   var table_grid_default = {
@@ -37832,11 +37931,11 @@
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/selectable.js
-  var import_jsx_runtime97 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime98 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/SelectColumn.js
-  var import_jsx_runtime96 = __toESM(require_jsx_runtime());
-  var import_react65 = __toESM(require_react());
+  var import_jsx_runtime97 = __toESM(require_jsx_runtime());
+  var import_react66 = __toESM(require_react());
   var RowSelectVariant;
   (function(RowSelectVariant2) {
     RowSelectVariant2["radio"] = "radio";
@@ -37855,14 +37954,14 @@
       name,
       isIndeterminate
     } = _a, props = __rest(_a, ["children", "className", "onSelect", "selectVariant", "tooltip", "tooltipProps", "id", "name", "isIndeterminate"]);
-    const inputRef = (0, import_react65.createRef)();
+    const inputRef = (0, import_react66.createRef)();
     const handleChange = (event, _checked) => {
       onSelect && onSelect(event);
     };
     const commonProps = Object.assign(Object.assign({}, props), { id, ref: inputRef, onChange: handleChange });
     const checkboxProps = Object.assign(Object.assign({}, commonProps), isIndeterminate && { isChecked: null });
-    const content = (0, import_jsx_runtime96.jsxs)(import_react65.Fragment, { children: [selectVariant === RowSelectVariant.checkbox ? (0, import_jsx_runtime96.jsx)(Checkbox, Object.assign({}, checkboxProps)) : (0, import_jsx_runtime96.jsx)(Radio, Object.assign({}, commonProps, { name })), children] });
-    return tooltip ? (0, import_jsx_runtime96.jsx)(Tooltip, Object.assign({ triggerRef: inputRef, content: tooltip }, tooltipProps, { children: content })) : content;
+    const content = (0, import_jsx_runtime97.jsxs)(import_react66.Fragment, { children: [selectVariant === RowSelectVariant.checkbox ? (0, import_jsx_runtime97.jsx)(Checkbox, Object.assign({}, checkboxProps)) : (0, import_jsx_runtime97.jsx)(Radio, Object.assign({}, commonProps, { name })), children] });
+    return tooltip ? (0, import_jsx_runtime97.jsx)(Tooltip, Object.assign({ triggerRef: inputRef, content: tooltip }, tooltipProps, { children: content })) : content;
   };
   SelectColumn.displayName = "SelectColumn";
 
@@ -37906,16 +38005,16 @@
       className: css(table_default.tableCheck),
       component: rowId !== -1 ? "td" : "th",
       isVisible: !rowData || !rowData.fullWidth,
-      children: (0, import_jsx_runtime97.jsx)(SelectColumn, Object.assign({}, customProps, { selectVariant, onSelect: selectClick, name: selectName, tooltip, isIndeterminate: rowId === -1 ? isIndeterminate : void 0, children: label }))
+      children: (0, import_jsx_runtime98.jsx)(SelectColumn, Object.assign({}, customProps, { selectVariant, onSelect: selectClick, name: selectName, tooltip, isIndeterminate: rowId === -1 ? isIndeterminate : void 0, children: label }))
     };
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/sortable.js
-  var import_jsx_runtime99 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime100 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/SortColumn.js
-  var import_jsx_runtime98 = __toESM(require_jsx_runtime());
-  var import_react66 = __toESM(require_react());
+  var import_jsx_runtime99 = __toESM(require_jsx_runtime());
+  var import_react67 = __toESM(require_react());
   var SortByDirection;
   (function(SortByDirection2) {
     SortByDirection2["asc"] = "asc";
@@ -37924,7 +38023,7 @@
   var SortColumn = (_a) => {
     var { children = null, className = "", isSortedBy = false, onSort = null, sortDirection = "", type = "button", tooltip, tooltipProps, tooltipHasDefaultBehavior, favoriteButtonProps } = _a, props = __rest(_a, ["children", "className", "isSortedBy", "onSort", "sortDirection", "type", "tooltip", "tooltipProps", "tooltipHasDefaultBehavior", "favoriteButtonProps"]);
     let SortedByIcon;
-    const [focused, setFocused] = (0, import_react66.useState)(false);
+    const [focused, setFocused] = (0, import_react67.useState)(false);
     if (isSortedBy) {
       SortedByIcon = sortDirection === SortByDirection.asc ? long_arrow_alt_up_icon_default : long_arrow_alt_down_icon_default;
     } else {
@@ -37932,16 +38031,16 @@
     }
     if (favoriteButtonProps) {
       const { favorited } = favoriteButtonProps, rest = __rest(favoriteButtonProps, ["favorited"]);
-      return (0, import_jsx_runtime98.jsxs)(ActionList, { isIconList: true, children: [(0, import_jsx_runtime98.jsx)(ActionListItem, { children: (0, import_jsx_runtime98.jsx)(Button, Object.assign({ variant: "plain", isFavorite: true, isFavorited: favorited }, rest)) }), (0, import_jsx_runtime98.jsx)(ActionListItem, { children: (0, import_jsx_runtime98.jsx)(Button, Object.assign({ variant: "plain", icon: (0, import_jsx_runtime98.jsx)("span", { className: css(table_default.tableSortIndicator), children: (0, import_jsx_runtime98.jsx)(SortedByIcon, {}) }), onClick: (event) => onSort && onSort(event) }, props)) })] });
+      return (0, import_jsx_runtime99.jsxs)(ActionList, { isIconList: true, children: [(0, import_jsx_runtime99.jsx)(ActionListItem, { children: (0, import_jsx_runtime99.jsx)(Button, Object.assign({ variant: "plain", isFavorite: true, isFavorited: favorited }, rest)) }), (0, import_jsx_runtime99.jsx)(ActionListItem, { children: (0, import_jsx_runtime99.jsx)(Button, Object.assign({ variant: "plain", icon: (0, import_jsx_runtime99.jsx)("span", { className: css(table_default.tableSortIndicator), children: (0, import_jsx_runtime99.jsx)(SortedByIcon, {}) }), onClick: (event) => onSort && onSort(event) }, props)) })] });
     }
-    return (0, import_jsx_runtime98.jsx)("button", Object.assign({}, props, { type, className: css(className, table_default.tableButton), onClick: (event) => onSort && onSort(event), onFocus: () => setFocused(true), onBlur: () => setFocused(false), children: (0, import_jsx_runtime98.jsxs)("div", { className: css(className, table_default.tableButtonContent), children: [(0, import_jsx_runtime98.jsx)(TableText, { tooltip, tooltipProps, tooltipHasDefaultBehavior, focused, children }), (0, import_jsx_runtime98.jsx)("span", { className: css(table_default.tableSortIndicator), children: (0, import_jsx_runtime98.jsx)(SortedByIcon, {}) })] }) }));
+    return (0, import_jsx_runtime99.jsx)("button", Object.assign({}, props, { type, className: css(className, table_default.tableButton), onClick: (event) => onSort && onSort(event), onFocus: () => setFocused(true), onBlur: () => setFocused(false), children: (0, import_jsx_runtime99.jsxs)("div", { className: css(className, table_default.tableButtonContent), children: [(0, import_jsx_runtime99.jsx)(TableText, { tooltip, tooltipProps, tooltipHasDefaultBehavior, focused, children }), (0, import_jsx_runtime99.jsx)("span", { className: css(table_default.tableSortIndicator), children: (0, import_jsx_runtime99.jsx)(SortedByIcon, {}) })] }) }));
   };
   SortColumn.displayName = "SortColumn";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/sortable.js
   var sortableFavorites = (sort) => () => {
     var _a;
-    return sortable((0, import_jsx_runtime99.jsx)(rh_ui_star_fill_icon_default, {}), {
+    return sortable((0, import_jsx_runtime100.jsx)(rh_ui_star_fill_icon_default, {}), {
       columnIndex: sort.columnIndex,
       className: table_default.tableFavorite,
       ariaLabel: (_a = sort.ariaLabel) !== null && _a !== void 0 ? _a : "Sort favorites",
@@ -37974,11 +38073,11 @@
       }
       onSort && onSort(event, columnIndex, reversedDirection, extraData);
     }
-    return Object.assign(Object.assign({ className: css(table_default.tableSort, isSortedBy && table_default.modifiers.selected, className) }, isSortedBy && { "aria-sort": `${sortBy.direction}ending` }), { children: (0, import_jsx_runtime99.jsx)(SortColumn, { isSortedBy, sortDirection: isSortedBy ? sortBy.direction : "", onSort: sortClicked, "aria-label": ariaLabel, tooltip, tooltipProps, tooltipHasDefaultBehavior, favoriteButtonProps, children: label }) });
+    return Object.assign(Object.assign({ className: css(table_default.tableSort, isSortedBy && table_default.modifiers.selected, className) }, isSortedBy && { "aria-sort": `${sortBy.direction}ending` }), { children: (0, import_jsx_runtime100.jsx)(SortColumn, { isSortedBy, sortDirection: isSortedBy ? sortBy.direction : "", onSort: sortClicked, "aria-label": ariaLabel, tooltip, tooltipProps, tooltipHasDefaultBehavior, favoriteButtonProps, children: label }) });
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/cellActions.js
-  var import_jsx_runtime100 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime101 = __toESM(require_jsx_runtime());
   var resolveOrDefault = (resolver, defaultValue, rowData, extraData) => typeof resolver === "function" ? resolver(rowData, extraData) : defaultValue;
   var cellActions = (actions, actionResolver, areActionsDisabled) => (label, { rowData, column, rowIndex, columnIndex, column: { extraParams: { actionsToggle, actionsPopperProps } }, property }) => {
     const extraData = {
@@ -37990,7 +38089,7 @@
     const resolvedActions = resolveOrDefault(actionResolver, actions, rowData, extraData);
     const resolvedIsDisabled = resolveOrDefault(areActionsDisabled, rowData && rowData.disableActions, rowData, extraData);
     const renderProps = resolvedActions && resolvedActions.length > 0 ? {
-      children: (0, import_jsx_runtime100.jsx)(ActionsColumn, { items: resolvedActions, isDisabled: resolvedIsDisabled, rowData, extraData, actionsToggle, popperProps: actionsPopperProps, children: label })
+      children: (0, import_jsx_runtime101.jsx)(ActionsColumn, { items: resolvedActions, isDisabled: resolvedIsDisabled, rowData, extraData, actionsToggle, popperProps: actionsPopperProps, children: label })
     } : {};
     return Object.assign({ className: css(table_default.tableAction), style: { paddingRight: 0 }, isVisible: true }, renderProps);
   };
@@ -38008,7 +38107,7 @@
   });
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/collapsible.js
-  var import_jsx_runtime101 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime102 = __toESM(require_jsx_runtime());
   var collapsible = (value, { rowIndex, columnIndex, rowData, column, property }) => {
     const { extraParams: { onCollapse, rowLabeledBy = "simple-node", expandId = "expand-toggle", allRowsExpanded, collapseAllAriaLabel, variant } } = column;
     const extraData = {
@@ -38032,12 +38131,12 @@
     return {
       className: ((rowData === null || rowData === void 0 ? void 0 : rowData.isOpen) !== void 0 || rowId === -1) && css(table_default.tableToggle),
       isVisible: !(rowData === null || rowData === void 0 ? void 0 : rowData.fullWidth),
-      children: (0, import_jsx_runtime101.jsx)(CollapseColumn, Object.assign({ "aria-labelledby": `${rowLabeledBy}${rowId} ${expandId}${rowId}`, onToggle, id: expandId + rowId, variant }, customProps, { children: value }))
+      children: (0, import_jsx_runtime102.jsx)(CollapseColumn, Object.assign({ "aria-labelledby": `${rowLabeledBy}${rowId} ${expandId}${rowId}`, onToggle, id: expandId + rowId, variant }, customProps, { children: value }))
     };
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/compoundExpand.js
-  var import_jsx_runtime102 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime103 = __toESM(require_jsx_runtime());
   var compoundExpand = (value, { rowIndex, columnIndex, rowData, column, property }) => {
     if (!value) {
       return null;
@@ -38055,7 +38154,7 @@
     }
     return {
       className: css(table_default.tableCompoundExpansionToggle, props.isOpen && table_default.modifiers.expanded),
-      children: props.isOpen !== void 0 && (0, import_jsx_runtime102.jsx)("button", { type: "button", className: css(table_default.tableButton), onClick: onToggle, "aria-expanded": props.isOpen, "aria-controls": props.ariaControls, id: `${expandId}-${rowIndex}-${columnIndex}`, children: (0, import_jsx_runtime102.jsx)(TableText, { children: title }) })
+      children: props.isOpen !== void 0 && (0, import_jsx_runtime103.jsx)("button", { type: "button", className: css(table_default.tableButton), onClick: onToggle, "aria-expanded": props.isOpen, "aria-controls": props.ariaControls, id: `${expandId}-${rowIndex}-${columnIndex}`, children: (0, import_jsx_runtime103.jsx)(TableText, { children: title }) })
     };
   };
 
@@ -38083,27 +38182,27 @@
   });
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/info.js
-  var import_jsx_runtime103 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime104 = __toESM(require_jsx_runtime());
   var info = ({ tooltip, tooltipProps, popover, popoverProps, className, ariaLabel }) => {
     const infoObj = (value) => ({
       className: table_default.modifiers.help,
-      children: tooltip ? (0, import_jsx_runtime103.jsx)(HeaderCellInfoWrapper, { variant: "tooltip", info: tooltip, tooltipProps, ariaLabel, className, children: value }) : (0, import_jsx_runtime103.jsx)(HeaderCellInfoWrapper, { variant: "popover", info: popover, popoverProps, ariaLabel, className, children: value })
+      children: tooltip ? (0, import_jsx_runtime104.jsx)(HeaderCellInfoWrapper, { variant: "tooltip", info: tooltip, tooltipProps, ariaLabel, className, children: value }) : (0, import_jsx_runtime104.jsx)(HeaderCellInfoWrapper, { variant: "popover", info: popover, popoverProps, ariaLabel, className, children: value })
     });
     return infoObj;
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/favoritable.js
-  var import_jsx_runtime105 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime106 = __toESM(require_jsx_runtime());
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/FavoritesCell.js
-  var import_jsx_runtime104 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime105 = __toESM(require_jsx_runtime());
   var FavoritesCell = (_a) => {
     var { className = "", onFavorite, isFavorited, rowIndex } = _a, props = __rest(_a, ["className", "onFavorite", "isFavorited", "rowIndex"]);
     const ariaProps = rowIndex === void 0 ? {} : {
       id: `favorites-button-${rowIndex}`,
       "aria-labelledby": `favorites-button-${rowIndex}`
     };
-    return (0, import_jsx_runtime104.jsx)(Button, Object.assign({ variant: "plain", className, type: "button", "aria-label": isFavorited ? "Starred" : "Not starred", onClick: onFavorite, isFavorite: true, isFavorited }, ariaProps, props));
+    return (0, import_jsx_runtime105.jsx)(Button, Object.assign({ variant: "plain", className, type: "button", "aria-label": isFavorited ? "Starred" : "Not starred", onClick: onFavorite, isFavorite: true, isFavorited }, ariaProps, props));
   };
   FavoritesCell.displayName = "FavoritesCell";
 
@@ -38129,23 +38228,23 @@
     return {
       className: css(table_default.tableFavorite, rowData && rowData.favorited && table_default.modifiers.favorited),
       isVisible: !rowData || !rowData.fullWidth,
-      children: (0, import_jsx_runtime105.jsx)(FavoritesCell, Object.assign({ rowIndex, onFavorite: favoritesClick, isFavorited: rowData && rowData.favorited }, additionalProps))
+      children: (0, import_jsx_runtime106.jsx)(FavoritesCell, Object.assign({ rowIndex, onFavorite: favoritesClick, isFavorited: rowData && rowData.favorited }, additionalProps))
     };
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/treeRow.js
-  var import_jsx_runtime106 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime107 = __toESM(require_jsx_runtime());
   var treeRow = (onCollapse, onCheckChange, onToggleRowDetails) => (value, { rowIndex, rowData }) => {
     const { isExpanded, isDetailsExpanded, "aria-level": level, "aria-setsize": setsize, toggleAriaLabel, checkAriaLabel, showDetailsAriaLabel, isChecked, checkboxId, icon } = rowData.props;
     const content = value.title || value;
-    const text = (0, import_jsx_runtime106.jsxs)("div", { className: css(table_tree_view_default.tableTreeViewText), children: [icon && (0, import_jsx_runtime106.jsx)("span", { className: css(table_tree_view_default.tableTreeViewIcon), children: icon }, "tree-view-text-icon"), (0, import_jsx_runtime106.jsx)("span", { className: table_default.tableText, children: content }, "table-text")] }, "tree-view-text");
+    const text = (0, import_jsx_runtime107.jsxs)("div", { className: css(table_tree_view_default.tableTreeViewText), children: [icon && (0, import_jsx_runtime107.jsx)("span", { className: css(table_tree_view_default.tableTreeViewIcon), children: icon }, "tree-view-text-icon"), (0, import_jsx_runtime107.jsx)("span", { className: table_default.tableText, children: content }, "table-text")] }, "tree-view-text");
     const onChange = (isChecked2, event) => {
       onCheckChange(event, isChecked2, rowIndex, content, rowData);
     };
     return {
       component: "th",
       className: table_tree_view_default.tableTreeViewTitleCell,
-      children: level !== void 0 ? (0, import_jsx_runtime106.jsxs)("div", { className: css(table_tree_view_default.tableTreeViewMain), children: [setsize > 0 && (0, import_jsx_runtime106.jsx)("span", { className: css(table_tree_view_default.tableToggle), children: (0, import_jsx_runtime106.jsx)(Button, { variant: "plain", onClick: (event) => onCollapse && onCollapse(event, rowIndex, content, rowData), className: css(isExpanded && table_default.modifiers.expanded), "aria-expanded": isExpanded, "aria-label": toggleAriaLabel || `${isExpanded ? "Collapse" : "Expand"} row ${rowIndex}`, icon: (0, import_jsx_runtime106.jsx)("div", { className: css(table_tree_view_default.tableToggleIcon), children: (0, import_jsx_runtime106.jsx)(rh_microns_caret_right_icon_default, {}) }) }) }, "table-toggle"), !!onCheckChange && (0, import_jsx_runtime106.jsx)("span", { className: css(table_tree_view_default.tableCheck), children: (0, import_jsx_runtime106.jsx)("label", { htmlFor: checkboxId || `checkbox_${rowIndex}`, children: (0, import_jsx_runtime106.jsx)(Checkbox, { id: checkboxId || `checkbox_${rowIndex}`, "aria-label": checkAriaLabel || `Row ${rowIndex} checkbox`, isChecked, onChange: (event, checked) => onChange(checked, event) }) }) }, "table-check"), text, !!onToggleRowDetails && (0, import_jsx_runtime106.jsx)("span", { className: css(table_tree_view_default.tableTreeViewDetailsToggle), children: (0, import_jsx_runtime106.jsx)(Button, { variant: "plain", "aria-expanded": isDetailsExpanded, "aria-label": showDetailsAriaLabel || "Show row details", onClick: (event) => onToggleRowDetails && onToggleRowDetails(event, rowIndex, content, rowData), icon: (0, import_jsx_runtime106.jsx)("span", { className: `${table_default.table}__details-toggle-icon`, children: (0, import_jsx_runtime106.jsx)(rh_ui_ellipsis_horizontal_fill_icon_default, {}) }) }) }, "view-details-toggle")] }) : text
+      children: level !== void 0 ? (0, import_jsx_runtime107.jsxs)("div", { className: css(table_tree_view_default.tableTreeViewMain), children: [setsize > 0 && (0, import_jsx_runtime107.jsx)("span", { className: css(table_tree_view_default.tableToggle), children: (0, import_jsx_runtime107.jsx)(Button, { variant: "plain", onClick: (event) => onCollapse && onCollapse(event, rowIndex, content, rowData), className: css(isExpanded && table_default.modifiers.expanded), "aria-expanded": isExpanded, "aria-label": toggleAriaLabel || `${isExpanded ? "Collapse" : "Expand"} row ${rowIndex}`, icon: (0, import_jsx_runtime107.jsx)("div", { className: css(table_tree_view_default.tableToggleIcon), children: (0, import_jsx_runtime107.jsx)(rh_microns_caret_right_icon_default, {}) }) }) }, "table-toggle"), !!onCheckChange && (0, import_jsx_runtime107.jsx)("span", { className: css(table_tree_view_default.tableCheck), children: (0, import_jsx_runtime107.jsx)("label", { htmlFor: checkboxId || `checkbox_${rowIndex}`, children: (0, import_jsx_runtime107.jsx)(Checkbox, { id: checkboxId || `checkbox_${rowIndex}`, "aria-label": checkAriaLabel || `Row ${rowIndex} checkbox`, isChecked, onChange: (event, checked) => onChange(checked, event) }) }) }, "table-check"), text, !!onToggleRowDetails && (0, import_jsx_runtime107.jsx)("span", { className: css(table_tree_view_default.tableTreeViewDetailsToggle), children: (0, import_jsx_runtime107.jsx)(Button, { variant: "plain", "aria-expanded": isDetailsExpanded, "aria-label": showDetailsAriaLabel || "Show row details", onClick: (event) => onToggleRowDetails && onToggleRowDetails(event, rowIndex, content, rowData), icon: (0, import_jsx_runtime107.jsx)("span", { className: `${table_default.table}__details-toggle-icon`, children: (0, import_jsx_runtime107.jsx)(rh_ui_ellipsis_horizontal_fill_icon_default, {}) }) }) }, "view-details-toggle")] }) : text
     };
   };
 
@@ -38165,7 +38264,7 @@
   })(TableVariant || (TableVariant = {}));
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Table.js
-  var TableContext = (0, import_react67.createContext)({
+  var TableContext = (0, import_react68.createContext)({
     registerSelectableRow: () => {
     },
     hasAnimations: false,
@@ -38200,11 +38299,11 @@
       selectableRowCaptionText
     } = _a, props = __rest(_a, ["children", "className", "variant", "borders", "isStickyHeader", "isStickyHeaderBase", "isStickyHeaderStuck", "isPlain", "isNoPlainOnGlass", "gridBreakPoint", "aria-label", "role", "innerRef", "ouiaId", "ouiaSafe", "isTreeTable", "isNested", "isStriped", "isExpandable", "hasAnimations", "hasNoInset", "nestedHeaderColumnSpans", "selectableRowCaptionText"]);
     const hasAnimations = useHasAnimations(hasAnimationsProp);
-    const ref = (0, import_react67.useRef)(null);
+    const ref = (0, import_react68.useRef)(null);
     const tableRef = innerRef || ref;
-    const [hasSelectableRows, setHasSelectableRows] = (0, import_react67.useState)(false);
-    const [tableCaption, setTableCaption] = (0, import_react67.useState)();
-    (0, import_react67.useEffect)(() => {
+    const [hasSelectableRows, setHasSelectableRows] = (0, import_react68.useState)(false);
+    const [tableCaption, setTableCaption] = (0, import_react68.useState)();
+    (0, import_react68.useEffect)(() => {
       document.addEventListener("keydown", handleKeys);
       if (tableRef && tableRef.current && tableRef.current.classList.contains("pf-m-tree-view")) {
         const tbody = tableRef.current.querySelector("tbody");
@@ -38214,11 +38313,11 @@
         document.removeEventListener("keydown", handleKeys);
       };
     }, [tableRef, tableRef.current]);
-    (0, import_react67.useEffect)(() => {
+    (0, import_react68.useEffect)(() => {
       if (selectableRowCaptionText) {
-        setTableCaption((0, import_jsx_runtime107.jsxs)("caption", { children: [selectableRowCaptionText, (0, import_jsx_runtime107.jsx)("div", { className: "pf-v6-screen-reader", children: "This table has selectable rows. It can be navigated by row using tab, and each row can be selected using space or enter." })] }));
+        setTableCaption((0, import_jsx_runtime108.jsxs)("caption", { children: [selectableRowCaptionText, (0, import_jsx_runtime108.jsx)("div", { className: "pf-v6-screen-reader", children: "This table has selectable rows. It can be navigated by row using tab, and each row can be selected using space or enter." })] }));
       } else {
-        setTableCaption((0, import_jsx_runtime107.jsx)("caption", { className: "pf-v6-screen-reader", children: "This table has selectable rows. It can be navigated by row using tab, and each row can be selected using space or enter." }));
+        setTableCaption((0, import_jsx_runtime108.jsx)("caption", { className: "pf-v6-screen-reader", children: "This table has selectable rows. It can be navigated by row using tab, and each row can be selected using space or enter." }));
       }
     }, [selectableRowCaptionText]);
     const ouiaProps = useOUIAProps("Table", ouiaId, ouiaSafe);
@@ -38243,16 +38342,16 @@
     const registerSelectableRow = () => {
       !hasSelectableRows && setHasSelectableRows(true);
     };
-    return (0, import_jsx_runtime107.jsx)(TableContext.Provider, { value: { registerSelectableRow, hasAnimations, variant }, children: (0, import_jsx_runtime107.jsxs)("table", Object.assign({ "aria-label": ariaLabel, role, className: css(className, table_default.table, isTreeTable ? treeGrid : grid, table_default.modifiers[variant], !borders && table_default.modifiers.noBorderRows, isStickyHeader && table_default.modifiers.stickyHeader, isStickyHeaderBase && table_default.modifiers.stickyHeaderBase, isStickyHeaderStuck && table_default.modifiers.stickyHeaderStuck, isTreeTable && table_tree_view_default.modifiers.treeView, isStriped && table_default.modifiers.striped, isExpandable && table_default.modifiers.expandable, isPlain && table_default.modifiers.plain, isNoPlainOnGlass && table_default.modifiers.noPlainOnGlass, hasNoInset && table_tree_view_default.modifiers.noInset, isNested && "pf-m-nested", hasAnimations && table_default.modifiers.animateExpand), ref: tableRef }, isTreeTable && { role: "treegrid" }, ouiaProps, props, { children: [hasSelectableRows && tableCaption, children] })) });
+    return (0, import_jsx_runtime108.jsx)(TableContext.Provider, { value: { registerSelectableRow, hasAnimations, variant }, children: (0, import_jsx_runtime108.jsxs)("table", Object.assign({ "aria-label": ariaLabel, role, className: css(className, table_default.table, isTreeTable ? treeGrid : grid, table_default.modifiers[variant], !borders && table_default.modifiers.noBorderRows, isStickyHeader && table_default.modifiers.stickyHeader, isStickyHeaderBase && table_default.modifiers.stickyHeaderBase, isStickyHeaderStuck && table_default.modifiers.stickyHeaderStuck, isTreeTable && table_tree_view_default.modifiers.treeView, isStriped && table_default.modifiers.striped, isExpandable && table_default.modifiers.expandable, isPlain && table_default.modifiers.plain, isNoPlainOnGlass && table_default.modifiers.noPlainOnGlass, hasNoInset && table_tree_view_default.modifiers.noInset, isNested && "pf-m-nested", hasAnimations && table_default.modifiers.animateExpand), ref: tableRef }, isTreeTable && { role: "treegrid" }, ouiaProps, props, { children: [hasSelectableRows && tableCaption, children] })) });
   };
-  var Table = (0, import_react67.forwardRef)((props, ref) => (0, import_jsx_runtime107.jsx)(TableBase, Object.assign({}, props, { innerRef: ref })));
+  var Table = (0, import_react68.forwardRef)((props, ref) => (0, import_jsx_runtime108.jsx)(TableBase, Object.assign({}, props, { innerRef: ref })));
   Table.displayName = "Table";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Tr.js
   var TrBase = (_a) => {
     var { children, className, isExpanded, isContentExpanded, isEditable, isHidden: isHidden3 = false, isClickable = false, isRowSelected = false, isStriped = false, isBorderRow = false, isControlRow = false, innerRef, ouiaId, ouiaSafe = true, resetOffset = false, onRowClick, isSelectable, "aria-label": passedAriaLabel } = _a, props = __rest(_a, ["children", "className", "isExpanded", "isContentExpanded", "isEditable", "isHidden", "isClickable", "isRowSelected", "isStriped", "isBorderRow", "isControlRow", "innerRef", "ouiaId", "ouiaSafe", "resetOffset", "onRowClick", "isSelectable", "aria-label"]);
     const ouiaProps = useOUIAProps("TableRow", ouiaId, ouiaSafe);
-    const [computedAriaLabel, setComputedAriaLabel] = (0, import_react68.useState)("");
+    const [computedAriaLabel, setComputedAriaLabel] = (0, import_react69.useState)("");
     let onKeyDown = null;
     if (onRowClick) {
       onKeyDown = (e) => {
@@ -38263,8 +38362,8 @@
       };
     }
     const rowIsHidden = isHidden3 || isExpanded !== void 0 && !isExpanded;
-    const { registerSelectableRow, hasAnimations } = (0, import_react68.useContext)(TableContext);
-    (0, import_react68.useEffect)(() => {
+    const { registerSelectableRow, hasAnimations } = (0, import_react69.useContext)(TableContext);
+    (0, import_react69.useEffect)(() => {
       if (isSelectable && !rowIsHidden) {
         setComputedAriaLabel(`${isRowSelected ? "Row selected" : ""}`);
         registerSelectableRow();
@@ -38273,13 +38372,13 @@
       }
     }, [isRowSelected, isSelectable, registerSelectableRow, rowIsHidden]);
     const ariaLabel = passedAriaLabel || computedAriaLabel;
-    return (0, import_jsx_runtime108.jsx)(import_jsx_runtime108.Fragment, { children: (0, import_jsx_runtime108.jsx)("tr", Object.assign({ className: css(table_default.tableTr, className, isExpanded !== void 0 && table_default.tableExpandableRow, (isExpanded || isContentExpanded) && table_default.modifiers.expanded, isEditable && inline_edit_default.modifiers.inlineEditable, isClickable && table_default.modifiers.clickable, isRowSelected && table_default.modifiers.selected, isStriped && table_default.modifiers.striped, isBorderRow && table_default.modifiers.borderRow, isControlRow && table_default.tableControlRow, resetOffset && table_default.modifiers.firstCellOffsetReset), hidden: rowIsHidden }, isClickable && { tabIndex: 0 }, { "aria-label": ariaLabel, ref: innerRef }, hasAnimations && rowIsHidden && { inert: "" }, onRowClick && { onClick: onRowClick, onKeyDown }, ouiaProps, props, { children })) });
+    return (0, import_jsx_runtime109.jsx)(import_jsx_runtime109.Fragment, { children: (0, import_jsx_runtime109.jsx)("tr", Object.assign({ className: css(table_default.tableTr, className, isExpanded !== void 0 && table_default.tableExpandableRow, (isExpanded || isContentExpanded) && table_default.modifiers.expanded, isEditable && inline_edit_default.modifiers.inlineEditable, isClickable && table_default.modifiers.clickable, isRowSelected && table_default.modifiers.selected, isStriped && table_default.modifiers.striped, isBorderRow && table_default.modifiers.borderRow, isControlRow && table_default.tableControlRow, resetOffset && table_default.modifiers.firstCellOffsetReset), hidden: rowIsHidden }, isClickable && { tabIndex: 0 }, { "aria-label": ariaLabel, ref: innerRef }, hasAnimations && rowIsHidden && { inert: "" }, onRowClick && { onClick: onRowClick, onKeyDown }, ouiaProps, props, { children })) });
   };
-  var Tr = (0, import_react68.forwardRef)((props, ref) => (0, import_jsx_runtime108.jsx)(TrBase, Object.assign({}, props, { innerRef: ref })));
+  var Tr = (0, import_react69.forwardRef)((props, ref) => (0, import_jsx_runtime109.jsx)(TrBase, Object.assign({}, props, { innerRef: ref })));
   Tr.displayName = "Tr";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/TreeRowWrapper.js
-  var import_jsx_runtime109 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime110 = __toESM(require_jsx_runtime());
   var TreeRowWrapper = (_a) => {
     var {
       className,
@@ -38288,33 +38387,33 @@
       row
     } = _a, props = __rest(_a, ["className", "rowProps", "row"]);
     const { "aria-level": level, "aria-posinset": posinset, "aria-setsize": setsize, isExpanded, isDetailsExpanded, isHidden: isHidden3 } = row.props;
-    return (0, import_jsx_runtime109.jsx)(Tr, Object.assign({ "aria-level": level, "aria-posinset": posinset, "aria-setsize": setsize, "aria-expanded": !!isExpanded, isHidden: isHidden3, className: css(className, isExpanded && table_default.modifiers.expanded, isDetailsExpanded && table_tree_view_default.modifiers.treeViewDetailsExpanded) }, props));
+    return (0, import_jsx_runtime110.jsx)(Tr, Object.assign({ "aria-level": level, "aria-posinset": posinset, "aria-setsize": setsize, "aria-expanded": !!isExpanded, isHidden: isHidden3, className: css(className, isExpanded && table_default.modifiers.expanded, isDetailsExpanded && table_tree_view_default.modifiers.treeViewDetailsExpanded) }, props));
   };
   TreeRowWrapper.displayName = "TreeRowWrapper";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Thead.js
-  var import_jsx_runtime110 = __toESM(require_jsx_runtime());
-  var import_react69 = __toESM(require_react());
+  var import_jsx_runtime111 = __toESM(require_jsx_runtime());
+  var import_react70 = __toESM(require_react());
   var TheadBase = (_a) => {
     var { children, className, noWrap = false, innerRef, hasNestedHeader } = _a, props = __rest(_a, ["children", "className", "noWrap", "innerRef", "hasNestedHeader"]);
-    return (0, import_jsx_runtime110.jsx)("thead", Object.assign({ className: css(table_default.tableThead, className, noWrap && table_default.modifiers.nowrap, hasNestedHeader && table_default.modifiers.nestedColumnHeader), ref: innerRef }, props, { children }));
+    return (0, import_jsx_runtime111.jsx)("thead", Object.assign({ className: css(table_default.tableThead, className, noWrap && table_default.modifiers.nowrap, hasNestedHeader && table_default.modifiers.nestedColumnHeader), ref: innerRef }, props, { children }));
   };
-  var Thead = (0, import_react69.forwardRef)((props, ref) => (0, import_jsx_runtime110.jsx)(TheadBase, Object.assign({}, props, { innerRef: ref })));
+  var Thead = (0, import_react70.forwardRef)((props, ref) => (0, import_jsx_runtime111.jsx)(TheadBase, Object.assign({}, props, { innerRef: ref })));
   Thead.displayName = "Thead";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Tbody.js
-  var import_jsx_runtime111 = __toESM(require_jsx_runtime());
-  var import_react70 = __toESM(require_react());
+  var import_jsx_runtime112 = __toESM(require_jsx_runtime());
+  var import_react71 = __toESM(require_react());
   var TbodyBase = (_a) => {
     var { children, className, isExpanded, innerRef, isEvenStriped = false, isOddStriped = false } = _a, props = __rest(_a, ["children", "className", "isExpanded", "innerRef", "isEvenStriped", "isOddStriped"]);
-    return (0, import_jsx_runtime111.jsx)("tbody", Object.assign({ role: "rowgroup", className: css(table_default.tableTbody, className, isExpanded && table_default.modifiers.expanded, isOddStriped && table_default.modifiers.striped, isEvenStriped && table_default.modifiers.stripedEven), ref: innerRef }, props, { children }));
+    return (0, import_jsx_runtime112.jsx)("tbody", Object.assign({ role: "rowgroup", className: css(table_default.tableTbody, className, isExpanded && table_default.modifiers.expanded, isOddStriped && table_default.modifiers.striped, isEvenStriped && table_default.modifiers.stripedEven), ref: innerRef }, props, { children }));
   };
-  var Tbody = (0, import_react70.forwardRef)((props, ref) => (0, import_jsx_runtime111.jsx)(TbodyBase, Object.assign({}, props, { innerRef: ref })));
+  var Tbody = (0, import_react71.forwardRef)((props, ref) => (0, import_jsx_runtime112.jsx)(TbodyBase, Object.assign({}, props, { innerRef: ref })));
   Tbody.displayName = "Tbody";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Th.js
-  var import_jsx_runtime112 = __toESM(require_jsx_runtime());
-  var import_react72 = __toESM(require_react());
+  var import_jsx_runtime113 = __toESM(require_jsx_runtime());
+  var import_react73 = __toESM(require_react());
 
   // node_modules/@patternfly/react-styles/css/components/Table/table-scrollable.mjs
   var table_scrollable_default = {
@@ -38355,7 +38454,7 @@
   };
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/base/merge-props.js
-  var import_react71 = __toESM(require_react());
+  var import_react72 = __toESM(require_react());
   var import_mergeWith = __toESM(require_mergeWith());
   function mergeProps(...props) {
     const firstProps = props[0];
@@ -38366,7 +38465,7 @@
     return (0, import_mergeWith.default)((0, import_mergeWith.default)({}, firstProps), ...restProps, (a, b, key) => {
       if (key === "children") {
         if (a && b) {
-          return (0, import_react71.cloneElement)(a, {
+          return (0, import_react72.cloneElement)(a, {
             children: b
           });
         }
@@ -38408,13 +38507,13 @@
     var _b;
     var { children, className, component = "th", dataLabel, scope = "col", textCenter = false, sort = null, modifier, select = null, expand: collapse = null, tooltip = "", tooltipProps, onMouseEnter: onMouseEnterProp = () => {
     }, width, visibility, innerRef, info: infoProps, isStickyColumn = false, hasRightBorder = false, hasLeftBorder = false, stickyMinWidth = "120px", stickyLeftOffset, stickyRightOffset, isSubheader = false, screenReaderText, "aria-label": ariaLabel, additionalContent } = _a, props = __rest(_a, ["children", "className", "component", "dataLabel", "scope", "textCenter", "sort", "modifier", "select", "expand", "tooltip", "tooltipProps", "onMouseEnter", "width", "visibility", "innerRef", "info", "isStickyColumn", "hasRightBorder", "hasLeftBorder", "stickyMinWidth", "stickyLeftOffset", "stickyRightOffset", "isSubheader", "screenReaderText", "aria-label", "additionalContent"]);
-    const { variant } = (0, import_react72.useContext)(TableContext);
+    const { variant } = (0, import_react73.useContext)(TableContext);
     if (!children && !screenReaderText && !ariaLabel) {
       console.warn("Th: Table headers must have an accessible name. If the Th is intended to be visually empty, pass in screenReaderText. If the Th contains only non-text, interactive content such as a checkbox or expand toggle, pass in an aria-label.");
     }
-    const [showTooltip, setShowTooltip] = (0, import_react72.useState)(false);
-    const [truncated, setTruncated] = (0, import_react72.useState)(false);
-    const cellRef = innerRef ? innerRef : (0, import_react72.createRef)();
+    const [showTooltip, setShowTooltip] = (0, import_react73.useState)(false);
+    const [truncated, setTruncated] = (0, import_react73.useState)(false);
+    const cellRef = innerRef ? innerRef : (0, import_react73.createRef)();
     const onMouseEnter = (event) => {
       if (event.target.offsetWidth < event.target.scrollWidth) {
         !showTooltip && setShowTooltip(true);
@@ -38496,30 +38595,30 @@
       className: mergedClassName = "",
       component: MergedComponent = component
     } = merged, mergedProps = __rest(merged, ["children", "isVisible", "className", "component"]);
-    (0, import_react72.useEffect)(() => {
+    (0, import_react73.useEffect)(() => {
       setTruncated(cellRef.current.offsetWidth < cellRef.current.scrollWidth);
     }, [cellRef]);
-    const cell = (0, import_jsx_runtime112.jsxs)(MergedComponent, Object.assign({ tabIndex: sort || select || !truncated ? -1 : 0, onFocus: tooltip !== null ? onMouseEnter : onMouseEnterProp, onBlur: () => setShowTooltip(false), "data-label": dataLabel, onMouseEnter: tooltip !== null ? onMouseEnter : onMouseEnterProp, scope: component === "th" ? scope : null, ref: cellRef, "aria-label": ariaLabel, className: css(table_default.tableTh, className, textCenter && table_default.modifiers.center, isSubheader && table_default.tableSubhead, isStickyColumn && table_scrollable_default.tableStickyCell, hasRightBorder && table_scrollable_default.modifiers.borderRight, hasLeftBorder && table_scrollable_default.modifiers.borderLeft, modifier && table_default.modifiers[modifier], ((_b = sort === null || sort === void 0 ? void 0 : sort.favoriteButtonProps) === null || _b === void 0 ? void 0 : _b.favorited) && table_default.modifiers.favorited, mergedClassName) }, mergedProps, props, isStickyColumn && {
+    const cell = (0, import_jsx_runtime113.jsxs)(MergedComponent, Object.assign({ tabIndex: sort || select || !truncated ? -1 : 0, onFocus: tooltip !== null ? onMouseEnter : onMouseEnterProp, onBlur: () => setShowTooltip(false), "data-label": dataLabel, onMouseEnter: tooltip !== null ? onMouseEnter : onMouseEnterProp, scope: component === "th" ? scope : null, ref: cellRef, "aria-label": ariaLabel, className: css(table_default.tableTh, className, textCenter && table_default.modifiers.center, isSubheader && table_default.tableSubhead, isStickyColumn && table_scrollable_default.tableStickyCell, hasRightBorder && table_scrollable_default.modifiers.borderRight, hasLeftBorder && table_scrollable_default.modifiers.borderLeft, modifier && table_default.modifiers[modifier], ((_b = sort === null || sort === void 0 ? void 0 : sort.favoriteButtonProps) === null || _b === void 0 ? void 0 : _b.favorited) && table_default.modifiers.favorited, mergedClassName) }, mergedProps, props, isStickyColumn && {
       style: Object.assign({ [c_table_sticky_cell_MinWidth_default.name]: stickyMinWidth ? stickyMinWidth : void 0, [c_table_sticky_cell_InsetInlineStart_default.name]: stickyLeftOffset ? stickyLeftOffset : 0, [c_table_sticky_cell_InsetInlineEnd_default.name]: stickyRightOffset ? stickyRightOffset : 0 }, props.style)
-    }, { children: [transformedChildren || screenReaderText && (0, import_jsx_runtime112.jsx)("span", { className: accessibility_default.screenReader, children: screenReaderText }), additionalContent && additionalContent] }));
+    }, { children: [transformedChildren || screenReaderText && (0, import_jsx_runtime113.jsx)("span", { className: accessibility_default.screenReader, children: screenReaderText }), additionalContent && additionalContent] }));
     const canMakeDefaultTooltip = tooltip === "" ? typeof transformedChildren === "string" : true;
     const childControlsTooltip = sortParams || selectParams;
-    return tooltip !== null && canMakeDefaultTooltip && !childControlsTooltip && showTooltip ? (0, import_jsx_runtime112.jsxs)(import_jsx_runtime112.Fragment, { children: [cell, (0, import_jsx_runtime112.jsx)(Tooltip, Object.assign({ triggerRef: cellRef, content: tooltip || tooltip === "" && children, isVisible: true }, tooltipProps))] }) : cell;
+    return tooltip !== null && canMakeDefaultTooltip && !childControlsTooltip && showTooltip ? (0, import_jsx_runtime113.jsxs)(import_jsx_runtime113.Fragment, { children: [cell, (0, import_jsx_runtime113.jsx)(Tooltip, Object.assign({ triggerRef: cellRef, content: tooltip || tooltip === "" && children, isVisible: true }, tooltipProps))] }) : cell;
   };
-  var Th = (0, import_react72.forwardRef)((props, ref) => (0, import_jsx_runtime112.jsx)(ThBase, Object.assign({}, props, { innerRef: ref })));
+  var Th = (0, import_react73.forwardRef)((props, ref) => (0, import_jsx_runtime113.jsx)(ThBase, Object.assign({}, props, { innerRef: ref })));
   Th.displayName = "Th";
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/Td.js
-  var import_jsx_runtime114 = __toESM(require_jsx_runtime());
-  var import_react73 = __toESM(require_react());
+  var import_jsx_runtime115 = __toESM(require_jsx_runtime());
+  var import_react74 = __toESM(require_react());
 
   // node_modules/@patternfly/react-table/dist/esm/components/Table/utils/decorators/draggable.js
-  var import_jsx_runtime113 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime114 = __toESM(require_jsx_runtime());
   var draggable = (value, { rowData }) => {
     const { id } = rowData;
     return {
       className: "",
-      children: (0, import_jsx_runtime113.jsx)(DraggableCell, { id })
+      children: (0, import_jsx_runtime114.jsx)(DraggableCell, { id })
     };
   };
 
@@ -38527,9 +38626,9 @@
   var TdBase = (_a) => {
     var { children, className, isActionCell = false, hasAction = false, component = "td", dataLabel, textCenter = false, modifier, select = null, actions = null, expand = null, treeRow: treeRowProp = null, compoundExpand: compoundExpandProp = null, noPadding, width, visibility, innerRef, favorites = null, draggableRow: draggableRowProp = null, tooltip = "", onMouseEnter: onMouseEnterProp = () => {
     }, isStickyColumn = false, hasRightBorder = false, hasLeftBorder = false, stickyMinWidth = "120px", stickyLeftOffset, stickyRightOffset } = _a, props = __rest(_a, ["children", "className", "isActionCell", "hasAction", "component", "dataLabel", "textCenter", "modifier", "select", "actions", "expand", "treeRow", "compoundExpand", "noPadding", "width", "visibility", "innerRef", "favorites", "draggableRow", "tooltip", "onMouseEnter", "isStickyColumn", "hasRightBorder", "hasLeftBorder", "stickyMinWidth", "stickyLeftOffset", "stickyRightOffset"]);
-    const [showTooltip, setShowTooltip] = (0, import_react73.useState)(false);
-    const [truncated, setTruncated] = (0, import_react73.useState)(false);
-    const cellRef = innerRef ? innerRef : (0, import_react73.createRef)();
+    const [showTooltip, setShowTooltip] = (0, import_react74.useState)(false);
+    const [truncated, setTruncated] = (0, import_react74.useState)(false);
+    const cellRef = innerRef ? innerRef : (0, import_react74.createRef)();
     const onMouseEnter = (event) => {
       if (event.target.offsetWidth < event.target.scrollWidth) {
         !showTooltip && setShowTooltip(true);
@@ -38584,7 +38683,7 @@
         }
       }
     }) : null;
-    const { hasAnimations, variant } = (0, import_react73.useContext)(TableContext);
+    const { hasAnimations, variant } = (0, import_react74.useContext)(TableContext);
     const expandableParams = expand !== null ? collapsible(null, {
       rowIndex: expand.rowIndex,
       columnIndex: expand === null || expand === void 0 ? void 0 : expand.columnIndex,
@@ -38652,16 +38751,16 @@
       component: MergedComponent = component
     } = merged, mergedProps = __rest(merged, ["isVisible", "children", "className", "component"]);
     const treeTableTitleCell = className && className.includes(table_tree_view_default.tableTreeViewTitleCell) || mergedClassName && mergedClassName.includes(table_tree_view_default.tableTreeViewTitleCell);
-    (0, import_react73.useEffect)(() => {
+    (0, import_react74.useEffect)(() => {
       setTruncated(cellRef.current.offsetWidth < cellRef.current.scrollWidth);
     }, [cellRef]);
-    const cell = (0, import_jsx_runtime114.jsx)(MergedComponent, Object.assign({ tabIndex: (select || !truncated) && modifier !== "truncate" ? -1 : 0 }, !treeTableTitleCell && { "data-label": dataLabel }, { onFocus: tooltip !== null ? onMouseEnter : onMouseEnterProp, onBlur: () => setShowTooltip(false), onMouseEnter: tooltip !== null ? onMouseEnter : onMouseEnterProp, className: css(table_default.tableTd, className, isActionCell && table_default.tableAction, hasAction && table_default.modifiers.action, textCenter && table_default.modifiers.center, noPadding && table_default.modifiers.noPadding, isStickyColumn && table_scrollable_default.tableStickyCell, hasRightBorder && table_scrollable_default.modifiers.borderRight, hasLeftBorder && table_scrollable_default.modifiers.borderLeft, table_default.modifiers[modifier], draggableParams && table_default.tableDraggable, mergedClassName), ref: cellRef }, mergedProps, props, isStickyColumn && {
+    const cell = (0, import_jsx_runtime115.jsx)(MergedComponent, Object.assign({ tabIndex: (select || !truncated) && modifier !== "truncate" ? -1 : 0 }, !treeTableTitleCell && { "data-label": dataLabel }, { onFocus: tooltip !== null ? onMouseEnter : onMouseEnterProp, onBlur: () => setShowTooltip(false), onMouseEnter: tooltip !== null ? onMouseEnter : onMouseEnterProp, className: css(table_default.tableTd, className, isActionCell && table_default.tableAction, hasAction && table_default.modifiers.action, textCenter && table_default.modifiers.center, noPadding && table_default.modifiers.noPadding, isStickyColumn && table_scrollable_default.tableStickyCell, hasRightBorder && table_scrollable_default.modifiers.borderRight, hasLeftBorder && table_scrollable_default.modifiers.borderLeft, table_default.modifiers[modifier], draggableParams && table_default.tableDraggable, mergedClassName), ref: cellRef }, mergedProps, props, isStickyColumn && {
       style: Object.assign({ [c_table_sticky_cell_MinWidth_default.name]: stickyMinWidth ? stickyMinWidth : void 0, [c_table_sticky_cell_InsetInlineStart_default.name]: stickyLeftOffset ? stickyLeftOffset : 0, [c_table_sticky_cell_InsetInlineEnd_default.name]: stickyRightOffset ? stickyRightOffset : 0 }, props.style)
     }, { children: mergedChildren || children }));
     const canMakeDefaultTooltip = tooltip === "" ? typeof children === "string" : true;
-    return tooltip !== null && canMakeDefaultTooltip && showTooltip ? (0, import_jsx_runtime114.jsxs)(import_jsx_runtime114.Fragment, { children: [cell, (0, import_jsx_runtime114.jsx)(Tooltip, { triggerRef: cellRef, content: tooltip || tooltip === "" && children, isVisible: true })] }) : cell;
+    return tooltip !== null && canMakeDefaultTooltip && showTooltip ? (0, import_jsx_runtime115.jsxs)(import_jsx_runtime115.Fragment, { children: [cell, (0, import_jsx_runtime115.jsx)(Tooltip, { triggerRef: cellRef, content: tooltip || tooltip === "" && children, isVisible: true })] }) : cell;
   };
-  var Td = (0, import_react73.forwardRef)((props, ref) => (0, import_jsx_runtime114.jsx)(TdBase, Object.assign({}, props, { innerRef: ref })));
+  var Td = (0, import_react74.forwardRef)((props, ref) => (0, import_jsx_runtime115.jsx)(TdBase, Object.assign({}, props, { innerRef: ref })));
   Td.displayName = "Td";
 
   // preview/main.jsx
@@ -38675,13 +38774,13 @@
     { name: "Storage", description: "Choose the disks and storage configuration for the installation." },
     { name: "Review", description: "Review your choices before beginning the installation." }
   ];
-  var ThemeToggle = ({ theme, setTheme, isCompact = false }) => /* @__PURE__ */ import_react74.default.createElement(
+  var ThemeToggle = ({ theme, setTheme, isCompact = false }) => /* @__PURE__ */ import_react75.default.createElement(
     ToggleGroup,
     {
       "aria-label": "Choose appearance",
       isCompact
     },
-    /* @__PURE__ */ import_react74.default.createElement(
+    /* @__PURE__ */ import_react75.default.createElement(
       ToggleGroupItem,
       {
         buttonId: isCompact ? "wizard-theme-light" : "opening-theme-light",
@@ -38690,7 +38789,7 @@
         onChange: () => setTheme("light")
       }
     ),
-    /* @__PURE__ */ import_react74.default.createElement(
+    /* @__PURE__ */ import_react75.default.createElement(
       ToggleGroupItem,
       {
         buttonId: isCompact ? "wizard-theme-dark" : "opening-theme-dark",
@@ -38700,7 +38799,16 @@
       }
     )
   );
-  var ModeCard = ({ mode, selected, title, description, icon, onSelect }) => /* @__PURE__ */ import_react74.default.createElement(
+  var AppearanceSwitch = ({ theme, setTheme }) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "appearance-switch" }, /* @__PURE__ */ import_react75.default.createElement(sun_icon_default, { "aria-hidden": "true" }), /* @__PURE__ */ import_react75.default.createElement(
+    Switch,
+    {
+      id: "opening-appearance-switch",
+      "aria-label": "Use dark appearance",
+      isChecked: theme === "dark",
+      onChange: (_, isDark) => setTheme(isDark ? "dark" : "light")
+    }
+  ), /* @__PURE__ */ import_react75.default.createElement(outlined_moon_icon_default, { "aria-hidden": "true" }));
+  var ModeCard = ({ mode, selected, title, description, icon, onSelect }) => /* @__PURE__ */ import_react75.default.createElement(
     Card,
     {
       isClickable: true,
@@ -38717,12 +38825,12 @@
         }
       }
     },
-    /* @__PURE__ */ import_react74.default.createElement(CardHeader, null, /* @__PURE__ */ import_react74.default.createElement(CardTitle, null, /* @__PURE__ */ import_react74.default.createElement("span", { className: "mode-icon", "aria-hidden": "true" }, icon), title)),
-    /* @__PURE__ */ import_react74.default.createElement(CardBody, null, description)
+    /* @__PURE__ */ import_react75.default.createElement(CardHeader, null, /* @__PURE__ */ import_react75.default.createElement(CardTitle, null, /* @__PURE__ */ import_react75.default.createElement("span", { className: "mode-icon", "aria-hidden": "true" }, icon), title)),
+    /* @__PURE__ */ import_react75.default.createElement(CardBody, null, description)
   );
   var SourceTypeSelect = ({ value, onChange }) => {
-    const [isOpen, setIsOpen] = (0, import_react74.useState)(false);
-    return /* @__PURE__ */ import_react74.default.createElement(
+    const [isOpen, setIsOpen] = (0, import_react75.useState)(false);
+    return /* @__PURE__ */ import_react75.default.createElement(
       Select,
       {
         isOpen,
@@ -38732,49 +38840,68 @@
           onChange(nextValue);
           setIsOpen(false);
         },
-        toggle: (toggleRef) => /* @__PURE__ */ import_react74.default.createElement("button", { ref: toggleRef, type: "button", className: "source-type-toggle" }, value, /* @__PURE__ */ import_react74.default.createElement("span", { "aria-hidden": "true" }, "\u25BE"))
+        toggle: (toggleRef) => /* @__PURE__ */ import_react75.default.createElement("button", { ref: toggleRef, type: "button", className: "source-type-toggle" }, value, /* @__PURE__ */ import_react75.default.createElement("span", { "aria-hidden": "true" }, "\u25BE"))
       },
-      /* @__PURE__ */ import_react74.default.createElement(SelectOption, { value: "Repository URL" }),
-      /* @__PURE__ */ import_react74.default.createElement(SelectOption, { value: "Base OS repository" }),
-      /* @__PURE__ */ import_react74.default.createElement(SelectOption, { value: "Local mirror" })
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "Repository URL" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "Base OS repository" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "Local mirror" })
     );
   };
-  var SourceRows = ({ rows, setRows, label, placeholder, allowAdd }) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "source-editor" }, /* @__PURE__ */ import_react74.default.createElement("div", { className: "source-column-labels" }, /* @__PURE__ */ import_react74.default.createElement("span", null, "Source type"), /* @__PURE__ */ import_react74.default.createElement("span", null, label), /* @__PURE__ */ import_react74.default.createElement("span", { "aria-hidden": "true" })), rows.map((row, index) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "source-row", key: row.id }, /* @__PURE__ */ import_react74.default.createElement(SourceTypeSelect, { value: row.type, onChange: (type) => setRows(rows.map((item) => item.id === row.id ? { ...item, type } : item)) }), /* @__PURE__ */ import_react74.default.createElement(TextInput, { "aria-label": `${label} ${index + 1}`, value: row.value, placeholder, onChange: (_, value) => setRows(rows.map((item) => item.id === row.id ? { ...item, value } : item)) }), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "plain", "aria-label": `Remove ${label.toLowerCase()} ${index + 1}`, isDisabled: rows.length === 1 && !allowAdd, onClick: () => setRows(rows.filter((item) => item.id !== row.id)) }, /* @__PURE__ */ import_react74.default.createElement(MinusCircleIcon, null)))), allowAdd && /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", icon: /* @__PURE__ */ import_react74.default.createElement(PlusCircleIcon, null), onClick: () => setRows([...rows, { id: Date.now(), type: "Repository URL", value: "" }]) }, "Add source"));
+  var SourceRows = ({ rows, setRows, label, placeholder, allowAdd }) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "source-editor" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "source-column-labels" }, /* @__PURE__ */ import_react75.default.createElement("span", null, "Source type"), /* @__PURE__ */ import_react75.default.createElement("span", null, label), /* @__PURE__ */ import_react75.default.createElement("span", { "aria-hidden": "true" })), rows.map((row, index) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "source-row", key: row.id }, /* @__PURE__ */ import_react75.default.createElement(SourceTypeSelect, { value: row.type, onChange: (type) => setRows(rows.map((item) => item.id === row.id ? { ...item, type } : item)) }), /* @__PURE__ */ import_react75.default.createElement(TextInput, { "aria-label": `${label} ${index + 1}`, value: row.value, placeholder, onChange: (_, value) => setRows(rows.map((item) => item.id === row.id ? { ...item, value } : item)) }), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "plain", "aria-label": `Remove ${label.toLowerCase()} ${index + 1}`, isDisabled: rows.length === 1 && !allowAdd, onClick: () => setRows(rows.filter((item) => item.id !== row.id)) }, /* @__PURE__ */ import_react75.default.createElement(MinusCircleIcon, null)))), allowAdd && /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", icon: /* @__PURE__ */ import_react75.default.createElement(PlusCircleIcon, null), onClick: () => setRows([...rows, { id: Date.now(), type: "Repository URL", value: "" }]) }, "Add source"));
   var InstallationContent = ({ mode, setMode }) => {
-    const [packageSources, setPackageSources] = (0, import_react74.useState)([{ id: 1, type: "Repository URL", value: "" }]);
-    const [registry, setRegistry] = (0, import_react74.useState)([{ id: 1, type: "Container registry", value: "" }]);
-    const [authentication, setAuthentication] = (0, import_react74.useState)("public");
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "installation-content", "aria-labelledby": "installation-config-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h1", size: "xl", id: "installation-config-title" }, "Installation"), /* @__PURE__ */ import_react74.default.createElement("p", { className: "installation-description" }, "Choose how software will be installed on this system."), /* @__PURE__ */ import_react74.default.createElement("div", { className: "mode-cards", role: "group", "aria-label": "Installation mode" }, /* @__PURE__ */ import_react74.default.createElement(ModeCard, { mode: "package", selected: mode === "package", icon: /* @__PURE__ */ import_react74.default.createElement(rh_ui_template_icon_default, null), title: "Package mode", description: "Install a traditional Red Hat Enterprise Linux system from package repositories. You can add one or more software sources.", onSelect: setMode }), /* @__PURE__ */ import_react74.default.createElement(ModeCard, { mode: "image", selected: mode === "image", icon: /* @__PURE__ */ import_react74.default.createElement(rh_ui_registry_icon_default, null), title: "Image mode", description: "Deploy a bootable image from a container registry for an image-based, managed system.", onSelect: setMode })), mode === "package" ? /* @__PURE__ */ import_react74.default.createElement(Form, { className: "source-form" }, /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Package sources", fieldId: "package-sources" }, /* @__PURE__ */ import_react74.default.createElement(SourceRows, { rows: packageSources, setRows: setPackageSources, label: "URL", placeholder: "www.website.com", allowAdd: true }))) : /* @__PURE__ */ import_react74.default.createElement(Form, { className: "source-form image-form" }, /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Registry image path", fieldId: "registry-image-path" }, /* @__PURE__ */ import_react74.default.createElement(TextInput, { id: "registry-image-path", placeholder: "registry.example.com/organization/image:tag" })), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Authentication type", fieldId: "authentication-type" }, /* @__PURE__ */ import_react74.default.createElement(ToggleGroup, { "aria-label": "Authentication type" }, /* @__PURE__ */ import_react74.default.createElement(ToggleGroupItem, { buttonId: "auth-public", text: "Public / No authentication", isSelected: authentication === "public", onChange: () => setAuthentication("public") }), /* @__PURE__ */ import_react74.default.createElement(ToggleGroupItem, { buttonId: "auth-private", text: "Private / Authentication required", isSelected: authentication === "private", onChange: () => setAuthentication("private") }))), /* @__PURE__ */ import_react74.default.createElement("div", { className: "image-credentials" }, /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Username", fieldId: "registry-username" }, /* @__PURE__ */ import_react74.default.createElement(TextInput, { id: "registry-username", isDisabled: authentication !== "private" })), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Password or personal access token (PAT)", fieldId: "registry-password" }, /* @__PURE__ */ import_react74.default.createElement(TextInput, { id: "registry-password", type: "password", isDisabled: authentication !== "private" }))), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Custom CA certificate (optional)", fieldId: "custom-ca" }, /* @__PURE__ */ import_react74.default.createElement(FileUpload, { id: "custom-ca", type: "text", filenamePlaceholder: "Choose a .crt file", browseButtonText: "Upload certificate" }))));
+    const [packageSources, setPackageSources] = (0, import_react75.useState)([{ id: 1, type: "Repository URL", value: "" }]);
+    const [registry, setRegistry] = (0, import_react75.useState)([{ id: 1, type: "Container registry", value: "" }]);
+    const [authentication, setAuthentication] = (0, import_react75.useState)("public");
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "installation-content", "aria-labelledby": "installation-config-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "xl", id: "installation-config-title" }, "Installation"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "installation-description" }, "Choose how software will be installed on this system."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "mode-cards", role: "group", "aria-label": "Installation mode" }, /* @__PURE__ */ import_react75.default.createElement(ModeCard, { mode: "package", selected: mode === "package", icon: /* @__PURE__ */ import_react75.default.createElement(rh_ui_template_icon_default, null), title: "Package mode", description: "Install a traditional Red Hat Enterprise Linux system from package repositories. You can add one or more software sources.", onSelect: setMode }), /* @__PURE__ */ import_react75.default.createElement(ModeCard, { mode: "image", selected: mode === "image", icon: /* @__PURE__ */ import_react75.default.createElement(rh_ui_registry_icon_default, null), title: "Image mode", description: "Deploy a bootable image from a container registry for an image-based, managed system.", onSelect: setMode })), mode === "package" ? /* @__PURE__ */ import_react75.default.createElement(Form, { className: "source-form" }, /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Package sources", fieldId: "package-sources" }, /* @__PURE__ */ import_react75.default.createElement(SourceRows, { rows: packageSources, setRows: setPackageSources, label: "URL", placeholder: "www.website.com", allowAdd: true }))) : /* @__PURE__ */ import_react75.default.createElement(Form, { className: "source-form image-form" }, /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Registry image path", fieldId: "registry-image-path" }, /* @__PURE__ */ import_react75.default.createElement(TextInput, { id: "registry-image-path", placeholder: "registry.example.com/organization/image:tag" })), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Authentication type", fieldId: "authentication-type" }, /* @__PURE__ */ import_react75.default.createElement(ToggleGroup, { "aria-label": "Authentication type" }, /* @__PURE__ */ import_react75.default.createElement(ToggleGroupItem, { buttonId: "auth-public", text: "Public / No authentication", isSelected: authentication === "public", onChange: () => setAuthentication("public") }), /* @__PURE__ */ import_react75.default.createElement(ToggleGroupItem, { buttonId: "auth-private", text: "Private / Authentication required", isSelected: authentication === "private", onChange: () => setAuthentication("private") }))), /* @__PURE__ */ import_react75.default.createElement("div", { className: "image-credentials" }, /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Username", fieldId: "registry-username" }, /* @__PURE__ */ import_react75.default.createElement(TextInput, { id: "registry-username", isDisabled: authentication !== "private" })), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Password or personal access token (PAT)", fieldId: "registry-password" }, /* @__PURE__ */ import_react75.default.createElement(TextInput, { id: "registry-password", type: "password", isDisabled: authentication !== "private" }))), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Custom CA certificate (optional)", fieldId: "custom-ca" }, /* @__PURE__ */ import_react75.default.createElement(FileUpload, { id: "custom-ca", type: "text", filenamePlaceholder: "Choose a .crt file", browseButtonText: "Upload certificate" }))));
   };
   var environments = [
-    { id: "minimal", name: "Minimal Install", description: "A basic Red Hat Enterprise Linux environment for systems that need a small footprint." },
-    { id: "server", name: "Server", description: "An integrated, easier to manage server environment." },
-    { id: "workstation", name: "Workstation", description: "A graphical desktop environment for laptops, PCs, and engineering workstations." },
-    { id: "virtualization", name: "Virtualization Host", description: "Tools and services for hosting and managing virtual machines." }
+    { id: "fedora-cloud", name: "Fedora Cloud Server", description: "A server install with components needed to run in a cloud environment." },
+    { id: "fedora-custom", name: "Fedora Custom Operating System", description: "Basic building block for a custom Fedora system." },
+    { id: "fedora-server", name: "Fedora Server Edition", description: "An integrated, easier to manage server." },
+    { id: "fedora-workstation", name: "Fedora Workstation", description: "A user-friendly desktop system for laptops and PCs." },
+    { id: "kde-mobile", name: "KDE Plasma Mobile", description: "The KDE Plasma Mobile environment includes KDE Plasma Mobile and many Plasma Mobile applications." },
+    { id: "kde-workspaces", name: "KDE Plasma Workspaces", description: "A highly configurable graphical interface with a panel, desktop, system icons, widgets, and KDE applications." },
+    { id: "none", name: "None", description: "Continue without selecting a base environment." },
+    { id: "xfce-desktop", name: "Xfce Desktop", description: "A lightweight desktop environment that works well on low-end machines." }
   ];
+  var getEnvironmentName = (environment) => environment && environment !== "none" ? environments.find((item) => item.id === environment)?.name : void 0;
+  var getEnvironmentAddOns = (environment) => environment && environment !== "none" ? environmentAddOns[environment] || [] : [];
   var environmentAddOns = {
-    minimal: [
+    "fedora-custom": [
       { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
       { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
       { id: "standard", name: "Standard", description: "Common set of utilities that extend the minimal installation." }
     ],
-    server: [
+    "fedora-server": [
       { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
       { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
       { id: "server-tools", name: "Server Tools", description: "Utilities for managing services, storage, and system administration." },
       { id: "web-server", name: "Web Server", description: "A ready to configure web server and related tools." }
     ],
-    workstation: [
+    "fedora-workstation": [
       { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
       { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." },
       { id: "container-management", name: "Container Management", description: "Tools for building, running, and managing containers." },
       { id: "office-suite", name: "Office Suite and Productivity", description: "Applications for documents, spreadsheets, and presentations." }
     ],
-    virtualization: [
+    "fedora-cloud": [
       { id: "guest-agents", name: "Guest Agents", description: "Agents used when running under a hypervisor." },
       { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
       { id: "virtualization-tools", name: "Virtualization Tools", description: "Tools to create, run, and administer virtual machines." },
       { id: "virtualization-platform", name: "Virtualization Platform", description: "Services for hosting virtual machines on this system." }
+    ],
+    "kde-mobile": [
+      { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+      { id: "mobile-applications", name: "Plasma Mobile Applications", description: "Applications and utilities designed for the Plasma Mobile environment." }
+    ],
+    "kde-workspaces": [
+      { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+      { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." },
+      { id: "office-suite", name: "Office Suite and Productivity", description: "Applications for documents, spreadsheets, and presentations." }
+    ],
+    "xfce-desktop": [
+      { id: "networkmanager", name: "Common NetworkManager Submodules", description: "This group contains NetworkManager submodules that are commonly used, but may not be wanted in some streamlined configurations." },
+      { id: "development-tools", name: "Development Tools", description: "Compilers, debuggers, and build utilities for software development." }
     ]
   };
   var generalAddOns = [
@@ -38783,13 +38910,13 @@
     { id: "authoring", name: "Authoring and Publishing", description: "These tools allow you to create documents in the DocBook format and convert them into HTML, PDF, Postscript, and text." }
   ];
   var SearchSelect = ({ ariaLabel, placeholder, items, groups, selected, onSelect, isMulti = false }) => {
-    const [isOpen, setIsOpen] = (0, import_react74.useState)(false);
-    const [filter, setFilter] = (0, import_react74.useState)("");
+    const [isOpen, setIsOpen] = (0, import_react75.useState)(false);
+    const [filter, setFilter] = (0, import_react75.useState)("");
     const matchesFilter = (item) => `${item.name} ${item.description}`.toLowerCase().includes(filter.toLowerCase());
     const clearSearch = () => setFilter("");
     const selectedLabel = !isMulti && items.find((item) => item.id === selected)?.name;
-    const renderOption = (item) => /* @__PURE__ */ import_react74.default.createElement(SelectOption, { key: item.id, value: item.id, description: item.description, isSelected: isMulti ? selected.includes(item.id) : selected === item.id }, item.name);
-    const toggle = (toggleRef) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "content-select-toggle" }, /* @__PURE__ */ import_react74.default.createElement(SearchIcon, { "aria-hidden": "true" }), /* @__PURE__ */ import_react74.default.createElement(
+    const renderOption = (item) => /* @__PURE__ */ import_react75.default.createElement(SelectOption, { key: item.id, value: item.id, description: item.description, isSelected: isMulti ? selected.includes(item.id) : selected === item.id }, item.name);
+    const toggle = (toggleRef) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "content-select-toggle" }, /* @__PURE__ */ import_react75.default.createElement(SearchIcon, { "aria-hidden": "true" }), /* @__PURE__ */ import_react75.default.createElement(
       TextInput,
       {
         ref: toggleRef,
@@ -38803,8 +38930,8 @@
           setIsOpen(true);
         }
       }
-    ), filter && /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "plain", "aria-label": "Clear search", onClick: clearSearch }, /* @__PURE__ */ import_react74.default.createElement(TimesIcon, null)));
-    return /* @__PURE__ */ import_react74.default.createElement(
+    ), filter && /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "plain", "aria-label": "Clear search", onClick: clearSearch }, /* @__PURE__ */ import_react75.default.createElement(TimesIcon, null)));
+    return /* @__PURE__ */ import_react75.default.createElement(
       Select,
       {
         className: "content-select",
@@ -38824,17 +38951,38 @@
       },
       groups ? groups.map((group) => {
         const matches2 = group.items.filter(matchesFilter);
-        return matches2.length ? /* @__PURE__ */ import_react74.default.createElement(SelectGroup, { key: group.label, label: group.label }, matches2.map(renderOption)) : null;
+        return matches2.length ? /* @__PURE__ */ import_react75.default.createElement(SelectGroup, { key: group.label, label: group.label }, matches2.map(renderOption)) : null;
       }) : items.filter(matchesFilter).map(renderOption)
     );
   };
-  var SoftwareHeader = ({ concept }) => /* @__PURE__ */ import_react74.default.createElement(import_react74.default.Fragment, null, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: "software-content-title" }, "Software selection"), /* @__PURE__ */ import_react74.default.createElement("p", { className: "software-description" }, concept));
-  var BaseEnvironmentSection = ({ environment, onEnvironmentChange, children }) => /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-section", "aria-labelledby": "base-environment-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "base-environment-title" }, "Base environment"), /* @__PURE__ */ import_react74.default.createElement("p", null, environment ? "Change the environment to explore the add-ons available for it." : "Select an environment to see its available add-ons."), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Select environment", fieldId: "base-environment-select" }, /* @__PURE__ */ import_react74.default.createElement(SearchSelect, { ariaLabel: "Search and select environment", placeholder: "Search and select environment", items: environments, selected: environment, onSelect: onEnvironmentChange })), children);
+  var EnvironmentSelect = ({ selected, onSelect }) => {
+    const [isOpen, setIsOpen] = (0, import_react75.useState)(false);
+    const selectedName = environments.find((item) => item.id === selected)?.name;
+    return /* @__PURE__ */ import_react75.default.createElement(
+      Select,
+      {
+        className: "environment-select",
+        isOpen,
+        selected,
+        onOpenChange: setIsOpen,
+        onSelect: (_, value) => {
+          onSelect(value);
+          setIsOpen(false);
+        },
+        toggle: (toggleRef) => /* @__PURE__ */ import_react75.default.createElement("button", { ref: toggleRef, type: "button", className: "environment-select-toggle", "aria-label": "Select environment", "aria-expanded": isOpen, onClick: () => setIsOpen((current) => !current) }, /* @__PURE__ */ import_react75.default.createElement("span", null, selectedName || "Select environment"), /* @__PURE__ */ import_react75.default.createElement(AngleDownIcon, { "aria-hidden": "true" })),
+        isScrollable: true,
+        maxMenuHeight: "320px"
+      },
+      environments.map((item) => /* @__PURE__ */ import_react75.default.createElement(SelectOption, { key: item.id, value: item.id, description: item.description, isSelected: selected === item.id }, item.name))
+    );
+  };
+  var SoftwareHeader = ({ concept }) => /* @__PURE__ */ import_react75.default.createElement(import_react75.default.Fragment, null, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: "software-content-title" }, "Software selection"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "software-description" }, concept));
+  var BaseEnvironmentSection = ({ environment, onEnvironmentChange, children }) => /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-section", "aria-labelledby": "base-environment-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "base-environment-title" }, "Base environment"), /* @__PURE__ */ import_react75.default.createElement("p", null, environment && environment !== "none" ? "Change the environment to explore the add-ons available for it." : "Select an environment to see its available add-ons."), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Select environment", fieldId: "base-environment-select" }, /* @__PURE__ */ import_react75.default.createElement(EnvironmentSelect, { selected: environment, onSelect: onEnvironmentChange })), children);
   var SoftwareContent = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn, onAddRecommended }) => {
-    const [expandedGroups, setExpandedGroups] = (0, import_react74.useState)({ specific: true, general: true });
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
+    const [expandedGroups, setExpandedGroups] = (0, import_react75.useState)({ specific: true, general: true });
+    const specificAddOns = getEnvironmentAddOns(environment);
     const addOns = [...specificAddOns, ...generalAddOns];
-    const environmentName = environments.find((item) => item.id === environment)?.name;
+    const environmentName = getEnvironmentName(environment);
     const recommendations = specificAddOns.map((item) => item.id);
     const allRecommendedSelected = recommendations.every((id) => selectedAddOns.includes(id));
     const toggleAddOn = onToggleAddOn;
@@ -38844,17 +38992,17 @@
     const renderTreeGroup = (key, label, items, position) => {
       if (!items.length) return null;
       const parentProps = { "aria-level": 1, "aria-posinset": position, "aria-setsize": items.length, isExpanded: expandedGroups[key], toggleAriaLabel: `${expandedGroups[key] ? "Collapse" : "Expand"} ${label}` };
-      return /* @__PURE__ */ import_react74.default.createElement(import_react74.default.Fragment, { key }, /* @__PURE__ */ import_react74.default.createElement(TreeRowWrapper, { row: { props: parentProps }, className: "software-tree-parent" }, /* @__PURE__ */ import_react74.default.createElement(Td, { treeRow: { rowIndex: position, props: parentProps, onCollapse: () => setExpandedGroups((current) => ({ ...current, [key]: !current[key] })) } }, /* @__PURE__ */ import_react74.default.createElement("strong", null, label), /* @__PURE__ */ import_react74.default.createElement("span", { className: "software-tree-count" }, items.length, " selected")), /* @__PURE__ */ import_react74.default.createElement(Td, null)), items.map((item, index) => {
+      return /* @__PURE__ */ import_react75.default.createElement(import_react75.default.Fragment, { key }, /* @__PURE__ */ import_react75.default.createElement(TreeRowWrapper, { row: { props: parentProps }, className: "software-tree-parent" }, /* @__PURE__ */ import_react75.default.createElement(Td, { treeRow: { rowIndex: position, props: parentProps, onCollapse: () => setExpandedGroups((current) => ({ ...current, [key]: !current[key] })) } }, /* @__PURE__ */ import_react75.default.createElement("strong", null, label), /* @__PURE__ */ import_react75.default.createElement("span", { className: "software-tree-count" }, items.length, " selected")), /* @__PURE__ */ import_react75.default.createElement(Td, null)), items.map((item, index) => {
         const childProps = { "aria-level": 2, "aria-posinset": index + 1, "aria-setsize": 0, isHidden: !expandedGroups[key] };
-        return /* @__PURE__ */ import_react74.default.createElement(TreeRowWrapper, { key: item.id, row: { props: childProps } }, /* @__PURE__ */ import_react74.default.createElement(Td, { treeRow: { rowIndex: index + 1, props: childProps, onCollapse: () => {
-        } }, dataLabel: "Name" }, /* @__PURE__ */ import_react74.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react74.default.createElement("p", null, item.description)), /* @__PURE__ */ import_react74.default.createElement(Td, { isActionCell: true }, /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "plain", icon: /* @__PURE__ */ import_react74.default.createElement(MinusCircleIcon, null), "aria-label": `Remove ${item.name}`, onClick: () => toggleAddOn(item.id) })));
+        return /* @__PURE__ */ import_react75.default.createElement(TreeRowWrapper, { key: item.id, row: { props: childProps } }, /* @__PURE__ */ import_react75.default.createElement(Td, { treeRow: { rowIndex: index + 1, props: childProps, onCollapse: () => {
+        } }, dataLabel: "Name" }, /* @__PURE__ */ import_react75.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react75.default.createElement("p", null, item.description)), /* @__PURE__ */ import_react75.default.createElement(Td, { isActionCell: true }, /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "plain", icon: /* @__PURE__ */ import_react75.default.createElement(MinusCircleIcon, null), "aria-label": `Remove ${item.name}`, onClick: () => toggleAddOn(item.id) })));
       }));
     };
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareHeader, { concept: "Concept 1 \xB7 Grouped menu and tree table. Choose a base environment, then add software." }), /* @__PURE__ */ import_react74.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }), /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react74.default.createElement("p", null, environmentName ? `Choose add-ons for ${environmentName}. Recommended options appear first.` : "Choose optional add-ons available for any environment."), environmentName && /* @__PURE__ */ import_react74.default.createElement(Alert, { variant: "info", isInline: true, isExpandable: true, component: "h3", className: "software-recommendations", title: `Recommended add-ons for ${environmentName}`, toggleAriaLabel: `Recommended add-ons for ${environmentName} details` }, /* @__PURE__ */ import_react74.default.createElement("p", null, "Choose the add-ons that fit this environment."), /* @__PURE__ */ import_react74.default.createElement("div", { className: "software-recommendation-list" }, specificAddOns.map((item) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "software-recommendation-item", key: item.id }, /* @__PURE__ */ import_react74.default.createElement("div", null, /* @__PURE__ */ import_react74.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react74.default.createElement("p", null, item.description)), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", icon: /* @__PURE__ */ import_react74.default.createElement(PlusCircleIcon, null), isDisabled: selectedAddOns.includes(item.id), onClick: () => toggleAddOn(item.id) }, selectedAddOns.includes(item.id) ? "Added" : "Add")))), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", isDisabled: allRecommendedSelected, onClick: addRecommended }, allRecommendedSelected ? "All recommended add-ons added" : "Add all recommended")), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Add-ons", fieldId: "software-addon-select" }, /* @__PURE__ */ import_react74.default.createElement(SearchSelect, { ariaLabel: "Search and add software", placeholder: "Search and add software", items: addOns, groups: [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }], selected: selectedAddOns, onSelect: toggleAddOn, isMulti: true })), /* @__PURE__ */ import_react74.default.createElement(Table, { "aria-label": "Selected software add-ons", variant: "compact", isTreeTable: true, className: "selected-software-table" }, /* @__PURE__ */ import_react74.default.createElement(Thead, null, /* @__PURE__ */ import_react74.default.createElement(Tr, null, /* @__PURE__ */ import_react74.default.createElement(Th, null, "Name"), /* @__PURE__ */ import_react74.default.createElement(Th, { screenReaderText: "Actions" }))), /* @__PURE__ */ import_react74.default.createElement(Tbody, null, renderTreeGroup("specific", `For ${environmentName}`, selectedSpecific, 1), renderTreeGroup("general", "Other add-ons", selectedGeneral, 2), !selectedSpecific.length && !selectedGeneral.length && /* @__PURE__ */ import_react74.default.createElement(Tr, null, /* @__PURE__ */ import_react74.default.createElement(Td, { colSpan: 2, className: "empty-software-state" }, "No additional software selected."))))));
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareHeader, { concept: "Concept 1 \xB7 Grouped menu and tree table. Choose a base environment, then add software." }), /* @__PURE__ */ import_react75.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }), /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react75.default.createElement("p", null, environmentName ? `Choose add-ons for ${environmentName}. Recommended options appear first.` : "Choose optional add-ons available for any environment."), environmentName && /* @__PURE__ */ import_react75.default.createElement(Alert, { variant: "custom", customIcon: /* @__PURE__ */ import_react75.default.createElement(rh_ui_cubes_icon_default, null), isInline: true, isExpandable: true, component: "h3", className: "software-recommendations", title: `Recommended add-ons for ${environmentName}`, toggleAriaLabel: `Recommended add-ons for ${environmentName} details` }, /* @__PURE__ */ import_react75.default.createElement("p", null, "Choose the add-ons that fit this environment."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "software-recommendation-list" }, specificAddOns.map((item) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "software-recommendation-item", key: item.id }, /* @__PURE__ */ import_react75.default.createElement("div", null, /* @__PURE__ */ import_react75.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react75.default.createElement("p", null, item.description)), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", icon: /* @__PURE__ */ import_react75.default.createElement(PlusCircleIcon, null), isDisabled: selectedAddOns.includes(item.id), onClick: () => toggleAddOn(item.id) }, selectedAddOns.includes(item.id) ? "Added" : "Add")))), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", isDisabled: allRecommendedSelected, onClick: addRecommended }, allRecommendedSelected ? "All recommended add-ons added" : "Add all recommended")), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Add-ons", fieldId: "software-addon-select" }, /* @__PURE__ */ import_react75.default.createElement(SearchSelect, { ariaLabel: "Search and add software", placeholder: "Search and add software", items: addOns, groups: environmentName ? [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }] : [{ label: "Available add-ons", items: generalAddOns }], selected: selectedAddOns, onSelect: toggleAddOn, isMulti: true })), /* @__PURE__ */ import_react75.default.createElement(Table, { "aria-label": "Selected software add-ons", variant: "compact", isTreeTable: true, className: "selected-software-table" }, /* @__PURE__ */ import_react75.default.createElement(Thead, null, /* @__PURE__ */ import_react75.default.createElement(Tr, null, /* @__PURE__ */ import_react75.default.createElement(Th, null, "Name"), /* @__PURE__ */ import_react75.default.createElement(Th, { screenReaderText: "Actions" }))), /* @__PURE__ */ import_react75.default.createElement(Tbody, null, renderTreeGroup("specific", environmentName ? `For ${environmentName}` : "Environment add-ons", selectedSpecific, 1), renderTreeGroup("general", "Other add-ons", selectedGeneral, 2), !selectedSpecific.length && !selectedGeneral.length && /* @__PURE__ */ import_react75.default.createElement(Tr, null, /* @__PURE__ */ import_react75.default.createElement(Td, { colSpan: 2, className: "empty-software-state" }, "No additional software selected."))))));
   };
   var AddOnChecklist = ({ items, selectedAddOns, onToggleAddOn, filter = "", idPrefix }) => {
     const visibleItems = items.filter((item) => `${item.name} ${item.description}`.toLowerCase().includes(filter.toLowerCase()));
-    return /* @__PURE__ */ import_react74.default.createElement("div", { className: "software-checklist" }, visibleItems.map((item) => /* @__PURE__ */ import_react74.default.createElement(
+    return /* @__PURE__ */ import_react75.default.createElement("div", { className: "software-checklist" }, visibleItems.map((item) => /* @__PURE__ */ import_react75.default.createElement(
       Checkbox,
       {
         key: item.id,
@@ -38864,15 +39012,15 @@
         isChecked: selectedAddOns.includes(item.id),
         onChange: () => onToggleAddOn(item.id)
       }
-    )), !visibleItems.length && /* @__PURE__ */ import_react74.default.createElement("p", { className: "software-no-results" }, "No matching add-ons."));
+    )), !visibleItems.length && /* @__PURE__ */ import_react75.default.createElement("p", { className: "software-no-results" }, "No matching add-ons."));
   };
-  var SelectedAddOnsSummary = ({ environment, selectedAddOns, onToggleAddOn, showCategory = false }) => {
-    const currentEnvironmentAddOns = environment ? environmentAddOns[environment] : [];
+  var SelectedAddOnsSummary = ({ environment, selectedAddOns, onToggleAddOn, showCategory = false, showSelectedIcon = false }) => {
+    const currentEnvironmentAddOns = getEnvironmentAddOns(environment);
     const items = [...currentEnvironmentAddOns, ...generalAddOns].filter((item) => selectedAddOns.includes(item.id));
     const specificIds = new Set(currentEnvironmentAddOns.map((item) => item.id));
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-selection-summary", "aria-labelledby": "selected-addons-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: showCategory ? "h2" : "h3", size: showCategory ? "xl" : "lg", id: "selected-addons-title" }, "Selected software (", items.length, ")"), /* @__PURE__ */ import_react74.default.createElement(Table, { "aria-label": "Selected software add-ons", variant: "compact", className: "selected-software-table" }, /* @__PURE__ */ import_react74.default.createElement(Thead, null, /* @__PURE__ */ import_react74.default.createElement(Tr, null, /* @__PURE__ */ import_react74.default.createElement(Th, null, "Name"), showCategory && /* @__PURE__ */ import_react74.default.createElement(Th, null, "Category"), /* @__PURE__ */ import_react74.default.createElement(Th, { screenReaderText: "Actions" }))), /* @__PURE__ */ import_react74.default.createElement(Tbody, null, items.map((item) => /* @__PURE__ */ import_react74.default.createElement(Tr, { key: item.id }, /* @__PURE__ */ import_react74.default.createElement(Td, { dataLabel: "Name" }, /* @__PURE__ */ import_react74.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react74.default.createElement("p", null, item.description)), showCategory && /* @__PURE__ */ import_react74.default.createElement(Td, { dataLabel: "Category" }, specificIds.has(item.id) ? "Base environment" : "Additional software"), /* @__PURE__ */ import_react74.default.createElement(Td, { isActionCell: true }, /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "plain", icon: /* @__PURE__ */ import_react74.default.createElement(MinusCircleIcon, null), "aria-label": `Remove ${item.name}`, onClick: () => onToggleAddOn(item.id) })))), !items.length && /* @__PURE__ */ import_react74.default.createElement(Tr, null, /* @__PURE__ */ import_react74.default.createElement(Td, { colSpan: showCategory ? 3 : 2, className: "empty-software-state" }, "No additional software selected.")))));
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-selection-summary", "aria-labelledby": "selected-addons-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: showCategory ? "h2" : "h3", size: showCategory ? "xl" : "lg", id: "selected-addons-title" }, showSelectedIcon && /* @__PURE__ */ import_react75.default.createElement(rh_ui_check_clipboard_icon_default, { className: "software-heading-icon", "aria-hidden": "true" }), /* @__PURE__ */ import_react75.default.createElement("span", null, "Selected software (", items.length, ")")), /* @__PURE__ */ import_react75.default.createElement(Table, { "aria-label": "Selected software add-ons", variant: "compact", className: "selected-software-table" }, /* @__PURE__ */ import_react75.default.createElement(Thead, null, /* @__PURE__ */ import_react75.default.createElement(Tr, null, /* @__PURE__ */ import_react75.default.createElement(Th, null, "Name"), showCategory && /* @__PURE__ */ import_react75.default.createElement(Th, null, "Category"), /* @__PURE__ */ import_react75.default.createElement(Th, { screenReaderText: "Actions" }))), /* @__PURE__ */ import_react75.default.createElement(Tbody, null, items.map((item) => /* @__PURE__ */ import_react75.default.createElement(Tr, { key: item.id }, /* @__PURE__ */ import_react75.default.createElement(Td, { dataLabel: "Name" }, /* @__PURE__ */ import_react75.default.createElement("strong", null, item.name), /* @__PURE__ */ import_react75.default.createElement("p", null, item.description)), showCategory && /* @__PURE__ */ import_react75.default.createElement(Td, { dataLabel: "Category" }, specificIds.has(item.id) ? "Base environment" : "Additional software"), /* @__PURE__ */ import_react75.default.createElement(Td, { isActionCell: true }, /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "plain", icon: /* @__PURE__ */ import_react75.default.createElement(MinusCircleIcon, null), "aria-label": `Remove ${item.name}`, onClick: () => onToggleAddOn(item.id) })))), !items.length && /* @__PURE__ */ import_react75.default.createElement(Tr, null, /* @__PURE__ */ import_react75.default.createElement(Td, { colSpan: showCategory ? 3 : 2, className: "empty-software-state" }, "No additional software selected.")))));
   };
-  var EnvironmentAddOnsTable = ({ environmentName, items, selectedAddOns, onToggleAddOn, idPrefix }) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "environment-table-scroll" }, /* @__PURE__ */ import_react74.default.createElement(Table, { "aria-label": `Add-ons for ${environmentName}`, variant: "compact", className: "environment-software-table" }, /* @__PURE__ */ import_react74.default.createElement(Thead, null, /* @__PURE__ */ import_react74.default.createElement(Tr, null, /* @__PURE__ */ import_react74.default.createElement(Th, null, "Add-on"), /* @__PURE__ */ import_react74.default.createElement(Th, null, "Description"))), /* @__PURE__ */ import_react74.default.createElement(Tbody, null, items.map((item) => /* @__PURE__ */ import_react74.default.createElement(Tr, { key: item.id }, /* @__PURE__ */ import_react74.default.createElement(Td, { dataLabel: "Add-on" }, /* @__PURE__ */ import_react74.default.createElement(
+  var EnvironmentAddOnsTable = ({ environmentName, items, selectedAddOns, onToggleAddOn, idPrefix }) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "environment-table-scroll" }, /* @__PURE__ */ import_react75.default.createElement(Table, { "aria-label": `Add-ons for ${environmentName}`, variant: "compact", className: "environment-software-table" }, /* @__PURE__ */ import_react75.default.createElement(Thead, null, /* @__PURE__ */ import_react75.default.createElement(Tr, null, /* @__PURE__ */ import_react75.default.createElement(Th, null, "Add-on"), /* @__PURE__ */ import_react75.default.createElement(Th, null, "Description"))), /* @__PURE__ */ import_react75.default.createElement(Tbody, null, items.map((item) => /* @__PURE__ */ import_react75.default.createElement(Tr, { key: item.id }, /* @__PURE__ */ import_react75.default.createElement(Td, { dataLabel: "Add-on" }, /* @__PURE__ */ import_react75.default.createElement(
     Checkbox,
     {
       id: `${idPrefix}-${item.id}`,
@@ -38880,14 +39028,15 @@
       isChecked: selectedAddOns.includes(item.id),
       onChange: () => onToggleAddOn(item.id)
     }
-  )), /* @__PURE__ */ import_react74.default.createElement(Td, { dataLabel: "Description" }, item.description))))));
+  )), /* @__PURE__ */ import_react75.default.createElement(Td, { dataLabel: "Description" }, item.description))))));
   var SoftwareCatalogColumns = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn }) => {
-    const environmentName = environments.find((item) => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareHeader, { concept: "Concept 2 \xB7 Preview software as you explore base environments, then choose any additional software." }), /* @__PURE__ */ import_react74.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }, environment && /* @__PURE__ */ import_react74.default.createElement(
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareHeader, { concept: "Concept 2 \xB7 Preview software as you explore base environments, then choose any additional software." }), /* @__PURE__ */ import_react75.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }, environmentName && /* @__PURE__ */ import_react75.default.createElement(
       Alert,
       {
-        variant: "info",
+        variant: "custom",
+        customIcon: /* @__PURE__ */ import_react75.default.createElement(rh_ui_cubes_icon_default, null),
         isInline: true,
         isExpandable: true,
         component: "h3",
@@ -38895,57 +39044,57 @@
         title: `Add-ons for ${environmentName}`,
         toggleAriaLabel: `Add-ons for ${environmentName}`
       },
-      /* @__PURE__ */ import_react74.default.createElement("p", null, "Each row is one selectable add-on for this environment."),
-      /* @__PURE__ */ import_react74.default.createElement(EnvironmentAddOnsTable, { environmentName, items: specificAddOns, selectedAddOns, onToggleAddOn, idPrefix: "preview-specific" })
-    )), /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react74.default.createElement("p", null, "Search and add software by environment or from the full add-on catalog."), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Add-ons", fieldId: "preview-addon-select" }, /* @__PURE__ */ import_react74.default.createElement(
+      /* @__PURE__ */ import_react75.default.createElement("p", null, "Each row is one selectable add-on for this environment."),
+      /* @__PURE__ */ import_react75.default.createElement(EnvironmentAddOnsTable, { environmentName, items: specificAddOns, selectedAddOns, onToggleAddOn, idPrefix: "preview-specific" })
+    )), /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react75.default.createElement("p", null, "Search and add software by environment or from the full add-on catalog."), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Add-ons", fieldId: "preview-addon-select" }, /* @__PURE__ */ import_react75.default.createElement(
       SearchSelect,
       {
         ariaLabel: "Search and add software",
         placeholder: "Search and add software",
         items: [...specificAddOns, ...generalAddOns],
-        groups: [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }],
+        groups: environmentName ? [{ label: `For ${environmentName}`, items: specificAddOns }, { label: "Other add-ons", items: generalAddOns }] : [{ label: "Available add-ons", items: generalAddOns }],
         selected: selectedAddOns,
         onSelect: onToggleAddOn,
         isMulti: true
       }
-    ))), /* @__PURE__ */ import_react74.default.createElement(SelectedAddOnsSummary, { environment, selectedAddOns, onToggleAddOn, showCategory: true }));
+    ))), /* @__PURE__ */ import_react75.default.createElement(SelectedAddOnsSummary, { environment, selectedAddOns, onToggleAddOn, showCategory: true }));
   };
   var SoftwareCatalogTable = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn }) => {
-    const environmentName = environments.find((item) => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareHeader, { concept: "Concept 4 \xB7 Compare environment-specific add-ons in a table before choosing." }), /* @__PURE__ */ import_react74.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }, environment && /* @__PURE__ */ import_react74.default.createElement("div", { className: "environment-table-section", "aria-live": "polite" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h3", size: "lg" }, "Add-ons for ", environmentName), /* @__PURE__ */ import_react74.default.createElement("p", null, "Each row is one selectable add-on for this environment."), /* @__PURE__ */ import_react74.default.createElement(EnvironmentAddOnsTable, { environmentName, items: specificAddOns, selectedAddOns, onToggleAddOn, idPrefix: "table-specific" }))), /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react74.default.createElement("p", null, "Optional add-ons available with any base environment."), /* @__PURE__ */ import_react74.default.createElement(FormGroup, { label: "Add-ons", fieldId: "table-addon-select" }, /* @__PURE__ */ import_react74.default.createElement(SearchSelect, { ariaLabel: "Search and add software", placeholder: "Search and add software", items: generalAddOns, selected: selectedAddOns, onSelect: onToggleAddOn, isMulti: true }))), /* @__PURE__ */ import_react74.default.createElement(SelectedAddOnsSummary, { environment, selectedAddOns, onToggleAddOn, showCategory: true }));
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-content software-table-concept", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareHeader, { concept: "Concept 4 \xB7 Compare environment-specific add-ons in a table before choosing." }), /* @__PURE__ */ import_react75.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }, environmentName && /* @__PURE__ */ import_react75.default.createElement("div", { className: "environment-table-section", "aria-live": "polite" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h3", size: "lg", className: "environment-table-title" }, /* @__PURE__ */ import_react75.default.createElement(rh_ui_cubes_icon_default, { "aria-hidden": "true" }), /* @__PURE__ */ import_react75.default.createElement("span", null, "Add-ons for ", environmentName)), /* @__PURE__ */ import_react75.default.createElement("p", null, "Each row is one selectable add-on for this environment."), /* @__PURE__ */ import_react75.default.createElement(EnvironmentAddOnsTable, { environmentName, items: specificAddOns, selectedAddOns, onToggleAddOn, idPrefix: "table-specific" }))), /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react75.default.createElement("p", null, "Optional add-ons available with any base environment."), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Add-ons", fieldId: "table-addon-select" }, /* @__PURE__ */ import_react75.default.createElement(SearchSelect, { ariaLabel: "Search and add software", placeholder: "Search and add software", items: generalAddOns, selected: selectedAddOns, onSelect: onToggleAddOn, isMulti: true }))), /* @__PURE__ */ import_react75.default.createElement(SelectedAddOnsSummary, { environment, selectedAddOns, onToggleAddOn, showCategory: true, showSelectedIcon: true }));
   };
   var SoftwareCatalogTabs = ({ environment, selectedAddOns, onEnvironmentChange, onToggleAddOn, onAddRecommended }) => {
-    const [activeCategory, setActiveCategory] = (0, import_react74.useState)("environment");
-    const [filter, setFilter] = (0, import_react74.useState)("");
-    const environmentName = environments.find((item) => item.id === environment)?.name;
-    const specificAddOns = environment ? environmentAddOns[environment] : [];
+    const [activeCategory, setActiveCategory] = (0, import_react75.useState)("environment");
+    const [filter, setFilter] = (0, import_react75.useState)("");
+    const environmentName = getEnvironmentName(environment);
+    const specificAddOns = getEnvironmentAddOns(environment);
     const allRecommendedSelected = specificAddOns.every((item) => selectedAddOns.includes(item.id));
-    const showCategory = (key, items, idPrefix) => /* @__PURE__ */ import_react74.default.createElement("div", { className: "software-tab-content" }, /* @__PURE__ */ import_react74.default.createElement(SearchInput, { "aria-label": `Search ${key === "environment" ? environmentName : "other"} add-ons`, placeholder: "Search add-ons", value: filter, onChange: (_, value) => setFilter(value), onClear: () => setFilter("") }), key === "environment" && !environment ? /* @__PURE__ */ import_react74.default.createElement("p", null, "Select a base environment to see its add-ons.") : /* @__PURE__ */ import_react74.default.createElement(AddOnChecklist, { items, selectedAddOns, onToggleAddOn, filter, idPrefix }), key === "environment" && /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", isDisabled: allRecommendedSelected, onClick: () => onAddRecommended(specificAddOns.map((item) => item.id)) }, allRecommendedSelected ? "All selected" : "Select all for this environment"));
-    return /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareHeader, { concept: "Concept 3 \xB7 Focus on one add-on category at a time with tabs." }), /* @__PURE__ */ import_react74.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }), /* @__PURE__ */ import_react74.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react74.default.createElement("p", null, "Switch categories to browse and select add-ons. Selections stay marked in each list."), /* @__PURE__ */ import_react74.default.createElement(Tabs, { activeKey: activeCategory, onSelect: (_, key) => {
+    const showCategory = (key, items, idPrefix) => /* @__PURE__ */ import_react75.default.createElement("div", { className: "software-tab-content" }, /* @__PURE__ */ import_react75.default.createElement(SearchInput, { "aria-label": `Search ${key === "environment" ? environmentName : "other"} add-ons`, placeholder: "Search add-ons", value: filter, onChange: (_, value) => setFilter(value), onClear: () => setFilter("") }), key === "environment" && !environmentName ? /* @__PURE__ */ import_react75.default.createElement("p", null, "Select a base environment to see its add-ons.") : /* @__PURE__ */ import_react75.default.createElement(AddOnChecklist, { items, selectedAddOns, onToggleAddOn, filter, idPrefix }), key === "environment" && /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", isDisabled: allRecommendedSelected, onClick: () => onAddRecommended(specificAddOns.map((item) => item.id)) }, allRecommendedSelected ? "All selected" : "Select all for this environment"));
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-content", "aria-labelledby": "software-content-title" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareHeader, { concept: "Concept 3 \xB7 Focus on one add-on category at a time with tabs." }), /* @__PURE__ */ import_react75.default.createElement(BaseEnvironmentSection, { environment, onEnvironmentChange }), /* @__PURE__ */ import_react75.default.createElement("section", { className: "software-section additional-software", "aria-labelledby": "additional-software-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "xl", id: "additional-software-title" }, "Additional software"), /* @__PURE__ */ import_react75.default.createElement("p", null, "Switch categories to browse and select add-ons. Selections stay marked in each list."), /* @__PURE__ */ import_react75.default.createElement(Tabs, { activeKey: activeCategory, onSelect: (_, key) => {
       setActiveCategory(key);
       setFilter("");
-    }, tabListAriaLabel: "Add-on categories", className: "software-category-tabs" }, /* @__PURE__ */ import_react74.default.createElement(Tab, { eventKey: "environment", title: /* @__PURE__ */ import_react74.default.createElement(TabTitleText, null, environmentName ? `For ${environmentName}` : "Choose an environment") }, environmentName ? showCategory("environment", specificAddOns, "tab-specific") : /* @__PURE__ */ import_react74.default.createElement("p", null, "Select a base environment to see its add-ons.")), /* @__PURE__ */ import_react74.default.createElement(Tab, { eventKey: "other", title: /* @__PURE__ */ import_react74.default.createElement(TabTitleText, null, "Other add-ons") }, showCategory("other", generalAddOns, "tab-general")))));
+    }, tabListAriaLabel: "Add-on categories", className: "software-category-tabs" }, /* @__PURE__ */ import_react75.default.createElement(Tab, { eventKey: "environment", title: /* @__PURE__ */ import_react75.default.createElement(TabTitleText, null, environmentName ? `For ${environmentName}` : "Choose an environment") }, environmentName ? showCategory("environment", specificAddOns, "tab-specific") : /* @__PURE__ */ import_react75.default.createElement("p", null, "Select a base environment to see its add-ons.")), /* @__PURE__ */ import_react75.default.createElement(Tab, { eventKey: "other", title: /* @__PURE__ */ import_react75.default.createElement(TabTitleText, null, "Other add-ons") }, showCategory("other", generalAddOns, "tab-general")))));
   };
   function App() {
-    const [theme, setTheme] = (0, import_react74.useState)("light");
-    const [started, setStarted] = (0, import_react74.useState)(false);
-    const [finished, setFinished] = (0, import_react74.useState)(false);
-    const [completedSteps, setCompletedSteps] = (0, import_react74.useState)([]);
-    const [installationMode, setInstallationMode] = (0, import_react74.useState)("package");
-    const [softwareEnvironment, setSoftwareEnvironment] = (0, import_react74.useState)("");
-    const [selectedSoftwareAddOns, setSelectedSoftwareAddOns] = (0, import_react74.useState)([]);
+    const [theme, setTheme] = (0, import_react75.useState)("light");
+    const [started, setStarted] = (0, import_react75.useState)(false);
+    const [finished, setFinished] = (0, import_react75.useState)(false);
+    const [completedSteps, setCompletedSteps] = (0, import_react75.useState)([]);
+    const [installationMode, setInstallationMode] = (0, import_react75.useState)("package");
+    const [softwareEnvironment, setSoftwareEnvironment] = (0, import_react75.useState)("");
+    const [selectedSoftwareAddOns, setSelectedSoftwareAddOns] = (0, import_react75.useState)([]);
     const changeSoftwareEnvironment = (id) => setSoftwareEnvironment(id);
     const toggleSoftwareAddOn = (id) => setSelectedSoftwareAddOns((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
     const addRecommendedSoftware = (ids) => setSelectedSoftwareAddOns((current) => [.../* @__PURE__ */ new Set([...current, ...ids])]);
     const softwareProps = {
       environment: softwareEnvironment,
-      selectedAddOns: selectedSoftwareAddOns.filter((id) => generalAddOns.some((item) => item.id === id) || softwareEnvironment && environmentAddOns[softwareEnvironment].some((item) => item.id === id)),
+      selectedAddOns: selectedSoftwareAddOns.filter((id) => generalAddOns.some((item) => item.id === id) || getEnvironmentAddOns(softwareEnvironment).some((item) => item.id === id)),
       onEnvironmentChange: changeSoftwareEnvironment,
       onToggleAddOn: toggleSoftwareAddOn,
       onAddRecommended: addRecommendedSoftware
     };
-    (0, import_react74.useEffect)(() => {
+    (0, import_react75.useEffect)(() => {
       document.documentElement.classList.toggle("pf-v6-theme-dark", theme === "dark");
       return () => document.documentElement.classList.remove("pf-v6-theme-dark");
     }, [theme]);
@@ -38954,7 +39103,7 @@
       setFinished(false);
       setCompletedSteps([]);
     };
-    const steps = stepContent.map(({ name, description }, index) => index === 5 ? /* @__PURE__ */ import_react74.default.createElement(
+    const steps = stepContent.map(({ name, description }, index) => index === 5 ? /* @__PURE__ */ import_react75.default.createElement(
       WizardStep,
       {
         key: name,
@@ -38962,13 +39111,13 @@
         name,
         status: completedSteps.includes("setup-step-6") ? "success" : "default",
         steps: [
-          /* @__PURE__ */ import_react74.default.createElement(WizardStep, { key: "grouped", id: "setup-step-6-grouped", name: "Grouped menu" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareContent, { ...softwareProps })),
-          /* @__PURE__ */ import_react74.default.createElement(WizardStep, { key: "columns", id: "setup-step-6-columns", name: "Environment preview" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareCatalogColumns, { ...softwareProps })),
-          /* @__PURE__ */ import_react74.default.createElement(WizardStep, { key: "tabs", id: "setup-step-6-tabs", name: "Category tabs" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareCatalogTabs, { ...softwareProps })),
-          /* @__PURE__ */ import_react74.default.createElement(WizardStep, { key: "table", id: "setup-step-6-table", name: "Software table" }, /* @__PURE__ */ import_react74.default.createElement(SoftwareCatalogTable, { ...softwareProps }))
+          /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "grouped", id: "setup-step-6-grouped", name: "A. Grouped menu" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareContent, { ...softwareProps })),
+          /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "columns", id: "setup-step-6-columns", name: "B. Environment preview" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogColumns, { ...softwareProps })),
+          /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "tabs", id: "setup-step-6-tabs", name: "C. Category tabs" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogTabs, { ...softwareProps })),
+          /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "table", id: "setup-step-6-table", name: "D. Software table" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogTable, { ...softwareProps }))
         ]
       }
-    ) : /* @__PURE__ */ import_react74.default.createElement(
+    ) : /* @__PURE__ */ import_react75.default.createElement(
       WizardStep,
       {
         key: name,
@@ -38977,9 +39126,9 @@
         status: completedSteps.includes(`setup-step-${index + 1}`) ? "success" : "default",
         footer: { nextButtonText: index === stepContent.length - 1 ? "Finish" : "Next" }
       },
-      index === 4 ? /* @__PURE__ */ import_react74.default.createElement(InstallationContent, { mode: installationMode, setMode: setInstallationMode }) : /* @__PURE__ */ import_react74.default.createElement("section", { className: "step-content", "aria-labelledby": `setup-step-${index + 1}-title` }, /* @__PURE__ */ import_react74.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: `setup-step-${index + 1}-title` }, name), /* @__PURE__ */ import_react74.default.createElement("p", null, description))
+      index === 4 ? /* @__PURE__ */ import_react75.default.createElement(InstallationContent, { mode: installationMode, setMode: setInstallationMode }) : /* @__PURE__ */ import_react75.default.createElement("section", { className: "step-content", "aria-labelledby": `setup-step-${index + 1}-title` }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: `setup-step-${index + 1}-title` }, name), /* @__PURE__ */ import_react75.default.createElement("p", null, description))
     ));
-    return /* @__PURE__ */ import_react74.default.createElement("main", { className: `setup-backdrop theme-${theme}` }, !started ? /* @__PURE__ */ import_react74.default.createElement("section", { className: "welcome-card", "aria-labelledby": "welcome-title" }, /* @__PURE__ */ import_react74.default.createElement("div", { className: "brand-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react74.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react74.default.createElement("p", { className: "eyebrow" }, "RED HAT ENTERPRISE LINUX"), /* @__PURE__ */ import_react74.default.createElement("h1", { id: "welcome-title" }, "Welcome"), /* @__PURE__ */ import_react74.default.createElement("p", { className: "welcome-copy" }, "Let\u2019s get your system ready. This guided setup will help you configure the essentials before installation."), /* @__PURE__ */ import_react74.default.createElement("div", { className: "appearance-selector" }, /* @__PURE__ */ import_react74.default.createElement("span", null, "Appearance"), /* @__PURE__ */ import_react74.default.createElement(ThemeToggle, { theme, setTheme })), /* @__PURE__ */ import_react74.default.createElement("div", { className: "welcome-actions" }, /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "primary", onClick: () => setStarted(true) }, "Begin setup"), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", onClick: () => setStarted(true) }, "Continue to setup"))) : finished ? /* @__PURE__ */ import_react74.default.createElement("section", { className: "welcome-card completion-card" }, /* @__PURE__ */ import_react74.default.createElement("div", { className: "brand-mark completion-mark", "aria-hidden": "true" }, "\u2713"), /* @__PURE__ */ import_react74.default.createElement("h1", null, "Setup complete"), /* @__PURE__ */ import_react74.default.createElement("p", { className: "welcome-copy" }, "You\u2019ve reached the end of the setup wizard."), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "primary", onClick: showOpeningPage }, "Return to opening page")) : /* @__PURE__ */ import_react74.default.createElement("div", { className: "wizard-frame" }, /* @__PURE__ */ import_react74.default.createElement("header", { className: "wizard-brand" }, /* @__PURE__ */ import_react74.default.createElement("span", { className: "mini-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react74.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react74.default.createElement("span", null, "Red Hat Enterprise Linux setup"), /* @__PURE__ */ import_react74.default.createElement(ThemeToggle, { theme, setTheme, isCompact: true }), /* @__PURE__ */ import_react74.default.createElement(Button, { variant: "link", onClick: showOpeningPage }, "Opening page")), /* @__PURE__ */ import_react74.default.createElement(
+    return /* @__PURE__ */ import_react75.default.createElement("main", { className: `setup-backdrop theme-${theme}` }, !started ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card", "aria-labelledby": "welcome-title" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("p", { className: "eyebrow" }, "RED HAT ENTERPRISE LINUX"), /* @__PURE__ */ import_react75.default.createElement("h1", { id: "welcome-title" }, "Welcome"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "Let\u2019s get your system ready. This guided setup will help you configure the essentials before installation."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "appearance-selector" }, /* @__PURE__ */ import_react75.default.createElement("span", null, "Appearance"), /* @__PURE__ */ import_react75.default.createElement(AppearanceSwitch, { theme, setTheme })), /* @__PURE__ */ import_react75.default.createElement("div", { className: "welcome-actions" }, /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", icon: /* @__PURE__ */ import_react75.default.createElement(ArrowRightIcon, null), iconPosition: "end", onClick: () => setStarted(true) }, "Install RHEL"), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "secondary", onClick: () => setStarted(false) }, "Cancel"))) : finished ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card completion-card" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark completion-mark", "aria-hidden": "true" }, "\u2713"), /* @__PURE__ */ import_react75.default.createElement("h1", null, "Setup complete"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "You\u2019ve reached the end of the setup wizard."), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", onClick: showOpeningPage }, "Return to opening page")) : /* @__PURE__ */ import_react75.default.createElement("div", { className: "wizard-frame" }, /* @__PURE__ */ import_react75.default.createElement("header", { className: "wizard-brand" }, /* @__PURE__ */ import_react75.default.createElement("span", { className: "mini-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("span", null, "Red Hat Enterprise Linux setup"), /* @__PURE__ */ import_react75.default.createElement(ThemeToggle, { theme, setTheme, isCompact: true }), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", onClick: showOpeningPage }, "Opening page")), /* @__PURE__ */ import_react75.default.createElement(
       Wizard,
       {
         className: "setup-wizard",
@@ -39002,7 +39151,7 @@
       steps
     )));
   }
-  (0, import_client.createRoot)(document.getElementById("app")).render(/* @__PURE__ */ import_react74.default.createElement(App, null));
+  (0, import_client.createRoot)(document.getElementById("app")).render(/* @__PURE__ */ import_react75.default.createElement(App, null));
 })();
 /*! Bundled license information:
 
