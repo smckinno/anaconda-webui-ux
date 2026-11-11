@@ -36423,6 +36423,15 @@
   var RhUiTemplateIcon = createIconBase(RhUiTemplateIconConfig);
   var rh_ui_template_icon_default = RhUiTemplateIcon;
 
+  // node_modules/@patternfly/react-icons/dist/esm/icons/rh-ui-trash-icon.js
+  var RhUiTrashIconConfig = {
+    name: "RhUiTrashIcon",
+    icon: { "xOffset": 0, "yOffset": 0, "width": 32, "height": 32, "svgPathData": "M12 24v-8a1 1 0 1 1 2 0v8a1 1 0 1 1-2 0Zm7 1a1 1 0 0 0 1-1v-8a1 1 0 1 0-2 0v8a1 1 0 0 0 1 1Zm8-14a1 1 0 0 1-1 1h-1v16.5c0 .827-.673 1.5-1.5 1.5h-15c-.827 0-1.5-.673-1.5-1.5V12H6a1 1 0 1 1 0-2h20a1 1 0 0 1 1 1Zm-4 1H9v16h14V12ZM5 6a1 1 0 0 1 1-1h5.101c.465-2.279 2.484-4 4.899-4s4.434 1.721 4.899 4H26a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm8.184-1h5.631c-.414-1.161-1.514-2-2.816-2s-2.402.839-2.816 2Z" },
+    rhUiIcon: null
+  };
+  var RhUiTrashIcon = createIconBase(RhUiTrashIconConfig);
+  var rh_ui_trash_icon_default = RhUiTrashIcon;
+
   // node_modules/@patternfly/react-icons/dist/esm/icons/sun-icon.js
   var SunIconConfig = {
     name: "SunIcon",
@@ -38774,6 +38783,15 @@
     { name: "Storage", description: "Choose the disks and storage configuration for the installation." },
     { name: "Review", description: "Review your choices before beginning the installation." }
   ];
+  var archivedIterationIds = ["setup-step-6-grouped", "setup-step-6-columns", "setup-step-6-table"];
+  var getWizardStartIndex = (stepId, showSavedIterations) => {
+    if (stepId === "setup-step-6-grouped") return 7;
+    if (stepId === "setup-step-6-columns") return 8;
+    if (stepId === "setup-step-6-table") return 9;
+    const match = /^setup-step-(\d+)$/.exec(stepId);
+    const baseIndex = match ? Number(match[1]) : 1;
+    return showSavedIterations && baseIndex > 6 ? baseIndex + 3 : baseIndex;
+  };
   var ThemeToggle = ({ theme, setTheme, isCompact = false }) => /* @__PURE__ */ import_react75.default.createElement(
     ToggleGroup,
     {
@@ -38808,6 +38826,82 @@
       onChange: (_, isDark) => setTheme(isDark ? "dark" : "light")
     }
   ), /* @__PURE__ */ import_react75.default.createElement(outlined_moon_icon_default, { "aria-hidden": "true" }));
+  var languageOptions = [
+    "English - United States",
+    "English - Ireland",
+    "French - Canada",
+    "German - Switzerland",
+    "Spanish - Puerto Rico"
+  ];
+  var suggestedKeyboardOptions = ["English (US)", "de-qwerty"];
+  var specialtyKeyboardOptions = ["adnw", "Dvorak", "Colemak"];
+  var SearchableSetupSelect = ({ id, label, placeholder, value, onChange, groups }) => {
+    const [isOpen, setIsOpen] = (0, import_react75.useState)(false);
+    const [filter, setFilter] = (0, import_react75.useState)("");
+    const visibleGroups = groups.map((group) => ({
+      ...group,
+      options: group.options.filter((option) => option.toLowerCase().includes(filter.toLowerCase()))
+    })).filter((group) => group.options.length);
+    return /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label, isRequired: true, fieldId: id, className: "setup-select-group" }, /* @__PURE__ */ import_react75.default.createElement(
+      Select,
+      {
+        id,
+        isOpen,
+        selected: value,
+        onOpenChange: setIsOpen,
+        onSelect: (_, selected) => {
+          onChange(selected);
+          setFilter("");
+          setIsOpen(false);
+        },
+        toggle: (toggleRef) => /* @__PURE__ */ import_react75.default.createElement("button", { ref: toggleRef, type: "button", className: "setup-select-toggle", "aria-label": label, onClick: () => setIsOpen((current) => !current) }, /* @__PURE__ */ import_react75.default.createElement("span", { className: value ? "" : "setup-select-placeholder" }, value || placeholder), /* @__PURE__ */ import_react75.default.createElement(AngleDownIcon, { "aria-hidden": "true" })),
+        shouldFocusToggleOnSelect: true
+      },
+      /* @__PURE__ */ import_react75.default.createElement("div", { className: "setup-select-search" }, /* @__PURE__ */ import_react75.default.createElement(SearchIcon, { "aria-hidden": "true" }), /* @__PURE__ */ import_react75.default.createElement(TextInput, { "aria-label": `Search ${label.toLowerCase()}`, placeholder: "Search by name", value: filter, onChange: (_, nextFilter) => setFilter(nextFilter), autoFocus: true })),
+      visibleGroups.map((group) => group.label ? /* @__PURE__ */ import_react75.default.createElement(SelectGroup, { key: group.label, label: group.label }, group.options.map((option) => /* @__PURE__ */ import_react75.default.createElement(SelectOption, { key: option, value: option }, option))) : group.options.map((option) => /* @__PURE__ */ import_react75.default.createElement(SelectOption, { key: option, value: option }, option))),
+      !visibleGroups.length && /* @__PURE__ */ import_react75.default.createElement("div", { className: "setup-select-empty" }, "No matches found.")
+    ));
+  };
+  var LanguageAndKeyboardContent = ({ language, keyboard, setLanguage, setKeyboard }) => /* @__PURE__ */ import_react75.default.createElement("section", { className: "language-keyboard-content", "aria-labelledby": "setup-step-1-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: "setup-step-1-title" }, "Welcome"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "language-keyboard-description" }, "Review the setup process and prepare to configure your system."), /* @__PURE__ */ import_react75.default.createElement(Form, null, /* @__PURE__ */ import_react75.default.createElement(SearchableSetupSelect, { id: "setup-language", label: "Language", placeholder: "Select language", value: language, onChange: setLanguage, groups: [{ options: languageOptions }] }), /* @__PURE__ */ import_react75.default.createElement(SearchableSetupSelect, { id: "setup-keyboard", label: "Keyboard", placeholder: "Select keyboard", value: keyboard, onChange: setKeyboard, groups: [
+    { label: "Suggested keyboards", options: suggestedKeyboardOptions },
+    { label: "Specialty keyboards", options: specialtyKeyboardOptions }
+  ] })));
+  var TimeZoneSelect = ({ value, onChange }) => {
+    const [isOpen, setIsOpen] = (0, import_react75.useState)(false);
+    return /* @__PURE__ */ import_react75.default.createElement(
+      Select,
+      {
+        isOpen,
+        selected: value,
+        onOpenChange: setIsOpen,
+        onSelect: (_, selected) => {
+          onChange(selected);
+          setIsOpen(false);
+        },
+        toggle: (toggleRef) => /* @__PURE__ */ import_react75.default.createElement("button", { ref: toggleRef, type: "button", className: "date-time-zone-toggle", onClick: () => setIsOpen((current) => !current) }, /* @__PURE__ */ import_react75.default.createElement("span", null, value), /* @__PURE__ */ import_react75.default.createElement(AngleDownIcon, { "aria-hidden": "true" }))
+      },
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "America/Denver" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "America/Chicago" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "America/Los_Angeles" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "America/New_York" }),
+      /* @__PURE__ */ import_react75.default.createElement(SelectOption, { value: "UTC" })
+    );
+  };
+  var DateAndTimeContent = () => {
+    const [clockMode, setClockMode] = (0, import_react75.useState)("automatic");
+    const [zoneMode, setZoneMode] = (0, import_react75.useState)("manual");
+    const [timeFormat, setTimeFormat] = (0, import_react75.useState)("12");
+    const [timeZone, setTimeZone] = (0, import_react75.useState)("America/Denver");
+    const [currentTime, setCurrentTime] = (0, import_react75.useState)(() => /* @__PURE__ */ new Date());
+    const detectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    (0, import_react75.useEffect)(() => {
+      const interval = window.setInterval(() => setCurrentTime(/* @__PURE__ */ new Date()), 1e3);
+      return () => window.clearInterval(interval);
+    }, []);
+    const displayDate = new Intl.DateTimeFormat(void 0, { dateStyle: "medium" }).format(currentTime);
+    const displayTime = new Intl.DateTimeFormat(void 0, { hour: "numeric", minute: "2-digit", second: "2-digit", hour12: timeFormat === "12" }).format(currentTime);
+    return /* @__PURE__ */ import_react75.default.createElement("section", { className: "date-time-content", "aria-labelledby": "setup-step-3-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: "setup-step-3-title" }, "Date and Time"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "date-time-description" }, "Set date and time first, then choose a time zone below."), /* @__PURE__ */ import_react75.default.createElement("section", { className: "date-time-section", "aria-labelledby": "clock-settings-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "lg", id: "clock-settings-title" }, "Date and time"), /* @__PURE__ */ import_react75.default.createElement("p", null, "Choose how this device sets its clock."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "date-time-radios", role: "radiogroup", "aria-label": "Date and time setting" }, /* @__PURE__ */ import_react75.default.createElement(Radio, { id: "clock-automatic", name: "clock-mode", label: "Automatically", isChecked: clockMode === "automatic", onChange: () => setClockMode("automatic") }), /* @__PURE__ */ import_react75.default.createElement(Radio, { id: "clock-manual", name: "clock-mode", label: "Manually", isChecked: clockMode === "manual", onChange: () => setClockMode("manual") })), clockMode === "automatic" ? /* @__PURE__ */ import_react75.default.createElement(Alert, { isInline: true, variant: "success", title: "Automatic time is on" }, /* @__PURE__ */ import_react75.default.createElement("p", null, "Syncing date and time from network time servers."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "current-date-time", "aria-label": "Current date and time" }, /* @__PURE__ */ import_react75.default.createElement("div", null, /* @__PURE__ */ import_react75.default.createElement("span", null, "Current date"), /* @__PURE__ */ import_react75.default.createElement("strong", null, displayDate)), /* @__PURE__ */ import_react75.default.createElement("div", null, /* @__PURE__ */ import_react75.default.createElement("span", null, "Current time"), /* @__PURE__ */ import_react75.default.createElement("strong", null, displayTime)))) : /* @__PURE__ */ import_react75.default.createElement("div", { className: "date-time-manual-fields" }, /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Date", fieldId: "manual-date" }, /* @__PURE__ */ import_react75.default.createElement(TextInput, { id: "manual-date", type: "date", defaultValue: "2026-11-11" })), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Time", fieldId: "manual-time" }, /* @__PURE__ */ import_react75.default.createElement(TextInput, { id: "manual-time", type: "time", defaultValue: timeFormat === "24" ? "22:42" : "10:42" }))), /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Time format", fieldId: "time-format", className: "time-format-control" }, /* @__PURE__ */ import_react75.default.createElement(ToggleGroup, { "aria-label": "Time format", isCompact: true }, /* @__PURE__ */ import_react75.default.createElement(ToggleGroupItem, { buttonId: "time-format-12", text: "12-hour", isSelected: timeFormat === "12", onChange: () => setTimeFormat("12") }), /* @__PURE__ */ import_react75.default.createElement(ToggleGroupItem, { buttonId: "time-format-24", text: "24-hour", isSelected: timeFormat === "24", onChange: () => setTimeFormat("24") })), /* @__PURE__ */ import_react75.default.createElement("p", null, "Choose how time is displayed. This preference works with either clock setting."))), /* @__PURE__ */ import_react75.default.createElement("section", { className: "date-time-section time-zone-section", "aria-labelledby": "zone-settings-title" }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h2", size: "lg", id: "zone-settings-title" }, "Time zone"), /* @__PURE__ */ import_react75.default.createElement("p", null, "Choose a time zone automatically or select one yourself."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "date-time-radios", role: "radiogroup", "aria-label": "Time zone setting" }, /* @__PURE__ */ import_react75.default.createElement(Radio, { id: "zone-automatic", name: "zone-mode", label: "Automatically", isChecked: zoneMode === "automatic", onChange: () => setZoneMode("automatic") }), /* @__PURE__ */ import_react75.default.createElement(Radio, { id: "zone-manual", name: "zone-mode", label: "Manually", isChecked: zoneMode === "manual", onChange: () => setZoneMode("manual") })), zoneMode === "automatic" ? /* @__PURE__ */ import_react75.default.createElement(Alert, { isInline: true, variant: "success", title: "Automatic time zone is on" }, /* @__PURE__ */ import_react75.default.createElement("p", null, "Using device location to select a time zone."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "current-date-time current-time-zone", "aria-label": "Detected time zone" }, /* @__PURE__ */ import_react75.default.createElement("div", null, /* @__PURE__ */ import_react75.default.createElement("span", null, "Detected time zone"), /* @__PURE__ */ import_react75.default.createElement("strong", null, detectedTimeZone)))) : /* @__PURE__ */ import_react75.default.createElement(FormGroup, { label: "Selected time zone", fieldId: "selected-time-zone", className: "time-zone-select" }, /* @__PURE__ */ import_react75.default.createElement(TimeZoneSelect, { value: timeZone, onChange: setTimeZone }), /* @__PURE__ */ import_react75.default.createElement("p", null, "UTC\u221207:00 \xB7 Mountain Time"))));
+  };
   var ModeCard = ({ mode, selected, title, description, icon, onSelect }) => /* @__PURE__ */ import_react75.default.createElement(
     Card,
     {
@@ -39082,8 +39176,14 @@
     const [finished, setFinished] = (0, import_react75.useState)(false);
     const [completedSteps, setCompletedSteps] = (0, import_react75.useState)([]);
     const [installationMode, setInstallationMode] = (0, import_react75.useState)("package");
+    const [language, setLanguage] = (0, import_react75.useState)("");
+    const [keyboard, setKeyboard] = (0, import_react75.useState)("");
     const [softwareEnvironment, setSoftwareEnvironment] = (0, import_react75.useState)("");
     const [selectedSoftwareAddOns, setSelectedSoftwareAddOns] = (0, import_react75.useState)([]);
+    const [showSavedIterations, setShowSavedIterations] = (0, import_react75.useState)(false);
+    const [activeStepId, setActiveStepId] = (0, import_react75.useState)("setup-step-1");
+    const [wizardKey, setWizardKey] = (0, import_react75.useState)(0);
+    const [wizardStartIndex, setWizardStartIndex] = (0, import_react75.useState)(1);
     const changeSoftwareEnvironment = (id) => setSoftwareEnvironment(id);
     const toggleSoftwareAddOn = (id) => setSelectedSoftwareAddOns((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
     const addRecommendedSoftware = (ids) => setSelectedSoftwareAddOns((current) => [.../* @__PURE__ */ new Set([...current, ...ids])]);
@@ -39103,6 +39203,16 @@
       setFinished(false);
       setCompletedSteps([]);
     };
+    const toggleSavedIterations = () => {
+      const nextShowSavedIterations = !showSavedIterations;
+      let nextStepId = activeStepId;
+      if (nextShowSavedIterations && activeStepId === "setup-step-6") nextStepId = "setup-step-6-grouped";
+      if (!nextShowSavedIterations && archivedIterationIds.includes(activeStepId)) nextStepId = "setup-step-6";
+      setShowSavedIterations(nextShowSavedIterations);
+      setActiveStepId(nextStepId);
+      setWizardStartIndex(getWizardStartIndex(nextStepId, nextShowSavedIterations));
+      setWizardKey((current) => current + 1);
+    };
     const steps = stepContent.map(({ name, description }, index) => index === 5 ? /* @__PURE__ */ import_react75.default.createElement(
       WizardStep,
       {
@@ -39110,13 +39220,13 @@
         id: "setup-step-6",
         name,
         status: completedSteps.includes("setup-step-6") ? "success" : "default",
-        steps: [
+        ...showSavedIterations ? { steps: [
           /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "grouped", id: "setup-step-6-grouped", name: "A. Grouped menu" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareContent, { ...softwareProps })),
           /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "columns", id: "setup-step-6-columns", name: "B. Environment preview" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogColumns, { ...softwareProps })),
-          /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "tabs", id: "setup-step-6-tabs", name: "C. Category tabs" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogTabs, { ...softwareProps })),
           /* @__PURE__ */ import_react75.default.createElement(WizardStep, { key: "table", id: "setup-step-6-table", name: "D. Software table" }, /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogTable, { ...softwareProps }))
-        ]
-      }
+        ] } : {}
+      },
+      !showSavedIterations && /* @__PURE__ */ import_react75.default.createElement(SoftwareCatalogTabs, { ...softwareProps })
     ) : /* @__PURE__ */ import_react75.default.createElement(
       WizardStep,
       {
@@ -39126,19 +39236,32 @@
         status: completedSteps.includes(`setup-step-${index + 1}`) ? "success" : "default",
         footer: { nextButtonText: index === stepContent.length - 1 ? "Finish" : "Next" }
       },
-      index === 4 ? /* @__PURE__ */ import_react75.default.createElement(InstallationContent, { mode: installationMode, setMode: setInstallationMode }) : /* @__PURE__ */ import_react75.default.createElement("section", { className: "step-content", "aria-labelledby": `setup-step-${index + 1}-title` }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: `setup-step-${index + 1}-title` }, name), /* @__PURE__ */ import_react75.default.createElement("p", null, description))
+      index === 0 ? /* @__PURE__ */ import_react75.default.createElement(LanguageAndKeyboardContent, { language, keyboard, setLanguage, setKeyboard }) : index === 2 ? /* @__PURE__ */ import_react75.default.createElement(DateAndTimeContent, null) : index === 4 ? /* @__PURE__ */ import_react75.default.createElement(InstallationContent, { mode: installationMode, setMode: setInstallationMode }) : /* @__PURE__ */ import_react75.default.createElement("section", { className: "step-content", "aria-labelledby": `setup-step-${index + 1}-title` }, /* @__PURE__ */ import_react75.default.createElement(Title, { headingLevel: "h1", size: "2xl", id: `setup-step-${index + 1}-title` }, name), /* @__PURE__ */ import_react75.default.createElement("p", null, description))
     ));
-    return /* @__PURE__ */ import_react75.default.createElement("main", { className: `setup-backdrop theme-${theme}` }, !started ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card", "aria-labelledby": "welcome-title" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("p", { className: "eyebrow" }, "RED HAT ENTERPRISE LINUX"), /* @__PURE__ */ import_react75.default.createElement("h1", { id: "welcome-title" }, "Welcome"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "Let\u2019s get your system ready. This guided setup will help you configure the essentials before installation."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "appearance-selector" }, /* @__PURE__ */ import_react75.default.createElement("span", null, "Appearance"), /* @__PURE__ */ import_react75.default.createElement(AppearanceSwitch, { theme, setTheme })), /* @__PURE__ */ import_react75.default.createElement("div", { className: "welcome-actions" }, /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", icon: /* @__PURE__ */ import_react75.default.createElement(ArrowRightIcon, null), iconPosition: "end", onClick: () => setStarted(true) }, "Install RHEL"), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "secondary", onClick: () => setStarted(false) }, "Cancel"))) : finished ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card completion-card" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark completion-mark", "aria-hidden": "true" }, "\u2713"), /* @__PURE__ */ import_react75.default.createElement("h1", null, "Setup complete"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "You\u2019ve reached the end of the setup wizard."), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", onClick: showOpeningPage }, "Return to opening page")) : /* @__PURE__ */ import_react75.default.createElement("div", { className: "wizard-frame" }, /* @__PURE__ */ import_react75.default.createElement("header", { className: "wizard-brand" }, /* @__PURE__ */ import_react75.default.createElement("span", { className: "mini-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("span", null, "Red Hat Enterprise Linux setup"), /* @__PURE__ */ import_react75.default.createElement(ThemeToggle, { theme, setTheme, isCompact: true }), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", onClick: showOpeningPage }, "Opening page")), /* @__PURE__ */ import_react75.default.createElement(
+    return /* @__PURE__ */ import_react75.default.createElement("main", { className: `setup-backdrop theme-${theme}` }, !started ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card", "aria-labelledby": "welcome-title" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("p", { className: "eyebrow" }, "RED HAT ENTERPRISE LINUX"), /* @__PURE__ */ import_react75.default.createElement("h1", { id: "welcome-title" }, "Welcome"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "Let\u2019s get your system ready. This guided setup will help you configure the essentials before installation."), /* @__PURE__ */ import_react75.default.createElement("div", { className: "appearance-selector" }, /* @__PURE__ */ import_react75.default.createElement("span", null, "Appearance"), /* @__PURE__ */ import_react75.default.createElement(AppearanceSwitch, { theme, setTheme })), /* @__PURE__ */ import_react75.default.createElement("div", { className: "welcome-actions" }, /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", icon: /* @__PURE__ */ import_react75.default.createElement(ArrowRightIcon, null), iconPosition: "end", onClick: () => setStarted(true) }, "Install RHEL"), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "secondary", onClick: () => setStarted(false) }, "Cancel"))) : finished ? /* @__PURE__ */ import_react75.default.createElement("section", { className: "welcome-card completion-card" }, /* @__PURE__ */ import_react75.default.createElement("div", { className: "brand-mark completion-mark", "aria-hidden": "true" }, "\u2713"), /* @__PURE__ */ import_react75.default.createElement("h1", null, "Setup complete"), /* @__PURE__ */ import_react75.default.createElement("p", { className: "welcome-copy" }, "You\u2019ve reached the end of the setup wizard."), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "primary", onClick: showOpeningPage }, "Return to opening page")) : /* @__PURE__ */ import_react75.default.createElement("div", { className: "wizard-frame" }, /* @__PURE__ */ import_react75.default.createElement("header", { className: "wizard-brand" }, /* @__PURE__ */ import_react75.default.createElement("span", { className: "mini-mark", "aria-hidden": "true" }, /* @__PURE__ */ import_react75.default.createElement(RedhatIcon, null)), /* @__PURE__ */ import_react75.default.createElement("span", null, "Red Hat Enterprise Linux setup"), /* @__PURE__ */ import_react75.default.createElement("div", { className: "wizard-tools" }, /* @__PURE__ */ import_react75.default.createElement(ThemeToggle, { theme, setTheme, isCompact: true }), /* @__PURE__ */ import_react75.default.createElement(Tooltip, { content: showSavedIterations ? "Hide saved iterations" : "Show saved iterations" }, /* @__PURE__ */ import_react75.default.createElement(
+      Button,
+      {
+        variant: "plain",
+        className: "saved-iterations-toggle",
+        icon: /* @__PURE__ */ import_react75.default.createElement(rh_ui_trash_icon_default, null),
+        "aria-label": showSavedIterations ? "Hide saved iterations" : "Show saved iterations",
+        "aria-pressed": showSavedIterations,
+        onClick: toggleSavedIterations
+      }
+    )), /* @__PURE__ */ import_react75.default.createElement(Button, { variant: "link", onClick: showOpeningPage }, "Opening page"))), /* @__PURE__ */ import_react75.default.createElement(
       Wizard,
       {
+        key: wizardKey,
         className: "setup-wizard",
         navAriaLabel: "Setup steps",
+        startIndex: wizardStartIndex,
         onSave: () => {
           setCompletedSteps(stepContent.map((_, index) => `setup-step-${index + 1}`));
           setFinished(true);
         },
         onClose: showOpeningPage,
         onStepChange: (event, currentStep, previousStep) => {
+          setActiveStepId(currentStep.id);
           if (currentStep.index > previousStep.index) {
             setCompletedSteps((previous) => {
               const completedIds = previousStep.parentId ? [] : [previousStep.id];

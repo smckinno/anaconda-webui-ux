@@ -6,6 +6,7 @@ import { Checkbox } from "@patternfly/react-core/dist/esm/components/Checkbox/in
 import { SearchInput } from "@patternfly/react-core/dist/esm/components/SearchInput/index.js";
 import { Tabs, Tab, TabTitleText } from "@patternfly/react-core/dist/esm/components/Tabs/index.js";
 import { Title } from "@patternfly/react-core/dist/esm/components/Title/index.js";
+import { Tooltip } from "@patternfly/react-core/dist/esm/components/Tooltip/index.js";
 import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/components/ToggleGroup/index.js";
 import { Switch } from "@patternfly/react-core/dist/esm/components/Switch/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
@@ -14,11 +15,13 @@ import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form
 import { Select, SelectGroup, SelectOption } from "@patternfly/react-core/dist/esm/components/Select/index.js";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput/index.js";
 import { FileUpload } from "@patternfly/react-core/dist/esm/components/FileUpload/index.js";
+import { Radio } from "@patternfly/react-core/dist/esm/components/Radio/index.js";
 import { AngleDownIcon, ArrowRightIcon, MinusCircleIcon, PlusCircleIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
 import RhUiCheckClipboardIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-check-clipboard-icon.js";
 import RhUiCubesIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-cubes-icon.js";
 import RhUiTemplateIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-template-icon.js";
 import RhUiRegistryIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-registry-icon.js";
+import RhUiTrashIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-trash-icon.js";
 import SunIcon from "@patternfly/react-icons/dist/esm/icons/sun-icon.js";
 import OutlinedMoonIcon from "@patternfly/react-icons/dist/esm/icons/outlined-moon-icon.js";
 import { Wizard, WizardStep } from "@patternfly/react-core/dist/esm/components/Wizard/index.js";
@@ -37,6 +40,17 @@ const stepContent = [
     { name: "Storage", description: "Choose the disks and storage configuration for the installation." },
     { name: "Review", description: "Review your choices before beginning the installation." },
 ];
+
+const archivedIterationIds = ["setup-step-6-grouped", "setup-step-6-columns", "setup-step-6-table"];
+
+const getWizardStartIndex = (stepId, showSavedIterations) => {
+    if (stepId === "setup-step-6-grouped") return 7;
+    if (stepId === "setup-step-6-columns") return 8;
+    if (stepId === "setup-step-6-table") return 9;
+    const match = /^setup-step-(\d+)$/.exec(stepId);
+    const baseIndex = match ? Number(match[1]) : 1;
+    return showSavedIterations && baseIndex > 6 ? baseIndex + 3 : baseIndex;
+};
 
 const ThemeToggle = ({ theme, setTheme, isCompact = false }) => <ToggleGroup
     aria-label="Choose appearance"
@@ -66,6 +80,138 @@ const AppearanceSwitch = ({ theme, setTheme }) => <div className="appearance-swi
     />
     <OutlinedMoonIcon aria-hidden="true" />
 </div>;
+
+const languageOptions = [
+    "English - United States",
+    "English - Ireland",
+    "French - Canada",
+    "German - Switzerland",
+    "Spanish - Puerto Rico",
+];
+
+const suggestedKeyboardOptions = ["English (US)", "de-qwerty"];
+const specialtyKeyboardOptions = ["adnw", "Dvorak", "Colemak"];
+
+const SearchableSetupSelect = ({ id, label, placeholder, value, onChange, groups }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [filter, setFilter] = useState("");
+    const visibleGroups = groups.map(group => ({
+        ...group,
+        options: group.options.filter(option => option.toLowerCase().includes(filter.toLowerCase())),
+    })).filter(group => group.options.length);
+    return <FormGroup label={label} isRequired fieldId={id} className="setup-select-group">
+        <Select
+            id={id}
+            isOpen={isOpen}
+            selected={value}
+            onOpenChange={setIsOpen}
+            onSelect={(_, selected) => {
+                onChange(selected);
+                setFilter("");
+                setIsOpen(false);
+            }}
+            toggle={toggleRef => <button ref={toggleRef} type="button" className="setup-select-toggle" aria-label={label} onClick={() => setIsOpen(current => !current)}>
+                <span className={value ? "" : "setup-select-placeholder"}>{value || placeholder}</span>
+                <AngleDownIcon aria-hidden="true" />
+            </button>}
+            shouldFocusToggleOnSelect
+        >
+            <div className="setup-select-search">
+                <SearchIcon aria-hidden="true" />
+                <TextInput aria-label={`Search ${label.toLowerCase()}`} placeholder="Search by name" value={filter} onChange={(_, nextFilter) => setFilter(nextFilter)} autoFocus />
+            </div>
+            {visibleGroups.map(group => group.label ? <SelectGroup key={group.label} label={group.label}>{group.options.map(option => <SelectOption key={option} value={option}>{option}</SelectOption>)}</SelectGroup> : group.options.map(option => <SelectOption key={option} value={option}>{option}</SelectOption>))}
+            {!visibleGroups.length && <div className="setup-select-empty">No matches found.</div>}
+        </Select>
+    </FormGroup>;
+};
+
+const LanguageAndKeyboardContent = ({ language, keyboard, setLanguage, setKeyboard }) => <section className="language-keyboard-content" aria-labelledby="setup-step-1-title">
+    <Title headingLevel="h1" size="2xl" id="setup-step-1-title">Welcome</Title>
+    <p className="language-keyboard-description">Review the setup process and prepare to configure your system.</p>
+    <Form>
+        <SearchableSetupSelect id="setup-language" label="Language" placeholder="Select language" value={language} onChange={setLanguage} groups={[{ options: languageOptions }]} />
+        <SearchableSetupSelect id="setup-keyboard" label="Keyboard" placeholder="Select keyboard" value={keyboard} onChange={setKeyboard} groups={[
+            { label: "Suggested keyboards", options: suggestedKeyboardOptions },
+            { label: "Specialty keyboards", options: specialtyKeyboardOptions },
+        ]} />
+    </Form>
+</section>;
+
+const TimeZoneSelect = ({ value, onChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return <Select
+        isOpen={isOpen}
+        selected={value}
+        onOpenChange={setIsOpen}
+        onSelect={(_, selected) => { onChange(selected); setIsOpen(false); }}
+        toggle={toggleRef => <button ref={toggleRef} type="button" className="date-time-zone-toggle" onClick={() => setIsOpen(current => !current)}>
+            <span>{value}</span><AngleDownIcon aria-hidden="true" />
+        </button>}
+    >
+        <SelectOption value="America/Denver" />
+        <SelectOption value="America/Chicago" />
+        <SelectOption value="America/Los_Angeles" />
+        <SelectOption value="America/New_York" />
+        <SelectOption value="UTC" />
+    </Select>;
+};
+
+const DateAndTimeContent = () => {
+    const [clockMode, setClockMode] = useState("automatic");
+    const [zoneMode, setZoneMode] = useState("manual");
+    const [timeFormat, setTimeFormat] = useState("12");
+    const [timeZone, setTimeZone] = useState("America/Denver");
+    const [currentTime, setCurrentTime] = useState(() => new Date());
+    const detectedTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    useEffect(() => {
+        const interval = window.setInterval(() => setCurrentTime(new Date()), 1000);
+        return () => window.clearInterval(interval);
+    }, []);
+    const displayDate = new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(currentTime);
+    const displayTime = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", second: "2-digit", hour12: timeFormat === "12" }).format(currentTime);
+    return <section className="date-time-content" aria-labelledby="setup-step-3-title">
+        <Title headingLevel="h1" size="2xl" id="setup-step-3-title">Date and Time</Title>
+        <p className="date-time-description">Set date and time first, then choose a time zone below.</p>
+        <section className="date-time-section" aria-labelledby="clock-settings-title">
+            <Title headingLevel="h2" size="lg" id="clock-settings-title">Date and time</Title>
+            <p>Choose how this device sets its clock.</p>
+            <div className="date-time-radios" role="radiogroup" aria-label="Date and time setting">
+                <Radio id="clock-automatic" name="clock-mode" label="Automatically" isChecked={clockMode === "automatic"} onChange={() => setClockMode("automatic")} />
+                <Radio id="clock-manual" name="clock-mode" label="Manually" isChecked={clockMode === "manual"} onChange={() => setClockMode("manual")} />
+            </div>
+            {clockMode === "automatic" ? <Alert isInline variant="success" title="Automatic time is on">
+                <p>Syncing date and time from network time servers.</p>
+                <div className="current-date-time" aria-label="Current date and time">
+                    <div><span>Current date</span><strong>{displayDate}</strong></div>
+                    <div><span>Current time</span><strong>{displayTime}</strong></div>
+                </div>
+            </Alert> : <div className="date-time-manual-fields">
+                <FormGroup label="Date" fieldId="manual-date"><TextInput id="manual-date" type="date" defaultValue="2026-11-11" /></FormGroup>
+                <FormGroup label="Time" fieldId="manual-time"><TextInput id="manual-time" type="time" defaultValue={timeFormat === "24" ? "22:42" : "10:42"} /></FormGroup>
+            </div>}
+            <FormGroup label="Time format" fieldId="time-format" className="time-format-control">
+                <ToggleGroup aria-label="Time format" isCompact>
+                    <ToggleGroupItem buttonId="time-format-12" text="12-hour" isSelected={timeFormat === "12"} onChange={() => setTimeFormat("12")} />
+                    <ToggleGroupItem buttonId="time-format-24" text="24-hour" isSelected={timeFormat === "24"} onChange={() => setTimeFormat("24")} />
+                </ToggleGroup>
+                <p>Choose how time is displayed. This preference works with either clock setting.</p>
+            </FormGroup>
+        </section>
+        <section className="date-time-section time-zone-section" aria-labelledby="zone-settings-title">
+            <Title headingLevel="h2" size="lg" id="zone-settings-title">Time zone</Title>
+            <p>Choose a time zone automatically or select one yourself.</p>
+            <div className="date-time-radios" role="radiogroup" aria-label="Time zone setting">
+                <Radio id="zone-automatic" name="zone-mode" label="Automatically" isChecked={zoneMode === "automatic"} onChange={() => setZoneMode("automatic")} />
+                <Radio id="zone-manual" name="zone-mode" label="Manually" isChecked={zoneMode === "manual"} onChange={() => setZoneMode("manual")} />
+            </div>
+            {zoneMode === "automatic" ? <Alert isInline variant="success" title="Automatic time zone is on">
+                <p>Using device location to select a time zone.</p>
+                <div className="current-date-time current-time-zone" aria-label="Detected time zone"><div><span>Detected time zone</span><strong>{detectedTimeZone}</strong></div></div>
+            </Alert> : <FormGroup label="Selected time zone" fieldId="selected-time-zone" className="time-zone-select"><TimeZoneSelect value={timeZone} onChange={setTimeZone} /><p>UTC−07:00 · Mountain Time</p></FormGroup>}
+        </section>
+    </section>;
+};
 
 const ModeCard = ({ mode, selected, title, description, icon, onSelect }) => <Card
     isClickable
@@ -482,8 +628,14 @@ function App() {
     const [finished, setFinished] = useState(false);
     const [completedSteps, setCompletedSteps] = useState([]);
     const [installationMode, setInstallationMode] = useState("package");
+    const [language, setLanguage] = useState("");
+    const [keyboard, setKeyboard] = useState("");
     const [softwareEnvironment, setSoftwareEnvironment] = useState("");
     const [selectedSoftwareAddOns, setSelectedSoftwareAddOns] = useState([]);
+    const [showSavedIterations, setShowSavedIterations] = useState(false);
+    const [activeStepId, setActiveStepId] = useState("setup-step-1");
+    const [wizardKey, setWizardKey] = useState(0);
+    const [wizardStartIndex, setWizardStartIndex] = useState(1);
     const changeSoftwareEnvironment = id => setSoftwareEnvironment(id);
     const toggleSoftwareAddOn = id => setSelectedSoftwareAddOns(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
     const addRecommendedSoftware = ids => setSelectedSoftwareAddOns(current => [...new Set([...current, ...ids])]);
@@ -503,25 +655,34 @@ function App() {
         setFinished(false);
         setCompletedSteps([]);
     };
+    const toggleSavedIterations = () => {
+        const nextShowSavedIterations = !showSavedIterations;
+        let nextStepId = activeStepId;
+        if (nextShowSavedIterations && activeStepId === "setup-step-6") nextStepId = "setup-step-6-grouped";
+        if (!nextShowSavedIterations && archivedIterationIds.includes(activeStepId)) nextStepId = "setup-step-6";
+        setShowSavedIterations(nextShowSavedIterations);
+        setActiveStepId(nextStepId);
+        setWizardStartIndex(getWizardStartIndex(nextStepId, nextShowSavedIterations));
+        setWizardKey(current => current + 1);
+    };
     const steps = stepContent.map(({ name, description }, index) => index === 5 ? <WizardStep
         key={name}
         id="setup-step-6"
         name={name}
         status={completedSteps.includes("setup-step-6") ? "success" : "default"}
-        steps={[
+        {...(showSavedIterations ? { steps: [
             <WizardStep key="grouped" id="setup-step-6-grouped" name="A. Grouped menu"><SoftwareContent {...softwareProps} /></WizardStep>,
             <WizardStep key="columns" id="setup-step-6-columns" name="B. Environment preview"><SoftwareCatalogColumns {...softwareProps} /></WizardStep>,
-            <WizardStep key="tabs" id="setup-step-6-tabs" name="C. Category tabs"><SoftwareCatalogTabs {...softwareProps} /></WizardStep>,
             <WizardStep key="table" id="setup-step-6-table" name="D. Software table"><SoftwareCatalogTable {...softwareProps} /></WizardStep>,
-        ]}
-    /> : <WizardStep
+        ] } : {})}
+    >{!showSavedIterations && <SoftwareCatalogTabs {...softwareProps} />}</WizardStep> : <WizardStep
         key={name}
         id={`setup-step-${index + 1}`}
         name={name}
         status={completedSteps.includes(`setup-step-${index + 1}`) ? "success" : "default"}
         footer={{ nextButtonText: index === stepContent.length - 1 ? "Finish" : "Next" }}
     >
-        {index === 4 ? <InstallationContent mode={installationMode} setMode={setInstallationMode} /> : <section className="step-content" aria-labelledby={`setup-step-${index + 1}-title`}>
+        {index === 0 ? <LanguageAndKeyboardContent language={language} keyboard={keyboard} setLanguage={setLanguage} setKeyboard={setKeyboard} /> : index === 2 ? <DateAndTimeContent /> : index === 4 ? <InstallationContent mode={installationMode} setMode={setInstallationMode} /> : <section className="step-content" aria-labelledby={`setup-step-${index + 1}-title`}>
             <Title headingLevel="h1" size="2xl" id={`setup-step-${index + 1}-title`}>{name}</Title>
             <p>{description}</p>
         </section>}
@@ -550,18 +711,33 @@ function App() {
             <header className="wizard-brand">
                 <span className="mini-mark" aria-hidden="true"><RedhatIcon /></span>
                 <span>Red Hat Enterprise Linux setup</span>
-                <ThemeToggle theme={theme} setTheme={setTheme} isCompact />
-                <Button variant="link" onClick={showOpeningPage}>Opening page</Button>
+                <div className="wizard-tools">
+                    <ThemeToggle theme={theme} setTheme={setTheme} isCompact />
+                    <Tooltip content={showSavedIterations ? "Hide saved iterations" : "Show saved iterations"}>
+                        <Button
+                            variant="plain"
+                            className="saved-iterations-toggle"
+                            icon={<RhUiTrashIcon />}
+                            aria-label={showSavedIterations ? "Hide saved iterations" : "Show saved iterations"}
+                            aria-pressed={showSavedIterations}
+                            onClick={toggleSavedIterations}
+                        />
+                    </Tooltip>
+                    <Button variant="link" onClick={showOpeningPage}>Opening page</Button>
+                </div>
             </header>
             <Wizard
+                key={wizardKey}
                 className="setup-wizard"
                 navAriaLabel="Setup steps"
+                startIndex={wizardStartIndex}
                 onSave={() => {
                     setCompletedSteps(stepContent.map((_, index) => `setup-step-${index + 1}`));
                     setFinished(true);
                 }}
                 onClose={showOpeningPage}
                 onStepChange={(event, currentStep, previousStep) => {
+                    setActiveStepId(currentStep.id);
                     if (currentStep.index > previousStep.index) {
                         setCompletedSteps(previous => {
                             const completedIds = previousStep.parentId ? [] : [previousStep.id];
