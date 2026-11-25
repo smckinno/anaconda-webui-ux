@@ -5,6 +5,12 @@ From this repository's root, run `./preview/start.sh` and open
 changes, and hosts it on localhost. Press Ctrl+C to stop it. The **Reset preview**
 button restores the original sample state.
 
+The preview opens on a PIN access screen before the Welcome page. Enter any
+nonempty numeric PIN and select **Connect to installer** (or press Enter) to continue.
+The eye button shows or hides the PIN. Refreshing the page returns to PIN entry.
+This is a local UI mock;
+it does not authenticate against Cockpit or store the PIN.
+
 This preview renders the fork's React wizard and screen components with local
 sample data. The network iframe is simulated because its real implementation is
 in Cockpit. The installer backend is simulated: D-Bus calls, process launches,

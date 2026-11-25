@@ -1,6 +1,29 @@
 html, body, #app { min-width: 320px; min-height: 100%; margin: 0; }
 body { font-family: var(--pf-t--global--font--family--body, "Red Hat Text", sans-serif); }
 
+.pin-access form { width: min(100%, 254px); margin-inline: auto; text-align: left; }
+.pin-access-brand { display: flex; justify-content: center; margin-bottom: 34px; color: #e00; }
+.pin-access-brand svg { width: 58px; height: 50px; }
+.pin-access-eyebrow { margin: 0 0 32px; color: #575757; font-size: 11px; font-weight: 700; letter-spacing: 1.3px; text-align: center; }
+.welcome-card.pin-access h1 { margin: 0 0 8px; font-size: 24px; font-weight: 700; line-height: 32px; text-align: center; }
+.pin-access .welcome-copy { margin-top: 0; }
+.pin-access-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; }
+.pin-access-label span { margin-left: 3px; color: #c44b30; }
+.pin-access-input { display: flex; height: 41px; border: 1px solid #919191; border-radius: 7px; }
+.pin-access-input:focus-within { outline: 2px solid #06c; outline-offset: 2px; }
+.pin-access-input.has-error { border-color: #b1380b; }
+.pin-access-helper { margin-top: 4px; }
+.pin-access-input input { width: 100%; min-width: 0; padding: 8px 16px; border: 0; border-radius: inherit; outline: none; background: transparent; color: #151515; font: inherit; font-size: 14px; }
+.pin-access-input input::placeholder { color: #575757; opacity: 1; }
+.pin-access-visibility { display: grid; flex: 0 0 44px; place-items: center; border: 0; border-radius: 6px; background: transparent; color: #333; cursor: pointer; }
+.pin-access-visibility svg { width: 15px; height: 15px; }
+.pin-access-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 17px; margin-top: 51px; }
+.pin-access-actions button { min-height: 41px; padding: 8px 25px; border: 1px solid #06f; border-radius: 24px; font: inherit; font-size: 15px; cursor: pointer; }
+.pin-access-submit { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #3867d0; border-color: #3867d0 !important; color: #fff; }
+.pin-access-submit:hover { background: #2853b5; }
+.pin-access-submit svg { width: 15px; height: 15px; }
+.pin-access button:focus-visible { outline: 2px solid #06c; outline-offset: 3px; }
+
 .setup-backdrop {
   position: relative;
   display: grid;

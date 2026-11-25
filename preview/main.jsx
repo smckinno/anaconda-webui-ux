@@ -11,12 +11,13 @@ import { ToggleGroup, ToggleGroupItem } from "@patternfly/react-core/dist/esm/co
 import { Switch } from "@patternfly/react-core/dist/esm/components/Switch/index.js";
 import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
 import { CardHeader } from "@patternfly/react-core/dist/esm/components/Card/CardHeader.js";
-import { Form, FormGroup } from "@patternfly/react-core/dist/esm/components/Form/index.js";
+import { Form, FormGroup, FormHelperText } from "@patternfly/react-core/dist/esm/components/Form/index.js";
+import { HelperText, HelperTextItem } from "@patternfly/react-core/dist/esm/components/HelperText/index.js";
 import { Select, SelectGroup, SelectOption } from "@patternfly/react-core/dist/esm/components/Select/index.js";
 import { TextInput } from "@patternfly/react-core/dist/esm/components/TextInput/index.js";
 import { FileUpload } from "@patternfly/react-core/dist/esm/components/FileUpload/index.js";
 import { Radio } from "@patternfly/react-core/dist/esm/components/Radio/index.js";
-import { AngleDownIcon, ArrowRightIcon, MinusCircleIcon, PlusCircleIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
+import { AngleDownIcon, ArrowRightIcon, EyeIcon, EyeSlashIcon, MinusCircleIcon, PlusCircleIcon, SearchIcon, TimesIcon } from "@patternfly/react-icons";
 import RhUiCheckClipboardIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-check-clipboard-icon.js";
 import RhUiCubesIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-cubes-icon.js";
 import RhUiTemplateIcon from "@patternfly/react-icons/dist/esm/icons/rh-ui-template-icon.js";
@@ -622,7 +623,50 @@ const SoftwareCatalogTabs = ({ environment, selectedAddOns, onEnvironmentChange,
     </section>;
 };
 
+const PinAccessScreen = ({ onUnlock }) => {
+    const [pin, setPin] = useState("");
+    const [isVisible, setIsVisible] = useState(false);
+    const [error, setError] = useState("");
+    const submit = event => {
+        event.preventDefault();
+        if (!/^[0-9]+$/.test(pin)) {
+            setError(pin ? "Enter a PIN using numbers only." : "Please enter a PIN.");
+            document.getElementById("access-pin").focus();
+            return;
+        }
+        setPin("");
+        onUnlock();
+    };
+    return <main className="setup-backdrop theme-light">
+        <section className="welcome-card pin-access" aria-labelledby="pin-access-title">
+            <div className="pin-access-brand" aria-hidden="true"><RedhatIcon /></div>
+            <p className="pin-access-eyebrow">RED HAT ENTERPRISE LINUX</p>
+            <h1 id="pin-access-title">Access the remote installer</h1>
+            <p className="welcome-copy">Install RHEL on another machine using this browser.</p>
+            <form onSubmit={submit} noValidate>
+                <label className="pin-access-label" htmlFor="access-pin">PIN <span aria-hidden="true">*</span></label>
+                <div className={`pin-access-input${error ? " has-error" : ""}`}>
+                    <input id="access-pin" name="pin" type={isVisible ? "text" : "password"} inputMode="numeric" autoComplete="off" required placeholder="Enter PIN" value={pin} aria-invalid={Boolean(error)} aria-describedby={`pin-access-help${error ? " pin-access-error" : ""}`} onChange={event => { setPin(event.target.value); setError(""); }} />
+                    <button type="button" className="pin-access-visibility" aria-label={isVisible ? "Hide PIN" : "Show PIN"} aria-pressed={isVisible} onClick={() => setIsVisible(current => !current)}>{isVisible ? <EyeSlashIcon /> : <EyeIcon />}</button>
+                </div>
+                <FormHelperText className="pin-access-helper">
+                    <HelperText id="pin-access-help">
+                        <HelperTextItem>Enter the PIN for the machine you are installing.</HelperTextItem>
+                    </HelperText>
+                    <HelperText isLiveRegion>
+                        {error && <HelperTextItem id="pin-access-error" variant="error">{error}</HelperTextItem>}
+                    </HelperText>
+                </FormHelperText>
+                <div className="pin-access-actions">
+                    <button type="submit" className="pin-access-submit">Connect to installer <ArrowRightIcon aria-hidden="true" /></button>
+                </div>
+            </form>
+        </section>
+    </main>;
+};
+
 function App() {
+    const [hasAccess, setHasAccess] = useState(false);
     const [theme, setTheme] = useState("light");
     const [started, setStarted] = useState(false);
     const [finished, setFinished] = useState(false);
@@ -651,6 +695,8 @@ function App() {
         return () => document.documentElement.classList.remove("pf-v6-theme-dark");
     }, [theme]);
     const showOpeningPage = () => {
+        setHasAccess(false);
+        setTheme("light");
         setStarted(false);
         setFinished(false);
         setCompletedSteps([]);
@@ -687,6 +733,8 @@ function App() {
             <p>{description}</p>
         </section>}
     </WizardStep>);
+
+    if (!hasAccess) return <PinAccessScreen onUnlock={() => setHasAccess(true)} />;
 
     return <main className={`setup-backdrop theme-${theme}`}>
         {!started ? <section className="welcome-card" aria-labelledby="welcome-title">
